@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="5dp"
+    tools:context="com.example.quang.ontapqlns.onTapQLNSActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtHoTen"
+            android:text="Họ tên"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtBangCap"
+            android:text="Bằng cấp"
+            android:layout_alignLeft="@+id/txtHoTen"
+            android:layout_below="@+id/txtHoTen"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtSoThich"
+            android:text="Sở thích"
+            android:layout_alignLeft="@+id/txtBangCap"
+            android:layout_below="@+id/txtBangCap"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtHoTen"
+            android:hint="Nhập tên ở đây"
+            android:layout_toRightOf="@+id/txtBangCap"
+            android:layout_alignBaseline="@+id/txtHoTen"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rdgroup"
+            android:orientation="horizontal"
+            android:layout_alignLeft="@+id/edtHoTen"
+            android:layout_below="@+id/edtHoTen">
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Đại học"
+                android:id="@+id/rbtnDH"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbtnCD"
+                android:text="Cao đẳng"
+                />
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/rbtnTC"
+                android:text="Trung cấp"/>
+        </RadioGroup>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Đọc sách"
+            android:id="@+id/chkDS"
+            android:layout_alignBaseline="@+id/txtSoThich"
+            android:layout_alignLeft="@+id/rdgroup"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chkNN"
+            android:text="Nghe nhạc"
+            android:layout_toRightOf="@+id/chkDS"
+            android:layout_alignBaseline="@id/chkDS"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtSoThichKhac"
+            android:hint="Sở thích khác"
+            android:layout_below="@+id/txtSoThich"
+            android:layout_alignLeft="@+id/chkDS"/>
+    </RelativeLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:id="@+id/listviewA"
+        android:layout_margin="2dp">
+    </ListView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnOK"
+            android:text="OK"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCancel"
+            android:text="Cancel"
+            android:textAllCaps="false"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string name="app_name">Trac Nghiem</string>
+    <string name="activity1">Trắc nghiệm: Câu số 1</string>
+    <string name="activity2">Trắc nghiệm: Câu số 2</string>
+    <string name="activity3">Trắc nghiệm: Câu số 3</string>
+    <string name="activity4">Trắc nghiệm: Câu số 4</string>
+    <string name="activity5">Trắc nghiệm: Câu số 5</string>
+    <string name="ketqua">Trắc nghiệm: Kết quả kiểm tra</string>
+    <string name="ketquaThongBao">Kết quả kiểm tra</string>
+    <string name="question1">Câu số 1:</string>
+    <string name="question2">Câu số 2:</string>
+    <string name="question3">Câu số 3:</string>
+    <string name="question4">Câu số 4:</string>
+    <string name="question5">Câu số 5:</string>
+    <string name="choice">Câu trả lời cho lựa chọn</string>
+    <string name="btnPrevious">&#60;</string>
+    <string name="btnNext">&#62;</string>
+    <string name="btnFinish">Kết thúc</string>
+    <string name="textOn">Đúng</string>
+    <string name="textOff">Sai</string>
+    <string name="openDrawer">Mở Drawer</string>
+    <string name="closeDrawer">Đóng Drawer</string>
+
+    <string-array name="spinner_default">
+        <item>Gia tri 1</item>
+        <item>Gia tri 2</item>
+        <item>Gia tri 3</item>
+        <item>Gia tri 4</item>
+        <item>Gia tri 5</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

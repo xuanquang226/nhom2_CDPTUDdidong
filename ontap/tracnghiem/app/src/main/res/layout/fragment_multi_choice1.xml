@@ -1,0 +1,72 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="vn.edu.tdc.tracnghiem.fragments.MultiChoice1Fragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/lblQuestion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/lblQuestion_margin"
+            android:text="@string/question1" />
+
+        <EditText
+            android:id="@+id/edtCau1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:editable="false"
+            android:lines="2" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center">
+
+        <CheckBox
+            android:id="@+id/chkA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="@string/choice" />
+
+        <CheckBox
+            android:id="@+id/chkB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/chkA"
+            android:layout_marginLeft="@dimen/choice_margin"
+            android:layout_toRightOf="@id/chkA"
+            android:text="@string/choice" />
+
+        <CheckBox
+            android:id="@+id/chkC"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/chkA"
+            android:layout_below="@id/chkA"
+            android:layout_marginTop="@dimen/choice_margin_top"
+            android:text="@string/choice" />
+
+        <CheckBox
+            android:id="@+id/chkD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/chkC"
+            android:layout_alignLeft="@id/chkB"
+            android:layout_toRightOf="@id/chkC"
+            android:text="@string/choice" />
+    </RelativeLayout>
+
+</LinearLayout>
