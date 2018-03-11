@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.quang.project_sdo.EnteringDrugActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2">
+
+            <ImageView
+                android:id="@+id/imgSDrug"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:background="@drawable/ic_launcher_background"
+                android:textAlignment="textStart"></ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtTenThuoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tên thuốc:" />
+
+            <EditText
+                android:id="@+id/edtNhapTenThuoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nhập tên thuốc ở đây"
+                android:lines="3" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5">
+
+        <TextView
+            android:id="@+id/txtCongDung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Công dụng:"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:id="@+id/txtGia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtCongDung"
+            android:layout_below="@+id/txtCongDung"
+            android:text="Giá:"
+            android:layout_marginBottom="20dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtNguonGoc"
+            android:text="Nguồn gốc:"
+            android:layout_below="@+id/txtGia"
+            android:layout_alignLeft="@+id/txtGia"
+            android:layout_marginBottom="20dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtMoTa"
+            android:text="Mô tả:"
+            android:layout_below="@+id/txtNguonGoc"
+            android:layout_alignLeft="@+id/txtNguonGoc"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtNhapCongDung"
+            android:text="Nhập công dụng thuốc"
+            android:layout_toRightOf="@+id/txtNguonGoc"
+            android:layout_alignBaseline="@+id/txtCongDung"
+            android:lines="2"/>
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtNhapGia"
+            android:text="Nhập giá"
+            android:layout_below="@+id/edtNhapCongDung"
+            android:layout_alignBaseline="@+id/txtGia"
+            android:layout_toRightOf="@+id/txtCongDung"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/edtNhapNguonGoc"
+            android:text="Nhập nguồn gốc"
+            android:layout_below="@+id/edtNhapGia"
+            android:layout_alignBaseline="@+id/txtNguonGoc"
+            android:layout_toRightOf="@+id/txtCongDung"/>
+
+        <EditText
+            android:id="@+id/edtNhapMoTa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtMoTa"
+            android:text="Nhập mô tả"
+            android:lines="6"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnOKNT"
+            android:text="Xác nhận"
+            android:textAllCaps="false"
+            />
+    </LinearLayout>
+
+</LinearLayout>
