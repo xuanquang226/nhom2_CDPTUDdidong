@@ -27,7 +27,7 @@
             android:src="@drawable/home" />
 
         <ImageButton
-            android:id="@+id/imgDrug"
+            android:id="@+id/imgMedicine"
             style="@style/FourImageView"
             android:src="@drawable/drug" />
 
