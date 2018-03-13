@@ -20,25 +20,27 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageView
+        <ImageButton
+
             android:id="@+id/imgHome"
             style="@style/FourImageView"
-            android:background="@drawable/home" />
+            android:src="@drawable/home" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imgDrug"
             style="@style/FourImageView"
-            android:background="@drawable/drug" />
+            android:src="@drawable/drug" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imgChat"
             style="@style/FourImageView"
-            android:background="@drawable/chat" />
+            android:src="@drawable/chat" />
 
-        <ImageView
+        <ImageButton
             android:id="@+id/imgAccount"
             style="@style/FourImageView"
-            android:background="@drawable/account" />
+            android:src="@drawable/account"/>
     </LinearLayout>
+
 
 </LinearLayout>
