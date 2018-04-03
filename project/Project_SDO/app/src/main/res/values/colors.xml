@@ -4,4 +4,8 @@
     <color name="colorPrimaryDark">#f56f35</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorCusA">#e4cfd6</color>
+    <color name="colorDo">#FFFA0000</color>
+    <color name="colorDen">#FF000000</color>
+    <color name="colorXam">#FF737171</color>
+    <color name="trang">#FFFFFFFF</color>
 </resources>

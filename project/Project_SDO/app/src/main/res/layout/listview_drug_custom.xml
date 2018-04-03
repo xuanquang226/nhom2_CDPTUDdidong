@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_weight="3">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/img_cefixim"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+        <TextView
+            android:textColor="@color/colorDen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/listviewdrug"
+            android:textSize="17dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:paddingTop="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/coin" />
+
+            <TextView
+                android:paddingLeft="10dp"
+                android:paddingTop="7dp"
+                android:id="@+id/txtGia"
+                android:textColor="@color/colorDo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/gia"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/textDrugstore"
+            android:paddingTop="7dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/drugstorename"
+            android:textColor="@color/colorXam"
+            android:textSize="17dp"
+            android:textStyle="bold"/>
+        <ImageButton
+            android:id="@+id/imgbtn_cart"
+            android:paddingRight="18dp"
+            android:paddingTop="7dp"
+            android:background="@color/trang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart"
+            android:layout_gravity="right"/>
+
+    </LinearLayout>
+</LinearLayout>
