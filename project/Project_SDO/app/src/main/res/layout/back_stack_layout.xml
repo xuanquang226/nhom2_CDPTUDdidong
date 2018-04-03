@@ -11,35 +11,24 @@
         android:id="@+id/flScreen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"></FrameLayout>
+        android:layout_weight="7">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listview_drug">
+        </ListView>
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/colorPrimary">
 
-        <ImageButton
 
-            android:id="@+id/imgHome"
-            style="@style/FourImageView"
-            android:src="@drawable/home" />
 
-        <ImageButton
-            android:id="@+id/imgMedicine"
-            style="@style/FourImageView"
-            android:src="@drawable/drug" />
-
-        <ImageButton
-            android:id="@+id/imgChat"
-            style="@style/FourImageView"
-            android:src="@drawable/chat" />
-
-        <ImageButton
-            android:id="@+id/imgAccount"
-            style="@style/FourImageView"
-            android:src="@drawable/account"/>
     </LinearLayout>
 
 
