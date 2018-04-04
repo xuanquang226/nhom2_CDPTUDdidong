@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "622871720899",
+    "firebase_url": "https://projectsdo-9812e.firebaseio.com",
+    "project_id": "projectsdo-9812e",
+    "storage_bucket": "projectsdo-9812e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622871720899:android:b5172056a2e8705e",
+        "android_client_info": {
+          "package_name": "com.example.quang.project_sdo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622871720899-q9ru0llffih91nj93l1kbfhfu8iibk1f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quang.project_sdo",
+            "certificate_hash": "c75cffd273523d027b825a63b88a3b739b79a98c"
+          }
+        },
+        {
+          "client_id": "622871720899-7eo8s1is7hf7j1t74schg4eusi2f1nje.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quang.project_sdo",
+            "certificate_hash": "22065427c8c5a550b742562516979f66a6655e87"
+          }
+        },
+        {
+          "client_id": "622871720899-tbicge8ataglacn9mgsef01jb7du35tq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC31Mc-cb7N_WOukONiBXyRTVbxByAx_iY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622871720899-tbicge8ataglacn9mgsef01jb7du35tq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,14 +11,14 @@
         android:theme="@style/AppTheme">
         <activity android:name=".SellerManagementActivity"></activity>
         <activity android:name=".EnteringDrugActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".SalesStatisticsActivity" />
-        <activity android:name=".BackStackActivity"></activity>
+        <activity android:name=".BackStackActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".ArcticleDetailActivity"></activity>
     </application>
 
