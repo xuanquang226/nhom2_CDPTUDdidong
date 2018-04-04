@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/listviewdrug"
-            android:textSize="17dp"/>
+            style="@style/Txt"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
                 android:src="@drawable/coin" />
 
             <TextView
-                android:paddingLeft="10dp"
+                style="@style/paddingLeft"
                 android:paddingTop="7dp"
                 android:id="@+id/txtGia"
                 android:textColor="@color/colorDo"
@@ -55,17 +55,16 @@
             android:layout_height="wrap_content"
             android:text="@string/drugstorename"
             android:textColor="@color/colorXam"
-            android:textSize="17dp"
-            android:textStyle="bold"/>
+            style="@style/Txt"/>
+
         <ImageButton
             android:id="@+id/imgbtn_cart"
-            android:paddingRight="18dp"
+            style="@style/paddingRight"
             android:paddingTop="7dp"
             android:background="@color/trang"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/cart"
-            android:layout_gravity="right"/>
+            android:src="@drawable/cart"/>
 
     </LinearLayout>
 </LinearLayout>

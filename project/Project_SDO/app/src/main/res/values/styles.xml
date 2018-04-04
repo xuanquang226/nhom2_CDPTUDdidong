@@ -12,7 +12,22 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
-        <item name="android:background">#FFFFFFFF</item>
+
         <!--</item> -->
     </style>
+
+    <style name="paddingRight">
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_gravity">right</item>
+    </style>
+
+    <style name="paddingLeft">
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="Txt">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 </resources>
