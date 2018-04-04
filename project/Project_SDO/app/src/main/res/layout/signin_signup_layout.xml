@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_weight="2"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark"
     tools:context="com.example.quang.project_sdo.SignInSignUpActivity">
@@ -18,28 +17,18 @@
         android:src="@drawable/cardiogram"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center">
+        style="@style/registerLinerStyle">
 
         <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="#632523"
-            android:textColor="#fff"
-            android:text="Sign In"
-            android:textSize="20sp"
-            android:textAllCaps="false"
+            android:id="@+id/registisBtnSignIn"
+            style="@style/registerButton"
+            android:text="@string/register_signin"
             android:layout_marginBottom="30dp"/>
         <Button
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:background="#632523"
-            android:textColor="#fff"
-            android:textSize="20sp"
-            android:text="Sign Up"
-            android:textAllCaps="false"/>
+            android:id="@+id/registisBtnSignUp"
+            style="@style/registerButton"
+            android:text="@string/register_signup"
+            />
 
     </LinearLayout>
 

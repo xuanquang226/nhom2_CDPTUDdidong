@@ -1,9 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
     tools:context="com.example.quang.project_sdo.SignInActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="94dp"
+            android:layout_height="94dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="50dp"
+            android:layout_marginTop="80dp"
+            android:src="@drawable/cardiogram" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="5"
+        >
+
+        <EditText
+            android:id="@+id/edtDangNhapUserName"
+            style="@style/dangkyEditTextStyle"
+            android:hint="@string/dangnhap_username"/>
+        <EditText
+            android:id="@+id/edtDangNhapPassword"
+            android:inputType="textPassword"
+            style="@style/dangkyEditTextStyle"
+            android:hint="@string/dangnhap_pass"/>
+        <Spinner
+            android:id="@+id/spinnerDangnhapLuaChonAccount"
+            android:layout_marginTop="10dp"
+            android:entries="@array/TypeAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="42dp"
+            android:layout_gravity="right"
+            >
+
+        </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_weight="3">
+
+        <Button
+            android:id="@+id/DangnhapbtnSingin"
+            style="@style/dangnhapButtonStyle"
+            android:text="@string/dangnhap_singin"
+            />
+        <Button
+            android:layout_marginLeft="50dp"
+            android:id="@+id/DangnhapbtnCancel"
+            style="@style/dangnhapButtonStyle"
+            android:text="@string/dangnhap_cancel"
+            />
+    </LinearLayout>
+
+</LinearLayout>

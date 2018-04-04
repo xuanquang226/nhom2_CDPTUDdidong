@@ -9,4 +9,24 @@
     <string name="drug">Drug</string>
     <string name="chat">Chat</string>
     <string name="user">User</string>
+    <string name="dangky_username">Username</string>
+    <string name="dangky_pass">Password</string>
+    <string name="dangky_re_pass">Re-Password</string>
+    <string name="dangky_adress">Address</string>
+    <string name="dangky_phone">Phone Number</string>.
+    <array name="TypeAccount">
+        <item name="account_user">User</item>
+        <item name="account_seller">Seller</item>
+        <item name="account_shipper">Shipper</item>
+        <item name="account_carrier">Carrier</item>
+    </array>
+    <string name="dangky_ok">Ok</string>
+    <string name="dangky_cancel">Cancel</string>
+    <string name="dangnhap_username">Username</string>
+    <string name="dangnhap_pass">Password</string>
+    <string name="dangnhap_singin">Sign In</string>
+    <string name="dangnhap_cancel">Cancel</string>
+    
+    <string name="register_signin">Sign In</string>
+    <string name="register_signup">Sign Up</string>
 </resources>
