@@ -11,7 +11,9 @@
         android:id="@+id/flScreen"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="9"></FrameLayout>
+        android:layout_weight="6">
+
+    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,29 +23,91 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
+        <ImageButton
             android:id="@+id/imgHome"
             style="@style/FourImageView"
             android:src="@drawable/home"
-
+            android:background="@color/colorPrimary"
             />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Txt"
+                android:text="@string/home"
+                android:textColor="@color/trang"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
         <ImageButton
             android:id="@+id/imgDrug"
             style="@style/FourImageView"
-            android:src="@drawable/drug" />
+            android:src="@drawable/idrug"
+            android:background="@color/colorPrimary"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Txt"
+                android:text="@string/drug"
+                android:textColor="@color/trang"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
         <ImageButton
             android:id="@+id/imgChat"
             style="@style/FourImageView"
-            android:src="@drawable/chat" />
+            android:src="@drawable/ichat"
+            android:background="@color/colorPrimary"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Txt"
+                android:text="@string/chat"
+                android:textColor="@color/trang"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
 
         <ImageButton
             android:id="@+id/imgAccount"
             style="@style/FourImageView"
-            android:src="@drawable/account"
-            />
+            android:src="@drawable/iuser"
+            android:background="@color/colorPrimary" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/Txt"
+                android:text="@string/user"
+                android:textColor="@color/trang"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 

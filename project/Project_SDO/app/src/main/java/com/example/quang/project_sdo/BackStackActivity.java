@@ -8,13 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class BackStackActivity extends AppCompatActivity {
-    ImageView imgHome;
-    ImageView imgDrug;
-    ImageView imgChat;
-    ImageView imgAccount;
+    ImageButton imgHome;
+    ImageButton imgDrug;
+    ImageButton imgChat;
+    ImageButton imgAccount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class BackStackActivity extends AppCompatActivity {
         setContentView(R.layout.back_stack_layout);
 
         //Process
-        imgHome = (ImageView) findViewById(R.id.imgHome);
+        imgHome = (ImageButton) findViewById(R.id.imgHome);
         imgHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -30,7 +31,7 @@ public class BackStackActivity extends AppCompatActivity {
             }
         });
 
-        imgDrug = (ImageView) findViewById(R.id.imgDrug);
+        imgDrug = (ImageButton) findViewById(R.id.imgDrug);
         imgDrug.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,7 +39,7 @@ public class BackStackActivity extends AppCompatActivity {
             }
         });
 
-        imgChat = (ImageView) findViewById(R.id.imgChat);
+        imgChat = (ImageButton) findViewById(R.id.imgChat);
         imgChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +47,7 @@ public class BackStackActivity extends AppCompatActivity {
             }
         });
 
-        imgAccount = (ImageView) findViewById(R.id.imgAccount);
+        imgAccount = (ImageButton) findViewById(R.id.imgAccount);
         imgAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
