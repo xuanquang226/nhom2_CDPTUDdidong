@@ -26,7 +26,7 @@ public class ListDrugFragment extends Fragment {
     ListView listView;
     ArrayList<ListDrugModel> listDrug = new ArrayList<ListDrugModel>();
     DrugAdapter adapter;
-
+//hjgjhgjhg
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
