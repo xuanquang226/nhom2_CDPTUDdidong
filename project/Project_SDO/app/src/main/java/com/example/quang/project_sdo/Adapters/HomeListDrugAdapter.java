@@ -8,38 +8,35 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.quang.project_sdo.Models.ListDrugModel;
+import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
 import com.example.quang.project_sdo.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ITLAB on 4/4/2018.
+ * Created by Trang on 4/5/2018.
  */
 
-public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
+public class HomeListDrugAdapter extends ArrayAdapter<ListDrugForHomeModel> {
+
     AppCompatActivity context;
     int layout;
-    ArrayList<ListDrugModel> listDrug;
-
-    public DrugAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ListDrugModel> objects) {
+    ArrayList<ListDrugForHomeModel> homeListDrug;
+    public HomeListDrugAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ListDrugForHomeModel> objects) {
         super(context, resource, objects);
         this.context = context;
         this.layout = resource;
-        this.listDrug = objects;
+        this.homeListDrug = objects;
     }
 
     public class ViewHolder {
         TextView nameDrug;
-        TextView priceDrug;
-        TextView nameStore;
+        TextView postDate;
+        TextView description;
         ImageView drugImage;
 
     }
@@ -52,19 +49,22 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
         ViewHolder viewHolder;
         if (convertView == null) {
             viewHolder = new ViewHolder();
-            viewHolder.nameDrug = (TextView) convertView.findViewById(com.example.quang.project_sdo.R.id.txtNameDrug);
-            viewHolder.priceDrug = (TextView) convertView.findViewById(com.example.quang.project_sdo.R.id.txtGia);
-            viewHolder.nameStore = (TextView) convertView.findViewById(com.example.quang.project_sdo.R.id.txtDrugStore);
-            viewHolder.drugImage = (ImageView) convertView.findViewById(com.example.quang.project_sdo.R.id.imgDrug);
+            viewHolder.nameDrug = (TextView) convertView.findViewById(R.id.txtHomeDrugName);
+            viewHolder.postDate = (TextView) convertView.findViewById(R.id.txtHomePostDate);
+            viewHolder.description = (TextView) convertView.findViewById(R.id.txtHomeDescription);
+            viewHolder.drugImage = (ImageView) convertView.findViewById(R.id.imgHomeDrug);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
+        viewHolder.nameDrug.setText(homeListDrug.get(position).getDrugName());
+        viewHolder.postDate.setText(homeListDrug.get(position).getDrugPostDate());
+        viewHolder.description.setText(homeListDrug.get(position).getDrugDescription());
+        viewHolder.drugImage.setImageResource(homeListDrug.get(position).getDrugImage());
 
-        viewHolder.nameDrug.setText(listDrug.get(position).getNameDrug());
-        viewHolder.nameStore.setText(listDrug.get(position).getNameStore());
-        viewHolder.priceDrug.setText(listDrug.get(position).getPriceDrug());
-        viewHolder.drugImage.setImageResource(listDrug.get(position).getImageDrug());
+
         return convertView;
     }
+
+
 }
