@@ -41,13 +41,16 @@
         <item name="android:layout_width">300dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">10dp</item>
+        <item name="android:drawableLeft">@drawable/phone</item>
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:paddingLeft">10dp</item>
         <item name="android:background">@color/trang</item>
     </style>
 
     <style name="dangkyButtonStyle">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">120dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:background">#632523</item>
+        <item name="android:background">@drawable/button_radius</item>
         <item name="android:textColor">@color/trang</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textAllCaps">false</item>

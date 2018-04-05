@@ -34,11 +34,19 @@
 
         <EditText
             android:id="@+id/edtUser"
+            android:drawableLeft="@drawable/key"
+            android:drawablePadding="8dp"
+            android:paddingLeft="10dp"
+            android:drawableStart="@drawable/key"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangnhap_username"/>
         <EditText
             android:id="@+id/edtPass"
             android:inputType="textPassword"
+            android:drawableLeft="@drawable/mail"
+            android:paddingLeft="10dp"
+            android:drawablePadding="8dp"
+            android:drawableStart="@drawable/mail"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangnhap_pass"/>
         <Spinner
