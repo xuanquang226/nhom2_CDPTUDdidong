@@ -13,7 +13,7 @@ public class ListDrugModel {
     public String priceDrug;
     public Integer imageDrug;
 
-    public ListDrugModel(String nameDrug, String nameStore, String priceDrug, Integer imageDrug, String imagePrice) {
+    public ListDrugModel(String nameDrug, String nameStore, String priceDrug, Integer imageDrug, int imagePrice) {
         this.nameDrug = nameDrug;
         this.nameStore = nameStore;
         this.priceDrug = priceDrug;

@@ -63,12 +63,15 @@
         <Button
             android:id="@+id/btnSignInP"
             style="@style/dangnhapButtonStyle"
+            android:background="@drawable/button_radius"
             android:text="@string/dangnhap_singin"
+
             />
         <Button
             android:layout_marginLeft="50dp"
             android:id="@+id/btnCancel"
             style="@style/dangnhapButtonStyle"
+            android:background="@drawable/button_radius"
             android:text="@string/dangnhap_cancel"
             />
     </LinearLayout>
