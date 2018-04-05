@@ -23,35 +23,35 @@
         android:layout_weight="5">
 
         <EditText
-            android:id="@+id/edtDangKyUserName"
+            android:id="@+id/edtEmail"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangky_username" />
 
         <EditText
-            android:id="@+id/edtDangKyPassword"
+            android:id="@+id/edtPassword"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangky_pass"
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/edtDangKyRePass"
+            android:id="@+id/edtRePass"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangky_re_pass"
             android:inputType="textPassword" />
 
         <EditText
-            android:id="@+id/edtDangKyAdress"
+            android:id="@+id/edtAddress"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangky_adress" />
 
         <EditText
-            android:id="@+id/edtDangKyPhone"
+            android:id="@+id/edtPhone"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangky_phone"
             android:inputType="number" />
 
         <Spinner
-            android:id="@+id/spinnerDangKyLuaChonAccount"
+            android:id="@+id/spinnerChoiceAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -69,12 +69,12 @@
         android:layout_weight="4">
 
         <Button
-            android:id="@+id/DangKybtnOK"
+            android:id="@+id/btnOK"
             style="@style/dangkyButtonStyle"
             android:text="@string/dangky_ok" />
         <Button
             android:layout_marginLeft="50dp"
-            android:id="@+id/DangKybtnCancel"
+            android:id="@+id/btnCancelU"
             style="@style/dangkyButtonStyle"
             android:text="@string/dangky_cancel" />
     </LinearLayout>

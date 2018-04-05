@@ -33,16 +33,16 @@
         >
 
         <EditText
-            android:id="@+id/edtDangNhapUserName"
+            android:id="@+id/edtUser"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangnhap_username"/>
         <EditText
-            android:id="@+id/edtDangNhapPassword"
+            android:id="@+id/edtPass"
             android:inputType="textPassword"
             style="@style/dangkyEditTextStyle"
             android:hint="@string/dangnhap_pass"/>
         <Spinner
-            android:id="@+id/spinnerDangnhapLuaChonAccount"
+            android:id="@+id/spinnerChoice"
             android:layout_marginTop="10dp"
             android:entries="@array/TypeAccount"
             android:layout_width="wrap_content"
@@ -61,13 +61,13 @@
         android:layout_weight="3">
 
         <Button
-            android:id="@+id/DangnhapbtnSingin"
+            android:id="@+id/btnSignInP"
             style="@style/dangnhapButtonStyle"
             android:text="@string/dangnhap_singin"
             />
         <Button
             android:layout_marginLeft="50dp"
-            android:id="@+id/DangnhapbtnCancel"
+            android:id="@+id/btnCancel"
             style="@style/dangnhapButtonStyle"
             android:text="@string/dangnhap_cancel"
             />

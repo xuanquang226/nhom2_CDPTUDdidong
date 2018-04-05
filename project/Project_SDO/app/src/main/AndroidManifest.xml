@@ -14,12 +14,17 @@
 
         </activity>
         <activity android:name=".SalesStatisticsActivity" />
-        <activity android:name=".BackStackActivity"><intent-filter>
+        <activity android:name=".BackStackActivity"></activity>
+        <activity android:name=".ArcticleDetailActivity"></activity>
+        <activity android:name=".SignInSignUpActivity">
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
+        </activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".SignUpActivity"><intent-filter>
+
         </intent-filter></activity>
-        <activity android:name=".ArcticleDetailActivity"></activity>
     </application>
 
 </manifest>

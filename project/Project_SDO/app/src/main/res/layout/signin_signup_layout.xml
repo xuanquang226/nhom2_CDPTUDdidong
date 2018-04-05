@@ -20,12 +20,12 @@
         style="@style/registerLinerStyle">
 
         <Button
-            android:id="@+id/registisBtnSignIn"
+            android:id="@+id/btnSignIn"
             style="@style/registerButton"
             android:text="@string/register_signin"
             android:layout_marginBottom="30dp"/>
         <Button
-            android:id="@+id/registisBtnSignUp"
+            android:id="@+id/btnSignUp"
             style="@style/registerButton"
             android:text="@string/register_signup"
             />
