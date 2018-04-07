@@ -47,10 +47,11 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        convertView = inflater.inflate(layout, parent, false);
+
         ViewHolder viewHolder;
         if (convertView == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            convertView = inflater.inflate(layout, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.nameDrug = (TextView) convertView.findViewById(com.example.quang.project_sdo.R.id.txtNameDrug);
             viewHolder.priceDrug = (TextView) convertView.findViewById(com.example.quang.project_sdo.R.id.txtGia);

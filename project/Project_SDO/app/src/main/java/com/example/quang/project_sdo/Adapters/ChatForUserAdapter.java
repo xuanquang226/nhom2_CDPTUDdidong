@@ -41,11 +41,12 @@ public class ChatForUserAdapter extends ArrayAdapter<ListChatForUserModel> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        convertView = inflater.inflate(layout,parent,false);
+
         ViewHolder viewHolder;
         if(convertView == null){
             viewHolder = new ViewHolder();
+            LayoutInflater inflater = context.getLayoutInflater();
+            convertView = inflater.inflate(layout,parent,false);
             viewHolder.ava = (ImageView) convertView.findViewById(R.id.imgAvaChat);
             viewHolder.txtNameChat = (TextView) convertView.findViewById(R.id.txtNameChat);
             viewHolder.txtRecentChat = (TextView) convertView.findViewById(R.id.txtChatRecent);

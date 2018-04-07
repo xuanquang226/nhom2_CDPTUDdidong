@@ -44,10 +44,11 @@ public class HomeListDrugAdapter extends ArrayAdapter<ListDrugForHomeModel> {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        convertView = inflater.inflate(layout, parent, false);
+
         ViewHolder viewHolder;
         if (convertView == null) {
+            LayoutInflater inflater = context.getLayoutInflater();
+            convertView = inflater.inflate(layout, parent, false);
             viewHolder = new ViewHolder();
             viewHolder.nameDrug = (TextView) convertView.findViewById(R.id.txtHomeDrugName);
             viewHolder.postDate = (TextView) convertView.findViewById(R.id.txtHomePostDate);
