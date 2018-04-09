@@ -67,7 +67,7 @@ public class BackStackActivity extends AppCompatActivity {
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.flScreen, fragment);
+            fragmentTransaction.replace(R.id.flScreen, fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }

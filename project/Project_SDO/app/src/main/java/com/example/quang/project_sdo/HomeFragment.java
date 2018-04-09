@@ -39,6 +39,12 @@ public class HomeFragment extends Fragment {
         listHomeDrug = new ArrayList<ListDrugForHomeModel>();
 
 
+        listHomeDrug.add(new ListDrugForHomeModel("thuốc đau đầu","ABC Store","120.000",R.drawable.drug));
+        listHomeDrug.add(new ListDrugForHomeModel("thuốc sad","777 Store","150.000",R.drawable.drug));
+        listHomeDrug.add(new ListDrugForHomeModel("thuốc phá thai","666 Store","180.000",R.drawable.drug));
+        listHomeDrug.add(new ListDrugForHomeModel("thuốc bbb","5555 Store","220.000",R.drawable.drug));
+
+
         adapter = new HomeListDrugAdapter((AppCompatActivity) getContext(), R.layout.listview_home_custom, listHomeDrug);
 
 
