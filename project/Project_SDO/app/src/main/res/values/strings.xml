@@ -26,7 +26,9 @@
     <string name="dangnhap_pass">Password</string>
     <string name="dangnhap_singin">Sign In</string>
     <string name="dangnhap_cancel">Cancel</string>
-    
+    <string name="content">Bên cạnh những sai sót do trách nhiệm của hệ thống y tế hoặc các nhân viên y tế, việc dùng thuốc không đúng của người bệnh do vô tình hay hữu ý cũng là một trong những nguyên nhân rất quan trọng góp phần vào các sai sót trong dùng thuốc. Một số sai sót có thể đến do các hành động không an toàn, không tuân thủ đúng các qui trình và thủ tục (thường để tiết kiệm thời gian và công việc), ví dụ như việc lấy sẵn các thuốc ra khỏi vỏ để tiện dùng hoặc trộn lẫn nhiều thứ thuốc với nhau để uống 1 lần. Bệnh nhân cũng có thể góp phần gây ra các sai sót trong dùng thuốc do không tuân thủ các hướng dẫn dùng thuốc của thầy thuốc như tự ý dùng thêm thuốc, tăng liều hoặc giảm liều thuốc... Một nghiên cứu gần đây ở Mỹ cho thấy, hầu hết các bệnh nhân lớn tuổi đã dùng các thuốc của mình không đúng hướng dẫn của thầy thuốc trong 20 - 60% thời gian điều trị tại nhà.
+
+Để có thể hạn chế tối đa các sai sót loại này, người bệnh và những người thân trong gia đình hoặc những người trực tiếp chăm sóc người bệnh cần được hướng dẫn và giải thích đầy đủ về các thuốc điều trị mà người bệnh sử dụng, ví dụ như lý do tại sao người bệnh phải sử dụng từng loại thuốc, thời điểm, thời gian và cách thức dùng từng loại, các phản ứng phụ có thể xảy ra, cách phát hiện và hành động cần thiết khi chúng xảy ra... Việc hướng dẫn này cần được thực hiện liên tục cả trong quá trình điều trị nội trú trong bệnh viện và ngoại trú tại nhà. Giáo dục để tăng cường ý thức của cộng đồng trong việc dùng thuốc đúng cũng đóng vai trò hết sức quan trọng góp phần hạn chế các sai sót trong việc dùng thuốc tại cộng đồng.</string>
     <string name="register_signin">Sign In</string>
     <string name="register_signup">Sign Up</string>
 </resources>
