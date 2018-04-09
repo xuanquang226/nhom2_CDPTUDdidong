@@ -31,4 +31,6 @@
 Để có thể hạn chế tối đa các sai sót loại này, người bệnh và những người thân trong gia đình hoặc những người trực tiếp chăm sóc người bệnh cần được hướng dẫn và giải thích đầy đủ về các thuốc điều trị mà người bệnh sử dụng, ví dụ như lý do tại sao người bệnh phải sử dụng từng loại thuốc, thời điểm, thời gian và cách thức dùng từng loại, các phản ứng phụ có thể xảy ra, cách phát hiện và hành động cần thiết khi chúng xảy ra... Việc hướng dẫn này cần được thực hiện liên tục cả trong quá trình điều trị nội trú trong bệnh viện và ngoại trú tại nhà. Giáo dục để tăng cường ý thức của cộng đồng trong việc dùng thuốc đúng cũng đóng vai trò hết sức quan trọng góp phần hạn chế các sai sót trong việc dùng thuốc tại cộng đồng.</string>
     <string name="register_signin">Sign In</string>
     <string name="register_signup">Sign Up</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
 </resources>
