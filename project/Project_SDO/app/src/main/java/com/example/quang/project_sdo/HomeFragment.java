@@ -44,10 +44,6 @@ public class HomeFragment extends Fragment {
         View view = null;
         view = inflater.inflate(R.layout.home_layout, container, false);
 
-
-
-
-
         //ListView
         listView = (ListView) view.findViewById(R.id.listViewHome);
         listHomeDrug.clear();

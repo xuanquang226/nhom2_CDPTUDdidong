@@ -96,7 +96,8 @@ public class ListDrugFragment extends Fragment {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
+        if(mToggle.isDrawerIndicatorEnabled() ){
+            mDrawerLayout.openDrawer(Gravity.LEFT);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -107,7 +108,7 @@ public class ListDrugFragment extends Fragment {
         listDrug.add(new ListDrugModel("thuốc A","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
         listDrug.add(new ListDrugModel("thuốc B","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
         listDrug.add(new ListDrugModel("thuốc B","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_home_custom, listDrug);
+        adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
@@ -116,7 +117,7 @@ public class ListDrugFragment extends Fragment {
         listDrug.add(new ListDrugModel("thuốc E","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
         listDrug.add(new ListDrugModel("thuốc F","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
         listDrug.add(new ListDrugModel("thuốc H","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_home_custom, listDrug);
+        adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
