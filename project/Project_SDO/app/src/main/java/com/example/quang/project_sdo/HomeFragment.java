@@ -34,9 +34,7 @@ public class HomeFragment extends Fragment {
     ArrayList<ListDrugForHomeModel> listHomeDrug = new ArrayList<ListDrugForHomeModel>();
     HomeListDrugAdapter adapter;
 
-    private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
-    private ActionBarDrawerToggle mToggle;
+
 
 
 
@@ -47,32 +45,7 @@ public class HomeFragment extends Fragment {
         view = inflater.inflate(R.layout.home_layout, container, false);
 
 
-        //NavigationView
-        mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawLayout);
-        mToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
 
-        navigationView = (NavigationView) view.findViewById(R.id.nav_drawer);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.ThuocA:
-                        setThuocA();
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
-                        return true;
-                    case R.id.ThuocB:
-                        setThuocB();
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
-                        return true;
-
-                }
-                return true;
-            }
-        });
 
 
         //ListView
@@ -88,30 +61,5 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.onOptionsItemSelected(item)){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
-    public void setThuocA(){
-        listHomeDrug.clear();
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc A","ABC Store","120.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc B","777 Store","150.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc C","666 Store","180.000",R.drawable.drug));
-        adapter = new HomeListDrugAdapter((AppCompatActivity) getContext(), R.layout.listview_home_custom, listHomeDrug);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-    public void setThuocB(){
-        listHomeDrug.clear();
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc D","ABC Store","120.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc E","777 Store","150.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc F","666 Store","180.000",R.drawable.drug));
-        adapter = new HomeListDrugAdapter((AppCompatActivity) getContext(), R.layout.listview_home_custom, listHomeDrug);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
 }
