@@ -48,10 +48,10 @@ public class HomeFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.listViewHome);
         listHomeDrug.clear();
         listHomeDrug = new ArrayList<ListDrugForHomeModel>();
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc đau đầu","ABC Store","120.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc sad","777 Store","150.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc phá thai","666 Store","180.000",R.drawable.drug));
-        listHomeDrug.add(new ListDrugForHomeModel("thuốc bbb","5555 Store","220.000",R.drawable.drug));
+        listHomeDrug.add(new ListDrugForHomeModel("Thuốc Cefixim","Thuốc dùng cho bệnh đau dạ dày, viêm loét....","10-04-2018",R.drawable.img_cefixim));
+        listHomeDrug.add(new ListDrugForHomeModel("Thuốc Giảm Đau","Thuốc được dùng cho các tiểu phẩu...","10-02-2018",R.drawable.img_giamdau));
+        listHomeDrug.add(new ListDrugForHomeModel("Thuốc An Thần","Thuốc sử dụng cho bệnh nhân sau khi phẫu thuật....","25-03-2018",R.drawable.img_anthan));
+        listHomeDrug.add(new ListDrugForHomeModel("Thuốc Kháng Viêm","Thuốc sử dụng cho các trường hợp viêm cánh quá nặng ....","1-04-2018",R.drawable.img_khangviem));
         adapter = new HomeListDrugAdapter((AppCompatActivity) getContext(), R.layout.listview_home_custom, listHomeDrug);
         listView.setAdapter(adapter);
         return view;
