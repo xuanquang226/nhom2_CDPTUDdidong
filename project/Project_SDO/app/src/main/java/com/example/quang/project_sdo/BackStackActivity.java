@@ -1,13 +1,20 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
 import android.media.Image;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -15,11 +22,16 @@ import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
+import com.example.quang.project_sdo.Adapters.HeadacheAdapter;
+
 public class BackStackActivity extends AppCompatActivity {
     ImageButton imgHome;
     ImageButton imgDrug;
     ImageButton imgChat;
     ImageButton imgAccount;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +73,39 @@ public class BackStackActivity extends AppCompatActivity {
 
 
         addFragment(new HomeFragment());
+
+
+        //NavigationView
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+
+        navigationView = (NavigationView) findViewById(R.id.nav_drawer);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.ThuocA:
+                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
+                        startActivity(new Intent(BackStackActivity.this, CoughActivity.class));
+                        return true;
+                    case R.id.ThuocB:
+                        //setThuocB();
+                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
+                        startActivity(new Intent(BackStackActivity.this, HeadacheActivity.class));
+                        return true;
+                    case R.id.ThuocC:
+                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
+                        startActivity(new Intent(BackStackActivity.this, StomachActivity.class));
+                        return true;
+
+                }
+                return true;
+            }
+        });
     }
 
     protected void addFragment(Fragment fragment) {
@@ -95,5 +140,20 @@ public class BackStackActivity extends AppCompatActivity {
            }
        });
         return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == android.R.id.home){
+            mDrawerLayout.openDrawer(Gravity.LEFT,true);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed(){
+        if(mDrawerLayout.isDrawerOpen(navigationView)){
+            mDrawerLayout.closeDrawer(navigationView);
+        }else {
+            finish();
+        }
     }
 }

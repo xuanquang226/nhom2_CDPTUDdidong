@@ -51,42 +51,17 @@ public class ListDrugFragment extends Fragment {
 
         img = (ImageView) view.findViewById(R.id.imgDrug);
 
-        //NavigationView
-        mDrawerLayout = (DrawerLayout) view.findViewById(R.id.drawLayout);
-        mToggle = new ActionBarDrawerToggle(getActivity(), mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        ((AppCompatActivity) getActivity()).getSupportActionBar().setHomeButtonEnabled(true);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
 
-        navigationView = (NavigationView) view.findViewById(R.id.nav_drawer);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.ThuocA:
-                        setThuocA();
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
-                        return true;
-                    case R.id.ThuocB:
-                        setThuocB();
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
-                        return true;
-
-                }
-                return true;
-            }
-        });
         //List view
         listView = (ListView) view.findViewById(R.id.drug_listview);
         // aaa
 
         listDrug = new ArrayList<ListDrugModel>();
 
-        listDrug.add(new ListDrugModel("Thuốc Cefixim","ABC Store","120.000",R.drawable.img_cefixim,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc Giảm Đau ","777 Store","150.000",R.drawable.img_giamdau,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc An Thần","666 Store","180.000",R.drawable.img_anthan,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc Kháng Viêm","5555 Store","220.000",R.drawable.img_khangviem,R.drawable.coin));
+        listDrug.add(new ListDrugModel("Thuốc Cefixim","ABC Store","120.000",R.drawable.img_cefixim));
+        listDrug.add(new ListDrugModel("thuốc Giảm Đau ","777 Store","150.000",R.drawable.img_giamdau));
+        listDrug.add(new ListDrugModel("thuốc An Thần","666 Store","180.000",R.drawable.img_anthan));
+        listDrug.add(new ListDrugModel("thuốc Kháng Viêm","5555 Store","220.000",R.drawable.img_khangviem));
         adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
 
 
@@ -103,23 +78,6 @@ public class ListDrugFragment extends Fragment {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setThuocA(){
-        listDrug.clear();
-        listDrug.add(new ListDrugModel("thuốc A","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc B","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc B","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
-    public void setThuocB(){
-        listDrug.clear();
-        listDrug.add(new ListDrugModel("thuốc E","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc F","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc H","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
-        listView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
+
 
 }

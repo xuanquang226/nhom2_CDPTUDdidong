@@ -10,20 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".SellerManagementActivity" />
-        <activity android:name=".EnteringDrugActivity"/>
+        <activity android:name=".EnteringDrugActivity" />
         <activity android:name=".SalesStatisticsActivity" />
-        <activity android:name=".BackStackActivity" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".BackStackActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
-        <activity android:name=".ArcticleDetailActivity" />
-        <activity android:name=".SignInSignUpActivity"/>
-        <activity android:name=".SignInActivity" />
-        <activity android:name=".SignUpActivity">
-
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
+        <activity android:name=".ArcticleDetailActivity" />
+        <activity android:name=".SignInSignUpActivity" />
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".CoughActivity" />
+        <activity android:name=".StomachActivity" />
+        <activity android:name=".HeadacheActivity"></activity>
     </application>
 
 </manifest>

@@ -2,9 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/ThuocA"
-        android:title="Thuốc A"></item>
+        android:title="Thuốc ho"></item>
     <item
-        android:id="@+id/ThuocB"
-        android:title="Thuốc B"></item>
+    android:id="@+id/ThuocB"
+    android:title="Thuốc đau đầu"></item>
+    <item
+        android:id="@+id/ThuocC"
+        android:title="Thuốc đau bụng"></item>
 
 </menu>

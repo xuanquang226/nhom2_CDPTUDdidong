@@ -1,115 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/drawLayout"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.quang.project_sdo.BackStackActivity">
 
-    <FrameLayout
-        android:id="@+id/flScreen"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="6">
-
-    </FrameLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@color/colorPrimary"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <FrameLayout
+            android:id="@+id/flScreen"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6">
+
+        </FrameLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/imgHome"
-            style="@style/FourImageView"
-            android:src="@drawable/home"
             android:background="@color/colorPrimary"
-            />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Txt"
-                android:text="@string/home"
-                android:textColor="@color/trang"/>
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imgHome"
+                    style="@style/FourImageView"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/home" />
+
+                <TextView
+                    style="@style/Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home"
+                    android:textColor="@color/trang" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imgDrug"
+                    style="@style/FourImageView"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/idrug" />
+
+                <TextView
+                    style="@style/Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/drug"
+                    android:textColor="@color/trang" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imgChat"
+                    style="@style/FourImageView"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/ichat" />
+
+                <TextView
+                    style="@style/Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chat"
+                    android:textColor="@color/trang" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imgAccount"
+                    style="@style/FourImageView"
+                    android:background="@color/colorPrimary"
+                    android:src="@drawable/iuser" />
+
+                <TextView
+                    style="@style/Txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/user"
+                    android:textColor="@color/trang" />
+            </LinearLayout>
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/imgDrug"
-            style="@style/FourImageView"
-            android:src="@drawable/idrug"
-            android:background="@color/colorPrimary"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Txt"
-                android:text="@string/drug"
-                android:textColor="@color/trang"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-        <ImageButton
-            android:id="@+id/imgChat"
-            style="@style/FourImageView"
-            android:src="@drawable/ichat"
-            android:background="@color/colorPrimary"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Txt"
-                android:text="@string/chat"
-                android:textColor="@color/trang"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:gravity="center">
-
-        <ImageButton
-            android:id="@+id/imgAccount"
-            style="@style/FourImageView"
-            android:src="@drawable/iuser"
-            android:background="@color/colorPrimary" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/Txt"
-                android:text="@string/user"
-                android:textColor="@color/trang"/>
-        </LinearLayout>
-
     </LinearLayout>
 
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/navigation_drawer"></android.support.design.widget.NavigationView>
 
-
-</LinearLayout>
+</android.support.v4.widget.DrawerLayout>
