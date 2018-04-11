@@ -79,7 +79,7 @@ public class ListDrugFragment extends Fragment {
         });
         //List view
         listView = (ListView) view.findViewById(R.id.drug_listview);
-        // @
+        // aaa
 
         listDrug = new ArrayList<ListDrugModel>();
 
