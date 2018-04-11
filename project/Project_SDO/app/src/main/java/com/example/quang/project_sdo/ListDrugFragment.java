@@ -83,10 +83,10 @@ public class ListDrugFragment extends Fragment {
 
         listDrug = new ArrayList<ListDrugModel>();
 
-        listDrug.add(new ListDrugModel("thuốc đau đầu","ABC Store","120.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc sad","777 Store","150.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc phá thai","666 Store","180.000",R.drawable.drug,R.drawable.coin));
-        listDrug.add(new ListDrugModel("thuốc bbb","5555 Store","220.000",R.drawable.drug,R.drawable.coin));
+        listDrug.add(new ListDrugModel("Thuốc Cefixim","ABC Store","120.000",R.drawable.img_cefixim,R.drawable.coin));
+        listDrug.add(new ListDrugModel("thuốc Giảm Đau ","777 Store","150.000",R.drawable.img_giamdau,R.drawable.coin));
+        listDrug.add(new ListDrugModel("thuốc An Thần","666 Store","180.000",R.drawable.img_anthan,R.drawable.coin));
+        listDrug.add(new ListDrugModel("thuốc Kháng Viêm","5555 Store","220.000",R.drawable.img_khangviem,R.drawable.coin));
         adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
 
 
