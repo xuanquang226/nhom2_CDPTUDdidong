@@ -33,7 +33,7 @@ public class CoughActivity extends AppCompatActivity {
         listCoughDrug = new ArrayList<CoughModel>();
         listCoughDrug.add(new CoughModel("thuốc đau đầu","ABC Store","120.000",R.drawable.drug));
         listCoughDrug.add(new CoughModel("thuốc sad","777 Store","150.000",R.drawable.drug));
-        listCoughDrug.add(new CoughModel("thuốc phá thai","666 Store","180.000",R.drawable.drug));
+        listCoughDrug.add(new CoughModel("thuốc Giảm Đau","666 Store","180.000",R.drawable.img_giamdau));
         listCoughDrug.add(new CoughModel("thuốc bbb","5555 Store","220.000",R.drawable.drug));
         adapter = new CoughAdapter(this,R.layout.listview_drug_custom,listCoughDrug);
         listView.setAdapter(adapter);
