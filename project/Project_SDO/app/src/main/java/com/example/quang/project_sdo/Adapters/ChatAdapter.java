@@ -1,6 +1,5 @@
 package com.example.quang.project_sdo.Adapters;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,22 +10,21 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.quang.project_sdo.Models.ListChatForUserModel;
+import com.example.quang.project_sdo.Models.ListChatModel;
 import com.example.quang.project_sdo.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Trang on 4/5/2018.
  */
 
-public class ChatForUserAdapter extends ArrayAdapter<ListChatForUserModel> {
+public class ChatAdapter extends ArrayAdapter<ListChatModel> {
     AppCompatActivity context;
     int layout;
-    ArrayList<ListChatForUserModel> chatUser;
+    ArrayList<ListChatModel> chatUser;
 
-    public ChatForUserAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ListChatForUserModel> objects) {
+    public ChatAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ListChatModel> objects) {
         super(context, resource, objects);
         this.context = context;
         this.layout = resource;
@@ -54,9 +52,9 @@ public class ChatForUserAdapter extends ArrayAdapter<ListChatForUserModel> {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.ava.setImageResource(chatUser.get(position).getAvatarShop());
-        viewHolder.txtNameChat.setText(chatUser.get(position).getNameShop());
-        viewHolder.txtRecentChat.setText(chatUser.get(position).getRecentChatS());
+        viewHolder.ava.setImageResource(chatUser.get(position).getAvatar());
+        viewHolder.txtNameChat.setText(chatUser.get(position).getName());
+        viewHolder.txtRecentChat.setText(chatUser.get(position).getRecentChat());
         return convertView;
     }
 }
