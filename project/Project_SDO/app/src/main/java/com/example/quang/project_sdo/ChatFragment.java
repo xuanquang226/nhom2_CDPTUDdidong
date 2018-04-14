@@ -35,9 +35,9 @@ public class ChatFragment extends Fragment {
 
         ListView listView = (ListView) view.findViewById(R.id.listChat);
 
-        chatModels.add(new ListChatModel("Shop A","Thuốc này có tác dụng phụ không shop",R.drawable.account));
-        chatModels.add(new ListChatModel("Shop B","Thuốc này có tác dụng phụ không shop",R.drawable.account));
-        chatModels.add(new ListChatModel("Shop C","Thuốc này có tác dụng phụ không shop",R.drawable.account));
+        chatModels.add(new ListChatModel("Shop A","Thuốc này có tác dụng phụ không shop",R.drawable.supporta));
+        chatModels.add(new ListChatModel("Shop B","Thuốc này có tác dụng phụ không shop",R.drawable.supportb));
+        chatModels.add(new ListChatModel("Shop C","Thuốc này có tác dụng phụ không shop",R.drawable.supportc));
 
         adapter = new ChatAdapter((AppCompatActivity) getActivity(),R.layout.list_chat_custom,chatModels);
         listView.setAdapter(adapter);

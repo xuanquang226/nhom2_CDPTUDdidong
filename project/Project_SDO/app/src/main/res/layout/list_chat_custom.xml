@@ -20,14 +20,17 @@
             android:id="@+id/txtNameChat"
             android:text="Name A"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/colorDen"
+            android:textStyle="bold"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/txtChatRecent"
             android:layout_below="@+id/txtNameChat"
             android:layout_alignLeft="@+id/txtNameChat"
-            android:text="Đây là loại thuốc ...."/>
+            android:text="Đây là loại thuốc ...."
+            android:layout_marginTop="20dp"/>
     </RelativeLayout>
 
 </LinearLayout>
