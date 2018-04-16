@@ -18,11 +18,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
+import com.example.quang.project_sdo.Adapters.DrugAdapter;
 import com.example.quang.project_sdo.Adapters.HeadacheAdapter;
+import com.example.quang.project_sdo.Models.ListDrugModel;
+
+import java.util.ArrayList;
+
+import static java.security.AccessController.getContext;
 
 public class BackStackActivity extends AppCompatActivity {
     ImageButton imgHome;
@@ -32,6 +39,10 @@ public class BackStackActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView navigationView;
+
+    ArrayList<ListDrugModel> listDrug = new ArrayList<ListDrugModel>();
+    DrugAdapter adapter;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,29 +129,30 @@ public class BackStackActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // dua nut search vao action bar
-        getMenuInflater().inflate(R.menu.menu_search_home,menu);
-       // tao 1 search view
-        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
-        //bat su kien cho nut search
-
-       searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
-           @Override
-           public boolean onQueryTextSubmit(String query) {
-               Toast.makeText(BackStackActivity.this, query, Toast.LENGTH_SHORT).show();
-               return false;
-           }
-
-           @Override
-           public boolean onQueryTextChange(String newText) {
-               Log.d("ABC", newText);
-               return false;
-           }
-       });
-        return super.onCreateOptionsMenu(menu);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // dua nut search vao action bar
+//        getMenuInflater().inflate(R.menu.menu_search_home,menu);
+//       // tao 1 search view
+//        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
+//        //bat su kien cho nut search
+//
+//       searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+//           @Override
+//           public boolean onQueryTextSubmit(String query) {
+//               Toast.makeText(BackStackActivity.this, query, Toast.LENGTH_SHORT).show();
+//               return false;
+//           }
+//
+//           @Override
+//           public boolean onQueryTextChange(String newText) {
+//               //adapter.filter(newText.trim());
+//               Log.d("ABC", newText);
+//               return false;
+//           }
+//       });
+//        return super.onCreateOptionsMenu(menu);
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){
@@ -156,4 +168,5 @@ public class BackStackActivity extends AppCompatActivity {
             finish();
         }
     }
+
 }

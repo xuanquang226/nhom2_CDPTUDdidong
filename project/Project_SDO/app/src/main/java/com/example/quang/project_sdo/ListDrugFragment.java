@@ -12,6 +12,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,7 @@ import com.example.quang.project_sdo.Models.ListDrugModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 //ss
 /**
  * Created by Quang on 3/11/2018.
@@ -40,7 +43,9 @@ public class ListDrugFragment extends Fragment {
     private NavigationView navigationView;
 
     private ActionBarDrawerToggle mToggle;
-
+    ArrayList<ListDrugModel> searchDrug = new ArrayList<ListDrugModel>();
+    DrugAdapter searchArray = null;
+    View view = null;
 
 //hjgjhgjhgffffffffcc
     @Nullable
@@ -48,7 +53,7 @@ public class ListDrugFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = null;
         view = inflater.inflate(R.layout.list_drug_layout, container, false);
-
+        setHasOptionsMenu(true);
         img = (ImageView) view.findViewById(R.id.imgDrug);
 
 
@@ -69,15 +74,68 @@ public class ListDrugFragment extends Fragment {
         return view;
 
     }
+
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        if(mToggle.isDrawerIndicatorEnabled() ){
+//            mDrawerLayout.openDrawer(Gravity.LEFT);
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+
+
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(mToggle.isDrawerIndicatorEnabled() ){
-            mDrawerLayout.openDrawer(Gravity.LEFT);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // dua nut search vao action bar
+
+        inflater.inflate(R.menu.menu_search_home,menu);
+        // tao 1 search view
+        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
+        //bat su kien cho nut search
+
+        searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                Toast.makeText(BackStackActivity.this, query, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+//                newText = newText.toLowerCase(Locale.getDefault());
+//                searchDrug.clear();
+//                if(newText.length() == 0)
+//                {
+//                    searchDrug.addAll(listDrug);
+//
+//
+//                }else
+//                {
+//                    for (ListDrugModel listDrugModel  : listDrug)
+//                    {
+//                        if (listDrugModel.nameDrug.toLowerCase(Locale.getDefault()).contains(newText)){
+//                            searchDrug.add(listDrugModel);
+//                        }
+//                    }
+//                }
+//                searchArray = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom,searchDrug);
+//                listView.setAdapter(adapter);
+                if (newText != null && !newText.isEmpty()) {
+                    ArrayList<ListDrugModel> listFound = new ArrayList<ListDrugModel>();
+                    for(ListDrugModel item:listDrug) {
+                        if (item.nameDrug.contains(newText)) {
+                            listFound.add(item);
+                        }
+                    }
+                    adapter = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_drug_custom, listFound);
+                    listView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+                return false;
+            }
+        });
+        super.onCreateOptionsMenu(menu, inflater);
     }
-
-
 
 }

@@ -19,6 +19,7 @@ import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by ITLAB on 4/4/2018.
@@ -28,12 +29,16 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
     AppCompatActivity context;
     int layout;
     ArrayList<ListDrugModel> listDrug;
+    //ArrayList<ListDrugModel> search;
 
     public DrugAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ListDrugModel> objects) {
         super(context, resource, objects);
         this.context = context;
         this.layout = resource;
         this.listDrug = objects;
+
+//        this.search = new ArrayList<ListDrugModel>();
+//        this.search.addAll(listDrug);
     }
 
     public class ViewHolder {
@@ -68,4 +73,22 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
         viewHolder.drugImage.setImageResource(listDrug.get(position).getImageDrug());
         return convertView;
     }
+
+//    // Filter Class
+//    public void filter(String charText) {
+//        charText = charText.toLowerCase(Locale.getDefault());
+//        listDrug.clear();
+//        if (charText.length() == 0) {
+//            listDrug.addAll(search);
+//        } else {
+//            for (ListDrugModel wp : search) {
+//                if (wp.nameDrug.toLowerCase(Locale.getDefault())
+//                        .contains(charText)) {
+//                    listDrug.add(wp);
+//                }
+//            }
+//        }
+//        notifyDataSetChanged();
+//    }
+//
 }
