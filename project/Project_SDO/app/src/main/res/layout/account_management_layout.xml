@@ -101,7 +101,7 @@
                 android:src="@drawable/box"
                 android:layout_marginTop="10dp"/>
             <Button
-                android:id="@+id/btnorder"
+                android:id="@+id/btnOrder"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
