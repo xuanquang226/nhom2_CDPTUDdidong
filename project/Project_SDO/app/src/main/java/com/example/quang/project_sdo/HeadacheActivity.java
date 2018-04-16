@@ -28,10 +28,10 @@ public class HeadacheActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.headachedrug_listview);
         listHeadacheDrug.clear();
         listHeadacheDrug = new ArrayList<HeadacheModel>();
-        listHeadacheDrug.add(new HeadacheModel("thuốc B","ABC Store","120.000",R.drawable.drug));
-        listHeadacheDrug.add(new HeadacheModel("thuốc C","777 Store","150.000",R.drawable.drug));
-        listHeadacheDrug.add(new HeadacheModel("thuốc E","666 Store","180.000",R.drawable.drug));
-        listHeadacheDrug.add(new HeadacheModel("thuốc F","5555 Store","220.000",R.drawable.drug));
+        listHeadacheDrug.add(new HeadacheModel("Thuốc Cefixim","ABC Store","120.000",R.drawable.img_cefixim));
+        listHeadacheDrug.add(new HeadacheModel("thuốc Giảm Đau ","777 Store","150.000",R.drawable.img_giamdau));
+        listHeadacheDrug.add(new HeadacheModel("thuốc An Thần","666 Store","180.000",R.drawable.img_anthan));
+        listHeadacheDrug.add(new HeadacheModel("thuốc Kháng Viêm","5555 Store","220.000",R.drawable.img_khangviem));
         adapter = new HeadacheAdapter(this,R.layout.listview_drug_custom,listHeadacheDrug);
         listView.setAdapter(adapter);
     }

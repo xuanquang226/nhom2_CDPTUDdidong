@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 
         inflater.inflate(R.menu.menu_search_home,menu);
         // tao 1 search view
-        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
+        final android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
         //bat su kien cho nut search
 
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
@@ -107,7 +107,7 @@ public class HomeFragment extends Fragment {
                 if (newText != null && !newText.isEmpty()) {
                     ArrayList<ListDrugForHomeModel> listFound = new ArrayList<ListDrugForHomeModel>();
                     for(ListDrugForHomeModel item:listHomeDrug) {
-                        if (item.getDrugName().contains(newText)) {
+                        if (item.getDrugName().toLowerCase(Locale.getDefault()).contains(newText)) {
                             listFound.add(item);
                         }
                     }
@@ -115,6 +115,7 @@ public class HomeFragment extends Fragment {
                     listView.setAdapter(adapter);
 
                 }
+                searchView.clearFocus();
                 return false;
             }
         });

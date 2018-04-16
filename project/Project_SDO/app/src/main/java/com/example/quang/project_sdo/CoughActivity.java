@@ -31,10 +31,10 @@ public class CoughActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.coughdrug_listview);
         listCoughDrug.clear();
         listCoughDrug = new ArrayList<CoughModel>();
-        listCoughDrug.add(new CoughModel("thuốc đau đầu","ABC Store","120.000",R.drawable.drug));
-        listCoughDrug.add(new CoughModel("thuốc sad","777 Store","150.000",R.drawable.drug));
-        listCoughDrug.add(new CoughModel("thuốc Giảm Đau","666 Store","180.000",R.drawable.img_giamdau));
-        listCoughDrug.add(new CoughModel("thuốc bbb","5555 Store","220.000",R.drawable.drug));
+        listCoughDrug.add(new CoughModel("Thuốc Cefixim","ABC Store","120.000",R.drawable.img_cefixim));
+        listCoughDrug.add(new CoughModel("thuốc Giảm Đau ","777 Store","150.000",R.drawable.img_giamdau));
+        listCoughDrug.add(new CoughModel("thuốc An Thần","666 Store","180.000",R.drawable.img_anthan));
+        listCoughDrug.add(new CoughModel("thuốc Kháng Viêm","5555 Store","220.000",R.drawable.img_khangviem));
         adapter = new CoughAdapter(this,R.layout.listview_drug_custom,listCoughDrug);
         listView.setAdapter(adapter);
     }

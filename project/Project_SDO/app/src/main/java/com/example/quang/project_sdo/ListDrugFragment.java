@@ -91,7 +91,7 @@ public class ListDrugFragment extends Fragment {
 
         inflater.inflate(R.menu.menu_search_home,menu);
         // tao 1 search view
-        android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
+        final android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
         //bat su kien cho nut search
 
         searchView.setOnQueryTextListener(new android.support.v7.widget.SearchView.OnQueryTextListener() {
@@ -103,7 +103,7 @@ public class ListDrugFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-//                newText = newText.toLowerCase(Locale.getDefault());
+                newText = newText.toLowerCase(Locale.getDefault());
 //                searchDrug.clear();
 //                if(newText.length() == 0)
 //                {
@@ -124,7 +124,7 @@ public class ListDrugFragment extends Fragment {
                 if (newText != null && !newText.isEmpty()) {
                     ArrayList<ListDrugModel> listFound = new ArrayList<ListDrugModel>();
                     for(ListDrugModel item:listDrug) {
-                        if (item.nameDrug.contains(newText)) {
+                        if (item.nameDrug.toLowerCase(Locale.getDefault()).contains(newText)) {
                             listFound.add(item);
                         }
                     }
@@ -132,6 +132,7 @@ public class ListDrugFragment extends Fragment {
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
+                searchView.clearFocus();
                 return false;
             }
         });
