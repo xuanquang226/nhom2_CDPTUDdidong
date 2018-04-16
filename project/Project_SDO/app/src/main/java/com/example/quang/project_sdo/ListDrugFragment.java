@@ -132,8 +132,9 @@ public class ListDrugFragment extends Fragment {
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }
-                searchView.clearFocus();
-                return false;
+                //searchView.clearFocus();
+                adapter.notifyDataSetChanged();
+                return true;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);

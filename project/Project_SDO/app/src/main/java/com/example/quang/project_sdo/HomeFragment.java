@@ -86,7 +86,7 @@ public class HomeFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 Log.d("ABC", newText);
 
-//                newText = newText.toLowerCase(Locale.getDefault());
+                newText = newText.toLowerCase(Locale.getDefault());
 //                searchDrug.clear();
 //                if(newText.length() == 0)
 //                {
@@ -104,6 +104,7 @@ public class HomeFragment extends Fragment {
 //                }
 //                searchArray = new HomeListDrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom,searchDrug);
 //                listView.setAdapter(adapter);
+
                 if (newText != null && !newText.isEmpty()) {
                     ArrayList<ListDrugForHomeModel> listFound = new ArrayList<ListDrugForHomeModel>();
                     for(ListDrugForHomeModel item:listHomeDrug) {
@@ -115,9 +116,13 @@ public class HomeFragment extends Fragment {
                     listView.setAdapter(adapter);
 
                 }
-                searchView.clearFocus();
-                return false;
+
+                adapter.notifyDataSetChanged();
+                //searchView.clearFocus();
+                return true;
+
             }
+
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
