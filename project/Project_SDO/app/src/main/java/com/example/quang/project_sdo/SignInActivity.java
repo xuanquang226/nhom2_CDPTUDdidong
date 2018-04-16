@@ -20,6 +20,7 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText edtUsername;
     EditText edtPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
