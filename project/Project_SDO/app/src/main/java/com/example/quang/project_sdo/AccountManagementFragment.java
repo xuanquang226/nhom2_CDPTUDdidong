@@ -58,7 +58,7 @@ public class AccountManagementFragment extends Fragment {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                mAuth.signOut();
             }
         });
 
@@ -77,9 +77,7 @@ public class AccountManagementFragment extends Fragment {
     }
     //aaa
 
-    public void signOut(){
-        signOut();
-    }
+
 
     @Override
     public void onStart() {
