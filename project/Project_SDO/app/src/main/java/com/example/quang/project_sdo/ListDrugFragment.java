@@ -130,10 +130,18 @@ public class ListDrugFragment extends Fragment {
                     }
                     adapter = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_drug_custom, listFound);
                     listView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    //adapter.notifyDataSetChanged();
                 }
-                //searchView.clearFocus();
+                else {
+                    adapter = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_drug_custom, listDrug);
+                    listView.setAdapter(adapter);
+                }
+
                 adapter.notifyDataSetChanged();
+                if (newText.length() == 0) {
+                    searchView.clearFocus();
+                }
+
                 return true;
             }
         });

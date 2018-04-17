@@ -116,9 +116,16 @@ public class HomeFragment extends Fragment {
                     listView.setAdapter(adapter);
 
                 }
+                else {
+                    adapter = new HomeListDrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom, listHomeDrug);
+                    listView.setAdapter(adapter);
+                }
 
                 adapter.notifyDataSetChanged();
-                //searchView.clearFocus();
+                if (newText.length() == 0) {
+                    searchView.clearFocus();
+                }
+
                 return true;
 
             }
