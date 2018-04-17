@@ -59,6 +59,8 @@ public class AccountManagementFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
+                startActivity(new Intent(getActivity(),SignInSignUpActivity.class));
+                Toast.makeText(getActivity(),"Đã thoát",Toast.LENGTH_SHORT).show();
             }
         });
 
