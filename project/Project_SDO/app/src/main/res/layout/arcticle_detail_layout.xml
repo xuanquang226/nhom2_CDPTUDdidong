@@ -20,11 +20,13 @@
             android:orientation="vertical">
 
             <ImageView
+                android:id="@+id/imageArctical"
                 android:layout_width="wrap_content"
                 android:layout_height="250dp"
                 android:src="@drawable/drug_demo" />
 
             <TextView
+                android:id="@+id/titleDrug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Các bài thuốc              "
@@ -38,7 +40,14 @@
                 android:layout_height="wrap_content"
                 style="@style/contentInfo"
                 android:text="@string/content"
+                android:layout_marginBottom="10dp"
 
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tác Giả : "
+                android:layout_gravity="right"
                 />
         </LinearLayout>
 
