@@ -27,7 +27,6 @@
             android:textColor="@color/colorDen"
             android:textSize="17dp" />
 
-
         <TextView
             android:id="@+id/txtHomeDescription"
             android:layout_width="wrap_content"
