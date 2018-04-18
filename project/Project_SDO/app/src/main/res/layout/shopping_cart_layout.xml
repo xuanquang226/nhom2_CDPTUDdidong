@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShoppingCartActivity">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_margin="5dp"
+        android:layout_weight="6"></ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btnContinue"
+            style="@style/shoppingcartButtonStyle"
+            android:drawableLeft="@drawable/play"
+            android:drawablePadding="5dp"
+            android:text="@string/shoppingcart_continue" />
+
+        <Button
+            android:id="@+id/btnOrder"
+            style="@style/shoppingcartButtonStyle"
+            android:layout_marginLeft="10dp"
+            android:drawableLeft="@drawable/order"
+            android:drawablePadding="10dp"
+            android:text="@string/shoppingcart_order" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
