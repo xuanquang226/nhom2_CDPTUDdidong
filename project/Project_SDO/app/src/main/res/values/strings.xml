@@ -13,6 +13,10 @@
     <string name="dangky_pass">Password</string>
     <string name="dangky_re_pass">Re-Password</string>
     <string name="dangky_adress">Address</string>
+    <string name="dangky_cmnd">CMND</string>
+    <string name="dangky_drugstore">Drug Store</string>
+    <string name="dangky_vehicel">Vehicel Code</string>
+    <string name="dangky_transported">The airline Transported</string>
     <string name="dangky_phone">Phone Number</string>.
     <string name="soxe">Code Bike: </string>
     <array name="TypeAccount">
@@ -32,11 +36,14 @@
     <string name="register_signup">Sign Up</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
+<<<<<<< Updated upstream
     <string name="shoppingcart_continue">Continue</string>
     <string name="shoppingcart_order">Order</string>
     <string name="price_shoppingcart">129.000 Đ</string>
     <string name="amount_number_shopping_cart">1</string>
 
+=======
+>>>>>>> Stashed changes
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
