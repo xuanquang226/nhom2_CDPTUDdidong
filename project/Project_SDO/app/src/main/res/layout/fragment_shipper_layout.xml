@@ -32,16 +32,19 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:orientation="vertical"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="15dp"
             >
             <TextView
+                android:textSize="17dp"
+                android:textStyle="bold"
                 android:id="@+id/txtnameShipper"
                 android:textColor="@color/colorDen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Nguyễn Văn A"/>
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -61,6 +64,7 @@
                     android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -89,15 +93,18 @@
         android:orientation="horizontal"
         android:layout_marginLeft="20dp">
         <ImageView
-            android:id="@+id/imgadress"
+            android:id="@+id/img_shipperAdress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/adress"/>
         <TextView
-            android:id="@+id/txtadress"
+            android:id="@+id/txt_shipperAdress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/colorXanhBien"
+            android:textStyle="bold"
+            android:textSize="17dp"
             android:text="74/x/x Ðường 6, Linh đông, quận Thủ Đức"/>
     </LinearLayout>
     <LinearLayout
@@ -113,17 +120,17 @@
             android:orientation="horizontal"
             android:layout_marginLeft="20dp">
             <ImageView
-                android:id="@+id/img_transportation"
+                android:id="@+id/img_de"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ibike"
                 android:layout_marginTop="10dp"/>
             <Button
-                android:id="@+id/btn_transportation"
+                android:id="@+id/btn_deliverySchedule"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Transportation Management"/>
+                android:text="Delivery Schedule"/>
 
         </LinearLayout>
         <LinearLayout

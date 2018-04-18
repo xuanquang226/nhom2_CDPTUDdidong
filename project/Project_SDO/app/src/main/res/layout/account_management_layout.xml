@@ -80,6 +80,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/colorXanhBien"
+            android:textStyle="bold"
             android:text="74/x/x Ðường 6, Linh đông, quận Thủ Đức"/>
     </LinearLayout>
     <LinearLayout
