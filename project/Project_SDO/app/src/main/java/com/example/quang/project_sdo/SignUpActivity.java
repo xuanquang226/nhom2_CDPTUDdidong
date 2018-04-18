@@ -29,6 +29,7 @@ public class SignUpActivity extends AppCompatActivity {
     EditText edtRePass;
     EditText edtAddress;
     EditText edtPhone;
+    //private ArrayList<mdSpinnerPlace> arrSpinnerType;
 
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
