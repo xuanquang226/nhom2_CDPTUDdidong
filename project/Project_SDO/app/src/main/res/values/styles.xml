@@ -29,6 +29,10 @@
         <item name="android:textSize">17dp</item>
         <item name="android:textStyle">bold</item>
     </style>
+    <style name="Txt_schedule">
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/colorDen</item>
+    </style>
 
     <style name="dangkyLinearStyle">
         <item name="android:layout_width">match_parent</item>

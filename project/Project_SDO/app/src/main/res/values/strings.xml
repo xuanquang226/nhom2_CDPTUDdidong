@@ -18,7 +18,10 @@
     <string name="dangky_vehicel">Vehicel Code</string>
     <string name="dangky_transported">The airline Transported</string>
     <string name="dangky_phone">Phone Number</string>.
-    <string name="soxe">Code Bike: </string>
+    <string name="soxe">Vehicle Code: </string>
+    <string name="order">Order : </string>
+    <string name="adress">Adress : </string>
+    <string name="customerphone">Phone Number : </string>
     <array name="TypeAccount">
         <item name="account_user">User</item>
         <item name="account_seller">Seller</item>
