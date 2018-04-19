@@ -44,9 +44,6 @@ public class HomeFragment extends Fragment {
     View view = null;
 
 
-
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -151,5 +148,4 @@ public class HomeFragment extends Fragment {
 //        adapter.notifyDataSetChanged();
 //    }
 
-//aa
 }
