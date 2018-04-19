@@ -1,14 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/colorPrimaryDark"
-    tools:context=".UserSignUpActivity">
+    tools:context="com.example.quang.project_sdo.ShipperSignUpFragment">
 
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
     <EditText
         android:id="@+id/edtEmail"
         style="@style/dangkyEditTextStyle"
@@ -46,5 +50,19 @@
         android:drawableLeft="@drawable/phone"
         android:drawableStart="@drawable/phone"
         android:inputType="number" />
-
-</LinearLayout>
+    <EditText
+        android:id="@+id/edtCMND"
+        style="@style/dangkyEditTextStyle"
+        android:hint="@string/dangky_cmnd"
+        android:drawableLeft="@drawable/phone"
+        android:drawableStart="@drawable/phone"
+        android:inputType="number" />
+    <EditText
+        android:id="@+id/edtDrugStore"
+        style="@style/dangkyEditTextStyle"
+        android:hint="@string/dangky_drugstore"
+        android:drawableLeft="@drawable/phone"
+        android:drawableStart="@drawable/phone"
+        android:inputType="number" />
+    </LinearLayout>
+</FrameLayout>
