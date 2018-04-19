@@ -47,8 +47,10 @@ public class ScheduleAdapter extends ArrayAdapter<ScheduleModel> {
             viewHolder.txtOrder = (TextView) convertView.findViewById(R.id.txt_order);
             viewHolder.txtAdress = (TextView) convertView.findViewById(R.id.txt_adress);
             viewHolder.txtnumberPhone = (TextView) convertView.findViewById(R.id.txt_customphone);
-        }else
+            convertView.setTag(viewHolder);
+        }else {
             viewHolder = (ViewHolder) convertView.getTag();
+        }
         viewHolder.txtOrder.setText(listSchedule.get(position).getOrderShedule());
         viewHolder.txtAdress.setText(listSchedule.get(position).getAdress());
         viewHolder.txtnumberPhone.setText(listSchedule.get(position).getPhoneNumber());

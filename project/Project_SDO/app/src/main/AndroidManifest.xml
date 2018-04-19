@@ -20,17 +20,20 @@
 
         </activity>
         <activity android:name=".SignUpActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".CoughActivity" />
         <activity android:name=".StomachActivity" />
         <activity android:name=".HeadacheActivity" />
         <activity android:name=".ShoppingCartActivity">
 
+        </activity>
+        <activity android:name=".ShipperDeliverySchedule">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

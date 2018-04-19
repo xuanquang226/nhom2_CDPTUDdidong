@@ -6,7 +6,7 @@ package com.example.quang.project_sdo.Models;
 
 public class ScheduleModel {
     public String orderShedule, adress;
-    public Integer phoneNumber;
+    public String phoneNumber;
 
     public ScheduleModel(String orderShedule, String adress, String phoneNumber) {
         this.orderShedule = orderShedule;
@@ -30,11 +30,11 @@ public class ScheduleModel {
         this.adress = adress;
     }
 
-    public Integer getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Integer phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
