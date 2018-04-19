@@ -30,6 +30,7 @@
             android:textColor="@color/colorDen"
             android:textSize="17dp" />
 
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -42,17 +43,34 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/price_shopping_cart"
                 />
+
             <TextView
                 android:id="@+id/txtShoppingCartPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/price_shoppingcart_front"
+                android:textColor="@color/colorDo"
+                android:textStyle="bold"
+                android:textSize="17dp"
+                />
+
+
+            <TextView
+                android:id="@+id/txtDisplayPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:paddingLeft="1dp"
                 android:paddingTop="1dp"
-                android:text="@string/price_shoppingcart"
+
+                android:text="@string/price_shoppingcart_back"
                 android:textColor="@color/colorDo"
                 android:textSize="17dp"
                 android:textStyle="bold" />
-
+            <TextView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/priceA"
+                android:textColor="@color/trang"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -66,6 +84,7 @@
                 android:layout_width="wrap_content"
                 android:background="@color/trang"
                 android:layout_height="wrap_content"
+
                 android:drawableRight="@drawable/minus_circle"
                 />
             <TextView
@@ -76,10 +95,12 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
-                android:textSize="30dp"
+                android:textSize="25dp"
+
                 />
             <Button
                 android:id="@+id/btnIncrease"
+
                 android:background="@color/trang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

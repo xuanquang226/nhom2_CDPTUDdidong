@@ -41,7 +41,8 @@
     <string name="navigation_drawer_close">Close</string>
     <string name="shoppingcart_continue">Continue</string>
     <string name="shoppingcart_order">Order</string>
-    <string name="price_shoppingcart">129.000 Đ</string>
+    <string name="price_shoppingcart_back">.000 Đ</string>
+    <string name="price_shoppingcart_front">129</string>
     <string name="amount_number_shopping_cart">1</string>
 
 
