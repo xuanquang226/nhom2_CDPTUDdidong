@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.quang.project_sdo.Models.SellerModel;
+import com.example.quang.project_sdo.Models.ShipperModel;
 import com.example.quang.project_sdo.Models.UsersModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -33,6 +35,10 @@ public class SignUpActivity extends AppCompatActivity {
     EditText edtRePass;
     EditText edtAddress;
     EditText edtPhone;
+    EditText edtCMND;
+    EditText edtDrugStore;
+    EditText edtVehicle;
+    EditText edtTheAirline;
     private ArrayList<String> arrayListSpinner;
     //private ArrayList<mdSpinnerPlace> arrSpinnerType;
     // Khoi tao cai vi tri
@@ -40,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog mProgress;
     private DatabaseReference root;
-    String email,password,re_pass,address,phone;
+    String email,password,re_pass,address,phone,cmnd,drugstore,vehicle,theairline;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +61,14 @@ public class SignUpActivity extends AppCompatActivity {
         final EditText edtRePass = (EditText) findViewById(R.id.edtRePass);
         final EditText edtAddress = (EditText) findViewById(R.id.edtAddress);
         final EditText edtPhone = (EditText) findViewById(R.id.edtPhone);
+        final EditText edtCMND = (EditText) findViewById(R.id.edtCMND);
+        final EditText edtDrugStore = (EditText) findViewById(R.id.edtDrugStore);
+        final EditText edtVehicle = (EditText) findViewById(R.id.edtVehidcle);
+        final EditText edtTheAirline = (EditText) findViewById(R.id.edtTheAirline);
         Spinner spinner = (Spinner) findViewById(R.id.spinnerChoiceAccount);
+
+
+
         arrayListSpinner = new ArrayList<String>();
         arrayListSpinner.add("User");
         arrayListSpinner.add("Seller");
@@ -69,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                possition = i;
+                    possition = i;
                 if (possition == 0) {
                     UserSignUpFragment fragment1 = new UserSignUpFragment(); // Gọi Fragment cần hiểu thị với tên fragment1
                     // Tạo ra fragmentTransaction
@@ -140,11 +153,6 @@ public class SignUpActivity extends AppCompatActivity {
                                 }
                             }
                         });
-                edtUser.setText("");
-                edtPass.setText("");
-                edtRePass.setText("");
-                edtAddress.setText("");
-                edtPhone.setText("");
             }
         });
         btnCancel.setOnClickListener(new View.OnClickListener() {
@@ -162,4 +170,17 @@ public class SignUpActivity extends AppCompatActivity {
         UsersModel model = new UsersModel(email,password,address,phone);
         current_user_id.setValue(model);
     }
+
+//    public void registerSeller(){
+//        String userID = mAuth.getCurrentUser().getUid();
+//        DatabaseReference current_user_id = root.child(userID);
+//        SellerModel model = new SellerModel(email,password,address,phone,cmnd,drugstore);
+//        current_user_id.setValue(model);
+//    }
+//    public void registerShipper(){
+//        String userID = mAuth.getCurrentUser().getUid();
+//        DatabaseReference current_user_id = root.child(userID);
+//        ShipperModel model = new ShipperModel(email,password,address,phone, cmnd, vehicle, theairline);
+//        current_user_id.setValue(model);
+//    }
 }

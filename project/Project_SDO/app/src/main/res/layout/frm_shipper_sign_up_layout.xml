@@ -54,15 +54,22 @@
         android:id="@+id/edtCMND"
         style="@style/dangkyEditTextStyle"
         android:hint="@string/dangky_cmnd"
-        android:drawableLeft="@drawable/phone"
-        android:drawableStart="@drawable/phone"
+        android:drawableLeft="@drawable/cmnd"
+        android:drawableStart="@drawable/cmnd"
         android:inputType="number" />
     <EditText
-        android:id="@+id/edtDrugStore"
+        android:id="@+id/edtVehidcle"
         style="@style/dangkyEditTextStyle"
-        android:hint="@string/dangky_drugstore"
-        android:drawableLeft="@drawable/phone"
-        android:drawableStart="@drawable/phone"
+        android:hint="@string/dangky_vehicel"
+        android:drawableLeft="@drawable/vehicle"
+        android:drawableStart="@drawable/vehicle"
         android:inputType="number" />
+        <EditText
+            android:id="@+id/edtTheAirline"
+            style="@style/dangkyEditTextStyle"
+            android:hint="@string/dangky_transported"
+            android:drawableLeft="@drawable/theairline"
+            android:drawableStart="@drawable/theairline"
+            android:inputType="number" />
     </LinearLayout>
 </FrameLayout>
