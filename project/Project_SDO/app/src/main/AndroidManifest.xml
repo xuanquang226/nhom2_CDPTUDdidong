@@ -11,30 +11,21 @@
         android:theme="@style/AppTheme">
         <activity android:name=".EnteringDrugActivity" />
         <activity android:name=".SalesStatisticsActivity" />
-        <activity android:name=".BackStackActivity">
+        <activity android:name=".BackStackActivity"><intent-filter>
+            <action android:name="android.intent.action.MAIN" />
 
-        </activity>
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
         <activity android:name=".ArcticleDetailActivity" />
-        <activity android:name=".SignInSignUpActivity" />
-        <activity android:name=".SignInActivity" >
-
+        <activity android:name=".SignInSignUpActivity">
         </activity>
-        <activity android:name=".SignUpActivity">
-
-        </activity>
+        <activity android:name=".SignInActivity"></activity>
+        <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".CoughActivity" />
         <activity android:name=".StomachActivity" />
         <activity android:name=".HeadacheActivity" />
-        <activity android:name=".ShoppingCartActivity">
-
-        </activity>
-        <activity android:name=".ShipperDeliverySchedule">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ShoppingCartActivity"></activity>
+        <activity android:name=".ShipperDeliverySchedule"></activity>
     </application>
 
 </manifest>

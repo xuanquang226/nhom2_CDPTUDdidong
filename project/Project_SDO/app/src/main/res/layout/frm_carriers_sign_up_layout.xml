@@ -1,18 +1,20 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@color/colorPrimaryDark"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.example.quang.project_sdo.CarriersSignUpFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:gravity="center"
+        android:orientation="vertical">
+
         <EditText
             android:id="@+id/edtEmail"
             style="@style/dangkyEditTextStyle"
@@ -31,9 +33,9 @@
         <EditText
             android:id="@+id/edtRePass"
             style="@style/dangkyEditTextStyle"
-            android:hint="@string/dangky_re_pass"
             android:drawableLeft="@drawable/key"
             android:drawableStart="@drawable/key"
+            android:hint="@string/dangky_re_pass"
             android:inputType="textPassword" />
 
         <EditText
@@ -46,24 +48,45 @@
         <EditText
             android:id="@+id/edtPhone"
             style="@style/dangkyEditTextStyle"
-            android:hint="@string/dangky_phone"
             android:drawableLeft="@drawable/phone"
             android:drawableStart="@drawable/phone"
+            android:hint="@string/dangky_phone"
             android:inputType="number" />
+
         <EditText
             android:id="@+id/edtCMND"
             style="@style/dangkyEditTextStyle"
+            android:drawableLeft="@drawable/phone"
+            android:drawableStart="@drawable/phone"
             android:hint="@string/dangky_cmnd"
-            android:drawableLeft="@drawable/phone"
-            android:drawableStart="@drawable/phone"
             android:inputType="number" />
+
         <EditText
-            android:id="@+id/edtDrugStore"
+            android:id="@+id/edtCarrier"
             style="@style/dangkyEditTextStyle"
-            android:hint="@string/dangky_drugstore"
             android:drawableLeft="@drawable/phone"
             android:drawableStart="@drawable/phone"
+            android:hint="Tên hãng"
             android:inputType="number" />
     </LinearLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnOKCa"
+            style="@style/dangkyButtonStyle"
+            android:text="@string/dangky_ok" />
+
+        <Button
+            android:id="@+id/btnCancelCa"
+            style="@style/dangkyButtonStyle"
+            android:layout_marginLeft="50dp"
+            android:text="@string/dangky_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

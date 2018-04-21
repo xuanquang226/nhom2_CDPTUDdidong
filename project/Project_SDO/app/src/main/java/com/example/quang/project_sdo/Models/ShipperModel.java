@@ -1,19 +1,28 @@
 package com.example.quang.project_sdo.Models;
 
 public class ShipperModel {
-    String email, pass, address, phone, cmnd, vehicle, airline;
+    String email, pass, address, phone, cmnd, vehicle,accountType;
 
-    public ShipperModel(String email, String pass, String address, String phone) {
+    public ShipperModel(String email, String pass, String address, String phone,String cmnd,String vehicle,String accountType) {
         this.email = email;
         this.pass = pass;
         this.address = address;
         this.phone = phone;
         this.cmnd = cmnd;
         this.vehicle = vehicle;
-        this.airline = airline;
+        this.accountType = accountType;
+
     }
 
     public ShipperModel() {
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public String getEmail() {
@@ -64,11 +73,4 @@ public class ShipperModel {
         this.vehicle = vehicle;
     }
 
-    public String getAirline() {
-        return airline;
-    }
-
-    public void setAirline(String airline) {
-        this.airline = airline;
-    }
 }

@@ -1,23 +1,32 @@
 package com.example.quang.project_sdo.Models;
 
-public class SellerModel {
-    String email, pass, address, phone, cmnd, drugstore,accountType;
+/**
+ * Created by Quang on 4/21/2018.
+ */
 
+public class CarrierModel {
+    String email, pass, address, phone, cmnd, nameCarrier,accountType;
 
-
-
-    public SellerModel(String email, String pass, String address, String phone, String cmnd, String drugstore, String accountType) {
+    public CarrierModel(String email, String pass, String address, String phone,String cmnd,String nameCarrier,String accountType) {
         this.email = email;
         this.pass = pass;
         this.address = address;
         this.phone = phone;
         this.cmnd = cmnd;
-        this.drugstore = drugstore;
+        this.nameCarrier = nameCarrier;
         this.accountType = accountType;
 
     }
 
-    public SellerModel() {
+    public CarrierModel() {
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public String getEmail() {
@@ -60,18 +69,11 @@ public class SellerModel {
         this.cmnd = cmnd;
     }
 
-    public void setDrugstore(String drugstore) {
-        this.drugstore = drugstore;
+    public String getNameCarrier() {
+        return nameCarrier;
     }
 
-    public String getDrugstore() {
-        return drugstore;
-    }
-    public String getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(String accountType) {
-        this.accountType = accountType;
+    public void setNameCarrier(String nameCarrier) {
+        this.nameCarrier = nameCarrier;
     }
 }

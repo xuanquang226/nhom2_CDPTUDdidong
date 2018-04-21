@@ -6,13 +6,21 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * Created by Quang on 3/11/2018.
@@ -20,7 +28,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountManagementFragment extends Fragment {
     FirebaseAuth mAuth;
-    FirebaseAuth.AuthStateListener mAuthLis;
+    DatabaseReference root;
+    String userType;
 
     @Nullable
     @Override
@@ -29,61 +38,55 @@ public class AccountManagementFragment extends Fragment {
         view = inflater.inflate(R.layout.account_management_layout, container, false);
         //Ini
         mAuth = FirebaseAuth.getInstance();
-        Button btnViewOrder = (Button) view.findViewById(R.id.btnOrder);
-        Button btnShopping = (Button) view.findViewById(R.id.btnshopping);
-        Button btnEditProfile = (Button) view.findViewById(R.id.btnEP);
-        Button btnLogout = (Button) view.findViewById(R.id.btnLogOut);
-
-        btnViewOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        btnShopping.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mAuth.signOut();
-                startActivity(new Intent(getActivity(),SignInSignUpActivity.class));
-                Toast.makeText(getActivity(),"Đã thoát",Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mAuthLis = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (mAuth.getCurrentUser() == null) {
-                    Toast.makeText(getActivity(),"Đăng nhập để thực hiện chức năng này",Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getActivity(), SignInSignUpActivity.class));
-                }
-            }
-        };
 
 
         return view;
     }
-    //aaa
 
+    public void account() {
+        root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getCurrentUser().getUid());
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                userType = dataSnapshot.child("accountType").getValue().toString();
+                if (userType.equalsIgnoreCase("User")) {
+                    UserAccountFragment fragment1 = new UserAccountFragment();
+                    FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                    fragmentTransaction1.replace(R.id.flAccount, fragment1);
+                    fragmentTransaction1.commit();
+                } else if (userType.equalsIgnoreCase("Seller")) {
+                    SellerManagementFragment fragment2 = new SellerManagementFragment();
+                    FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                    fragmentTransaction1.replace(R.id.flAccount, fragment2);
+                    fragmentTransaction1.commit();
+                } else if (userType.equalsIgnoreCase("Shipper")) {
+                    ShipperFragment fragment3 = new ShipperFragment();
+                    FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
+                    fragmentTransaction1.replace(R.id.flAccount, fragment3);
+                    fragmentTransaction1.commit();
+                } else if(userType.equalsIgnoreCase("Carrier")){
+                    CarrierFragment fragment4 = new CarrierFragment();
+                    FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.flAccount,fragment4);
+                    fragmentTransaction.commit();
+                }
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 
     @Override
     public void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthLis);
+        if (mAuth.getCurrentUser() == null) {
+            Toast.makeText(getActivity(), "Đăng nhập để thực hiện chức năng này", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), SignInSignUpActivity.class));
+        } else {
+            account();
+        }
     }
 }

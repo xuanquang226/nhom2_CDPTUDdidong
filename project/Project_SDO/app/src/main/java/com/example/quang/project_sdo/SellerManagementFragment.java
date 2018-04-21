@@ -21,13 +21,15 @@ public class SellerManagementFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = null;
-        view = super.onCreateView(inflater, container, savedInstanceState);
+        view = inflater.inflate(R.layout.seller_management_layout,container,false);
         //Ini
         mAuth = FirebaseAuth.getInstance();
         Button btnAdddrugs = (Button) view.findViewById(R.id.btnadddrugs);
         Button btnViewStatistics = (Button) view.findViewById(R.id.btnviewStatistics);
         Button btnEditprofile = (Button) view.findViewById(R.id.btnprofile);
         Button btnLogout = (Button) view.findViewById(R.id.btnlayout);
+
+
 
 
         //Process
@@ -60,6 +62,7 @@ public class SellerManagementFragment extends Fragment {
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), SignInSignUpActivity.class);
                 startActivity(intent);
+                mAuth.signOut();
             }
         });
         return view;

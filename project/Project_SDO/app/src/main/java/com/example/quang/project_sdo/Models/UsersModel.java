@@ -1,16 +1,26 @@
 package com.example.quang.project_sdo.Models;
 
 public class UsersModel {
-    String email, pass, address, phone;
+    String email, pass, address, phone,accountType;
 
-    public UsersModel(String email, String pass, String address, String phone) {
+
+    public UsersModel(String email, String pass, String address, String phone,String accountType) {
         this.email = email;
         this.pass = pass;
         this.address = address;
         this.phone = phone;
+        this.accountType = accountType;
     }
 
     public UsersModel() {
+    }
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     public String getEmail() {

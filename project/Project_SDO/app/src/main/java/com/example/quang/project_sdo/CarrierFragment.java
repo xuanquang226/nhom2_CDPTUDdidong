@@ -15,11 +15,10 @@ import com.google.firebase.auth.FirebaseAuth;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShipperFragment extends Fragment {
-    FirebaseAuth mAuth;
+public class CarrierFragment extends Fragment {
+    private FirebaseAuth mAuth;
 
-
-    public ShipperFragment() {
+    public CarrierFragment() {
         // Required empty public constructor
     }
 
@@ -28,22 +27,10 @@ public class ShipperFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = null;
-        view = super.onCreateView(inflater, container, savedInstanceState);
-        view =  inflater.inflate(R.layout.fragment_shipper_layout, container, false);
+        View view = inflater.inflate(R.layout.fragment_carrier_layout, container, false);
+        Button btnLogout= (Button) view.findViewById(R.id.btnLogOut);
         mAuth = FirebaseAuth.getInstance();
-
-        Button btn_deliverySchedule = (Button) view.findViewById(R.id.btn_deliverySchedule);
-        btn_deliverySchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), ShipperDeliverySchedule.class);
-                startActivity(intent);
-            }
-        });
-
-        Button btnSignOutt = (Button) view.findViewById(R.id.btnLogOut);
-        btnSignOutt.setOnClickListener(new View.OnClickListener() {
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mAuth.signOut();
@@ -51,7 +38,6 @@ public class ShipperFragment extends Fragment {
             }
         });
         return view;
-
-
     }
+
 }
