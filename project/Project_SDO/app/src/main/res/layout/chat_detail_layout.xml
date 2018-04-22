@@ -5,12 +5,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.quang.project_sdo.ChatDetailActivity">
-    <ListView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refreshPull"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
-        android:id="@+id/listChatd"
-        android:layout_margin="5dp"></ListView>
+        android:layout_weight="8"
+        android:background="#ecf0f1">
+        <ListView
+            android:id="@+id/lvChat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="#FFFFFF"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            >
+        </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -33,6 +43,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/colorPrimaryDark"
-            android:src="@drawable/send"/>
+            android:src="@drawable/send"
+            android:id="@+id/imgSend"/>
     </LinearLayout>
 </LinearLayout>

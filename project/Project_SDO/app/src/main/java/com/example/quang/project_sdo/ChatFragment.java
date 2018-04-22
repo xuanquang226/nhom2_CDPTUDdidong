@@ -1,12 +1,16 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,6 +46,15 @@ public class ChatFragment extends Fragment {
         adapter = new ChatAdapter((AppCompatActivity) getActivity(),R.layout.list_chat_custom,chatModels);
         listView.setAdapter(adapter);
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                startActivity(new Intent(getActivity(),ChatDetailActivity.class));
+            }
+        });
+
         return view;
     }
+
 }

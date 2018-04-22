@@ -27,23 +27,11 @@ import java.util.ArrayList;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText edtUser;
-    EditText edtPass;
-    EditText edtRePass;
-    EditText edtAddress;
-    EditText edtPhone;
-    EditText edtCMND;
-    EditText edtDrugStore;
-    EditText edtVehicle;
-    EditText edtTheAirline;
     Spinner spinner;
     private ArrayList<String> arrayListSpinner;
-    //private ArrayList<mdSpinnerPlace> arrSpinnerType;
     // Khoi tao cai vi tri
     int possition;
-    private FirebaseAuth mAuth;
-    private ProgressDialog mProgress;
-    private DatabaseReference root;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity {
         //Ini
         spinner = (Spinner) findViewById(R.id.spinnerChoiceAccount);
 
-        
+
         arrayListSpinner = new ArrayList<String>();
         arrayListSpinner.add("User");
         arrayListSpinner.add("Seller");
@@ -92,97 +80,12 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
 
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
 
-        mAuth = FirebaseAuth.getInstance();
-        root = FirebaseDatabase.getInstance().getReference("Users Info");
-
-        //Process
-
     }
-
-
-/*
-    public void registerUser() {
-        final String email = edtUser.getText().toString();
-        final String password = edtPass.getText().toString();
-        final String address = edtAddress.getText().toString();
-        final String phone = edtPhone.getText().toString();
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_id = root.child(userID);
-                            UsersModel model = new UsersModel(email, password, address, phone);
-                            current_user_id.setValue(model);
-                            Toast.makeText(SignUpActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                        } else {
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
-
-                        }
-                    }
-                });
-
-    }
-
-
-    public void registerSeller() {
-
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_id = root.child(userID);
-                            SellerModel model = new SellerModel(email, password, address, phone, cmnd, drugstore);
-                            current_user_id.setValue(model);
-                            Toast.makeText(SignUpActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                        } else {
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
-
-                        }
-                    }
-                });
-    }
-
-    public void registerShipper() {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            String userID = mAuth.getCurrentUser().getUid();
-                            DatabaseReference current_user_id = root.child(userID);
-                            ShipperModel model = new ShipperModel(email, password, address, phone, cmnd, vehicle, theairline);
-                            current_user_id.setValue(model);
-                            Toast.makeText(SignUpActivity.this, "SignUp Successfully", Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
-                            startActivity(new Intent(SignUpActivity.this, SignInActivity.class));
-                        } else {
-                            Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            mProgress.dismiss();
-
-                        }
-                    }
-                });
-    }
-    */
 
 }
