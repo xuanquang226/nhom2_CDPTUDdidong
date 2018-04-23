@@ -49,10 +49,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvShoppingCart);
         listShopping.clear();
         listShopping = new ArrayList<ShoppingCartModel>();
-        listShopping.add(new ShoppingCartModel("Thuốc Cefixim", 129, R.drawable.img_cefixim, "1"));
-        listShopping.add(new ShoppingCartModel("Thuốc Giảm Đau", 200, R.drawable.img_giamdau, "1"));
-        listShopping.add(new ShoppingCartModel("Thuốc An Thần", 300, R.drawable.img_anthan, "1"));
-        listShopping.add(new ShoppingCartModel("Thuốc Kháng Viêm", 500, R.drawable.img_khangviem, "1"));
+        listShopping.add(new ShoppingCartModel("Thuốc Cefixim", 200, R.drawable.img_cefixim, "1",1));
+        listShopping.add(new ShoppingCartModel("Thuốc Giảm Đau", 200, R.drawable.img_giamdau, "1",1));
+        listShopping.add(new ShoppingCartModel("Thuốc An Thần", 300, R.drawable.img_anthan, "1",1));
+        listShopping.add(new ShoppingCartModel("Thuốc Kháng Viêm", 500, R.drawable.img_khangviem, "1",1));
         adapter = new ShoppingCartAdapter(this, R.layout.listview_shoppingcart_custom, listShopping);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "622871720899-e9v6b8sa01o01n5mfqo6gs8tarcu1l5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.quang.project_sdo",
+            "certificate_hash": "6d411df36d9be56c6c1c534a8e9b10c8e94a68c1"
+          }
+        },
+        {
           "client_id": "622871720899-u804dtfp3fv1m6m1q6d597isq2j90eqk.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

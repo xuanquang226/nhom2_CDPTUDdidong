@@ -2,16 +2,27 @@ package com.example.quang.project_sdo.Models;
 
 public class ShoppingCartModel {
     public String drugName, drugTextAmount;
-    public Integer drugImage,drugPrice ;
+    public Integer drugImage, drugPrice, count;
+
 
     public ShoppingCartModel() {
     }
 
-    public ShoppingCartModel(String drugName,   Integer drugPrice,Integer drugImage, String drugTextAmount) {
+    public ShoppingCartModel(String drugName, Integer drugPrice, Integer drugImage, String drugTextAmount,Integer count) {
         this.drugName = drugName;
         this.drugPrice = drugPrice;
         this.drugImage = drugImage;
         this.drugTextAmount = drugTextAmount;
+        this.count = count;
+
+    }
+
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     public String getDrugName() {

@@ -24,9 +24,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
     AppCompatActivity context;
     int layout;
     ArrayList<ShoppingCartModel> listShoppingCart;
-    int dem = 0;
-    int sum = 0;
-
+    int dem;
 
     public ShoppingCartAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ShoppingCartModel> objects) {
         super(context, resource, objects);
@@ -46,9 +44,13 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
 
     }
 
+
+
+
+
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         final ViewHolder viewHolder;
         if (convertView == null) {
@@ -70,14 +72,19 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
         viewHolder.drugAmount.setText(listShoppingCart.get(position).getDrugTextAmount());
         viewHolder.drugImage.setImageResource(listShoppingCart.get(position).getDrugImage());
 
+
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dem = Integer.parseInt(listShoppingCart.get(position).getDrugTextAmount());
                 dem++;
                 viewHolder.drugAmount.setText(Integer.toString(dem));
-                final int defaultPrice = Integer.parseInt(viewHolder.drugPrice.getText().toString());
-                sum =  dem * defaultPrice;
+                int defaultPrice = (Integer.parseInt(listShoppingCart.get(position).getDrugPrice().toString()));
+                int sum = dem * defaultPrice;
                 viewHolder.drugPrice.setText(sum + "");
+                listShoppingCart.get(position).setDrugTextAmount(dem+"");
+
+
                 //Log.d("price",viewHolder.drugPrice.get);
             }
         });
@@ -85,15 +92,13 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
         viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(dem < 0){
-
-                }else{
-
-                }
+                dem = Integer.parseInt(listShoppingCart.get(position).getDrugTextAmount());
                 dem--;
                 viewHolder.drugAmount.setText(Integer.toString(dem));
-                sum = dem * 129;
+                int defaultPrice = (Integer.parseInt(listShoppingCart.get(position).getDrugPrice().toString()));
+                int sum = dem * defaultPrice;
                 viewHolder.drugPrice.setText(sum + "");
+                listShoppingCart.get(position).setDrugTextAmount(dem+"");
             }
         });
 
