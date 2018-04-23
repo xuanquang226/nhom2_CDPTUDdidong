@@ -110,4 +110,25 @@
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
     </style>
+
+    <!--Style Sale Statistic-->
+    <style name="textSaleStat">
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textColor">@color/trang</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+    
+    <style name="txtAmount">
+        <item name="android:textSize">17dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">10dp</item>
+    </style>
+    <style name="daySale">
+        <item name="android:layout_gravity">right</item>
+        <item name="android:text">@string/sale_date</item>
+        <item name="android:textColor">@color/colorDen</item>
+        <item name="android:drawableLeft">@drawable/homeclock</item>
+        <item name="android:drawablePadding">5dp</item>
+    </style>
 </resources>

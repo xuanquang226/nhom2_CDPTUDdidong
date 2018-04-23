@@ -48,4 +48,15 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    
+    <!--Sale Statistic -->
+    <array name="TypeDate">
+        <item name="account_user">Ngày</item>
+        <item name="account_seller">Tháng</item>
+        <item name="account_shipper">Năm</item>
+    </array>
+    
+    <string name="amount">Amount: </string>
+    <string name="sale_date">Day: 1-1-2017</string>
 </resources>
