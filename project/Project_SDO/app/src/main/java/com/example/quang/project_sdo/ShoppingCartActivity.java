@@ -1,5 +1,6 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -49,13 +50,29 @@ public class ShoppingCartActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.lvShoppingCart);
         listShopping.clear();
         listShopping = new ArrayList<ShoppingCartModel>();
-        listShopping.add(new ShoppingCartModel("Thuốc Cefixim", 200, R.drawable.img_cefixim, "1",1));
-        listShopping.add(new ShoppingCartModel("Thuốc Giảm Đau", 200, R.drawable.img_giamdau, "1",1));
-        listShopping.add(new ShoppingCartModel("Thuốc An Thần", 300, R.drawable.img_anthan, "1",1));
-        listShopping.add(new ShoppingCartModel("Thuốc Kháng Viêm", 500, R.drawable.img_khangviem, "1",1));
+        listShopping.add(new ShoppingCartModel("Thuốc Cefixim", 200, R.drawable.img_cefixim, "1"));
+        listShopping.add(new ShoppingCartModel("Thuốc Giảm Đau", 200, R.drawable.img_giamdau, "1"));
+        listShopping.add(new ShoppingCartModel("Thuốc An Thần", 300, R.drawable.img_anthan, "1"));
+        listShopping.add(new ShoppingCartModel("Thuốc Kháng Viêm", 500, R.drawable.img_khangviem, "1"));
         adapter = new ShoppingCartAdapter(this, R.layout.listview_shoppingcart_custom, listShopping);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        //processing for two buttons Continue and Order
+        btnContinue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ShoppingCartActivity.this,BackStackActivity.class));
+            }
+        });
+
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ShoppingCartActivity.this,PaymentActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
