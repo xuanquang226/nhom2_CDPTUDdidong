@@ -14,9 +14,11 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.ChatAdapter;
 import com.example.quang.project_sdo.Models.ListChatModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
@@ -27,11 +29,15 @@ import java.util.ArrayList;
 public class ChatFragment extends Fragment {
     private ArrayList<ListChatModel> chatModels = new ArrayList<ListChatModel>();
     private ChatAdapter adapter;
+    private FirebaseAuth mAuth;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = null;
-        view =  inflater.inflate(R.layout.chat_layout,container,false);
+        view = inflater.inflate(R.layout.chat_layout, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
 
         ImageView ava = (ImageView) view.findViewById(R.id.imgChat);
         TextView name = (TextView) view.findViewById(R.id.txtNameChat);
@@ -39,22 +45,29 @@ public class ChatFragment extends Fragment {
 
         ListView listView = (ListView) view.findViewById(R.id.listChat);
 
-        chatModels.add(new ListChatModel("Shop A","Thuốc này có tác dụng phụ không shop",R.drawable.supporta));
-        chatModels.add(new ListChatModel("Shop B","Thuốc này có tác dụng phụ không shop",R.drawable.supportb));
-        chatModels.add(new ListChatModel("Shop C","Thuốc này có tác dụng phụ không shop",R.drawable.supportc));
+        chatModels.add(new ListChatModel("Shop A", "Thuốc này có tác dụng phụ không shop", R.drawable.supporta));
+        chatModels.add(new ListChatModel("Shop B", "Thuốc này có tác dụng phụ không shop", R.drawable.supportb));
+        chatModels.add(new ListChatModel("Shop C", "Thuốc này có tác dụng phụ không shop", R.drawable.supportc));
 
-        adapter = new ChatAdapter((AppCompatActivity) getActivity(),R.layout.list_chat_custom,chatModels);
+        adapter = new ChatAdapter((AppCompatActivity) getActivity(), R.layout.list_chat_custom, chatModels);
         listView.setAdapter(adapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getActivity(),ChatDetailActivity.class));
+                startActivity(new Intent(getActivity(), ChatDetailActivity.class));
             }
         });
-
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (mAuth.getUid() == null) {
+            Toast.makeText(getActivity(), "Đăng nhập để thực hiện chức năng này", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), SignInSignUpActivity.class));
+        }
+    }
 }

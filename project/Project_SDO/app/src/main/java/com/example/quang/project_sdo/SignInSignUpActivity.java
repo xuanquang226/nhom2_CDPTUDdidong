@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,13 +22,14 @@ public class SignInSignUpActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         Button btnSignIn = (Button) findViewById(R.id.btnSignIn);
         Button btnSignUp = (Button) findViewById(R.id.btnSignUp);
+        TextView txtHome = (TextView) findViewById(R.id.txtHome);
 
 
         //Process
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInSignUpActivity.this,SignInActivity.class);
+                Intent intent = new Intent(SignInSignUpActivity.this, SignInActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,8 +37,15 @@ public class SignInSignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(SignInSignUpActivity.this,SignUpActivity.class);
+                Intent intent = new Intent(SignInSignUpActivity.this, SignUpActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        txtHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignInSignUpActivity.this, BackStackActivity.class));
             }
         });
     }
@@ -46,10 +55,10 @@ public class SignInSignUpActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-           Intent intent = new Intent(SignInSignUpActivity.this, BackStackActivity.class);
-           startActivity(intent);
-           finish();
+        if (currentUser != null) {
+            Intent intent = new Intent(SignInSignUpActivity.this, BackStackActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 }

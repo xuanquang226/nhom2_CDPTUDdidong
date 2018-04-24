@@ -25,6 +25,7 @@ public class ChatDetailModel {
         CreatedDate = new Date().getTime();
     }
 
+
     public void setName(String name) {
         UserName = name;
     }

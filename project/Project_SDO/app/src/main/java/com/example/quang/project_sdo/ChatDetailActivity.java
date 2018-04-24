@@ -155,6 +155,8 @@ public class ChatDetailActivity extends AppCompatActivity {
                     // mess should be in the left (receiver)
                     llChatMess.setGravity(Gravity.START);
                 }
+
+
             }
         };
     }
