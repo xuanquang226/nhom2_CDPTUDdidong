@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -58,66 +58,86 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:text="Công dụng:"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="20dp"
+            android:text="Công dụng:" />
+
         <TextView
             android:id="@+id/txtGia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/txtCongDung"
             android:layout_below="@+id/txtCongDung"
-            android:text="Giá:"
-            android:layout_marginBottom="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/txtNguonGoc"
-            android:text="Nguồn gốc:"
-            android:layout_below="@+id/txtGia"
-            android:layout_alignLeft="@+id/txtGia"
             android:layout_marginBottom="20dp"
-            />
+            android:text="Giá:" />
+
         <TextView
+            android:id="@+id/txtNguonGoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtGia"
+            android:layout_below="@+id/txtGia"
+            android:layout_marginBottom="20dp"
+            android:text="Nguồn gốc:" />
+
+        <TextView
             android:id="@+id/txtMoTa"
-            android:text="Mô tả:"
-            android:layout_below="@+id/txtNguonGoc"
-            android:layout_alignLeft="@+id/txtNguonGoc"
-            />
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/edtNhapCongDung"
-            android:text="Nhập công dụng thuốc"
-            android:layout_toRightOf="@+id/txtNguonGoc"
-            android:layout_alignBaseline="@+id/txtCongDung"
-            android:lines="2"/>
-        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edtNhapGia"
-            android:text="Nhập giá"
-            android:layout_below="@+id/edtNhapCongDung"
-            android:layout_alignBaseline="@+id/txtGia"
-            android:layout_toRightOf="@+id/txtCongDung"/>
+            android:layout_alignLeft="@+id/txtNguonGoc"
+            android:layout_below="@+id/txtNhapSoLuong"
+            android:layout_marginBottom="20dp"
+            android:text="Mô tả:" />
+
+        <TextView
+            android:id="@+id/txtNhapSoLuong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNguonGoc"
+            android:layout_marginBottom="20dp"
+            android:text="Số lượng:" />
+
         <EditText
+            android:id="@+id/edtNhapCongDung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtCongDung"
+            android:layout_toRightOf="@+id/txtNguonGoc"
+            android:hint="Nhập công dụng thuốc"
+            android:lines="2" />
+
+        <EditText
+            android:id="@+id/edtNhapGia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtGia"
+            android:layout_below="@+id/edtNhapCongDung"
+            android:layout_toRightOf="@+id/txtCongDung"
+            android:hint="Nhập giá" />
+
+        <EditText
             android:id="@+id/edtNhapNguonGoc"
-            android:text="Nhập nguồn gốc"
-            android:layout_below="@+id/edtNhapGia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/txtNguonGoc"
-            android:layout_toRightOf="@+id/txtCongDung"/>
+            android:layout_below="@+id/edtNhapGia"
+            android:layout_toRightOf="@+id/txtCongDung"
+            android:hint="Nhập nguồn gốc" />
+
+        <EditText
+            android:id="@+id/edtNhapSoLuong"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtNguonGoc"
+            android:hint="Nhập số lượng"
+            android:layout_toRightOf="@+id/txtCongDung" />
 
         <EditText
             android:id="@+id/edtNhapMoTa"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtMoTa"
-            android:text="Nhập mô tả"
-            android:lines="6"
-            />
+            android:hint="Nhập mô tả"
+            android:lines="6" />
     </RelativeLayout>
 
     <LinearLayout
@@ -125,13 +145,13 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center">
+
         <Button
+            android:id="@+id/btnOKNT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnOKNT"
             android:text="Xác nhận"
-            android:textAllCaps="false"
-            />
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </LinearLayout>
