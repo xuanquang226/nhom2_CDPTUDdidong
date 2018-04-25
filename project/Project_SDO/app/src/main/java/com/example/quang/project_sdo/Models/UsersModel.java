@@ -4,6 +4,8 @@ public class UsersModel {
     String email, pass, address, phone,accountType;
 
 
+
+
     public UsersModel(String email, String pass, String address, String phone,String accountType) {
         this.email = email;
         this.pass = pass;

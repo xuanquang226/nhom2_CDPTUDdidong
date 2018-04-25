@@ -1,5 +1,6 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,16 +22,25 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.DrugAdapter;
 import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
+import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
 import com.example.quang.project_sdo.Models.ListDrugModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 //ss
+
 /**
  * Created by Quang on 3/11/2018.
  */
@@ -39,15 +50,14 @@ public class ListDrugFragment extends Fragment {
     ArrayList<ListDrugModel> listDrug = new ArrayList<ListDrugModel>();
     DrugAdapter adapter;
     ImageView img;
-    private DrawerLayout mDrawerLayout;
-    private NavigationView navigationView;
+    DatabaseReference root;
+    FirebaseAuth mAuth;
 
-    private ActionBarDrawerToggle mToggle;
+
     ArrayList<ListDrugModel> searchDrug = new ArrayList<ListDrugModel>();
     DrugAdapter searchArray = null;
-    View view = null;
 
-//hjgjhgjhgffffffffcc
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,23 +65,47 @@ public class ListDrugFragment extends Fragment {
         view = inflater.inflate(R.layout.list_drug_layout, container, false);
         setHasOptionsMenu(true);
         img = (ImageView) view.findViewById(R.id.imgDrug);
-
+        mAuth = FirebaseAuth.getInstance();
+        root = FirebaseDatabase.getInstance().getReference();
 
         //List view
         listView = (ListView) view.findViewById(R.id.drug_listview);
-        // aaa
-
-        listDrug = new ArrayList<ListDrugModel>();
-
-        listDrug.add(new ListDrugModel("Thuốc Cefixim","ABC Store","120.000",R.drawable.img_cefixim));
-        listDrug.add(new ListDrugModel("thuốc Giảm Đau ","777 Store","150.000",R.drawable.img_giamdau));
-        listDrug.add(new ListDrugModel("thuốc An Thần","666 Store","180.000",R.drawable.img_anthan));
-        listDrug.add(new ListDrugModel("thuốc Kháng Viêm","5555 Store","220.000",R.drawable.img_khangviem));
         adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
-
-
         listView.setAdapter(adapter);
+        loadData();
         return view;
+
+    }
+
+    public void loadData() {
+        root.child("Drug").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                ListDrugModel drugModel = dataSnapshot.getValue(ListDrugModel.class);
+                listDrug.add(new ListDrugModel(drugModel.tenthuoc, drugModel.gia, drugModel.linkhinh, drugModel.tenshop));
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -89,7 +123,7 @@ public class ListDrugFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // dua nut search vao action bar
 
-        inflater.inflate(R.menu.menu_search_home,menu);
+        inflater.inflate(R.menu.menu_search_home, menu);
         // tao 1 search view
         final android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
         //bat su kien cho nut search
@@ -123,17 +157,16 @@ public class ListDrugFragment extends Fragment {
 //                listView.setAdapter(adapter);
                 if (newText != null && !newText.isEmpty()) {
                     ArrayList<ListDrugModel> listFound = new ArrayList<ListDrugModel>();
-                    for(ListDrugModel item:listDrug) {
-                        if (item.nameDrug.toLowerCase(Locale.getDefault()).contains(newText)) {
+                    for (ListDrugModel item : listDrug) {
+                        if (item.tenthuoc.toLowerCase(Locale.getDefault()).contains(newText)) {
                             listFound.add(item);
                         }
                     }
-                    adapter = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_drug_custom, listFound);
+                    adapter = new DrugAdapter((AppCompatActivity) getActivity(), R.layout.listview_drug_custom, listFound);
                     listView.setAdapter(adapter);
                     //adapter.notifyDataSetChanged();
-                }
-                else {
-                    adapter = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_drug_custom, listDrug);
+                } else {
+                    adapter = new DrugAdapter((AppCompatActivity) getActivity(), R.layout.listview_drug_custom, listDrug);
                     listView.setAdapter(adapter);
                 }
 

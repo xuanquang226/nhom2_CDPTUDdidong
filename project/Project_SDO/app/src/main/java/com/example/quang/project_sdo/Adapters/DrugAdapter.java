@@ -12,8 +12,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.example.quang.project_sdo.Models.ListDrugModel;
 import com.example.quang.project_sdo.R;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -67,12 +69,14 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        viewHolder.nameDrug.setText(listDrug.get(position).getNameDrug());
-        viewHolder.nameStore.setText(listDrug.get(position).getNameStore());
-        viewHolder.priceDrug.setText(listDrug.get(position).getPriceDrug());
-        viewHolder.drugImage.setImageResource(listDrug.get(position).getImageDrug());
+        viewHolder.nameDrug.setText(listDrug.get(position).getTenthuoc());
+        viewHolder.priceDrug.setText(listDrug.get(position).getGia());
+        Picasso.get().load(listDrug.get(position).getLinkhinh()).into(viewHolder.drugImage);
+        viewHolder.nameStore.setText(listDrug.get(position).getTenshop());
+
         return convertView;
     }
+}
 
 //    // Filter Class
 //    public void filter(String charText) {
@@ -91,4 +95,4 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
 //        notifyDataSetChanged();
 //    }
 //
-}
+

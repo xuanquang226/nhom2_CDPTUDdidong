@@ -5,24 +5,20 @@ package com.example.quang.project_sdo.Models;
  */
 
 public class EnterDrugModel {
-    String tenthuoc,congdung,gia,nguongoc,mota;
-    int soluong;
+    public String tenthuoc, congdung, gia, nguongoc, mota, soluong, linkhinh, tenshop;
 
-    public EnterDrugModel(String tenthuoc, String congdung, String gia, String nguongoc, String mota,int soluong) {
+    public EnterDrugModel() {
+    }
+
+    public EnterDrugModel(String tenthuoc, String congdung, String gia, String nguongoc, String mota, String soluong, String linkhinh, String tenshop) {
         this.tenthuoc = tenthuoc;
         this.congdung = congdung;
         this.gia = gia;
         this.nguongoc = nguongoc;
         this.mota = mota;
         this.soluong = soluong;
-    }
-
-    public int getSoluong() {
-        return soluong;
-    }
-
-    public void setSoluong(int soluong) {
-        this.soluong = soluong;
+        this.linkhinh = linkhinh;
+        this.tenshop = tenshop;
     }
 
     public String getTenthuoc() {
@@ -64,4 +60,29 @@ public class EnterDrugModel {
     public void setMota(String mota) {
         this.mota = mota;
     }
+
+    public String getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(String soluong) {
+        this.soluong = soluong;
+    }
+
+    public String getLinkhinh() {
+        return linkhinh;
+    }
+
+    public void setLinkhinh(String linkhinh) {
+        this.linkhinh = linkhinh;
+    }
+
+    public String getTenshop() {
+        return tenshop;
+    }
+
+    public void setTenshop(String tenshop) {
+        this.tenshop = tenshop;
+    }
 }
+

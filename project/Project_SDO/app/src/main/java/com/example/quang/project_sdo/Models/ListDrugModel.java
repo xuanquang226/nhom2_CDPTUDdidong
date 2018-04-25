@@ -1,55 +1,52 @@
 package com.example.quang.project_sdo.Models;
 
-import android.media.Image;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-
 /**
- * Created by ITLAB on 4/4/2018.
+ * Created by Trang on 4/24/2018.
  */
 
 public class ListDrugModel {
-    public String nameDrug, nameStore;
-    public String priceDrug;
-    public Integer imageDrug;
+    public String tenthuoc, gia, linkhinh, tenshop;
 
-    public ListDrugModel(String nameDrug, String nameStore, String priceDrug, Integer imageDrug) {
-        this.nameDrug = nameDrug;
-        this.nameStore = nameStore;
-        this.priceDrug = priceDrug;
-        this.imageDrug = imageDrug;
-
+    public ListDrugModel() {
     }
 
-    public String getNameDrug() {
-        return nameDrug;
+    public ListDrugModel(String tenthuoc, String gia, String linkhinh, String tenshop) {
+        this.tenthuoc = tenthuoc;
+        this.gia = gia;
+        this.linkhinh = linkhinh;
+        this.tenshop = tenshop;
     }
 
-    public void setNameDrug(String nameDrug) {
-        this.nameDrug = nameDrug;
+    public String getTenthuoc() {
+        return tenthuoc;
     }
 
-    public String getNameStore() {
-        return nameStore;
+    public void setTenthuoc(String tenthuoc) {
+        this.tenthuoc = tenthuoc;
     }
 
-    public void setNameStore(String nameStore) {
-        this.nameStore = nameStore;
+    public String getGia() {
+        return gia;
     }
 
-    public String getPriceDrug() {
-        return priceDrug;
+    public void setGia(String gia) {
+        this.gia = gia;
     }
 
-    public void setPriceDrug(String priceDrug) {
-        this.priceDrug = priceDrug;
+    public String getLinkhinh() {
+        return linkhinh;
     }
 
-    public Integer getImageDrug() {
-        return imageDrug;
+    public void setLinkhinh(String linkhinh) {
+        this.linkhinh = linkhinh;
     }
 
-    public void setImageDrug(Integer imageDrug) {
-        this.imageDrug = imageDrug;
+    public String getTenshop() {
+        return tenshop;
+    }
+
+    public void setTenshop(String tenshop) {
+        this.tenshop = tenshop;
     }
 }
+

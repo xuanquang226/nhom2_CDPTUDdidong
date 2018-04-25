@@ -23,7 +23,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 import android.widget.SearchView.OnQueryTextListener;
 
-import com.example.quang.project_sdo.Adapters.DrugAdapter;
+//import com.example.quang.project_sdo.Adapters.DrugAdapter;
 import com.example.quang.project_sdo.Adapters.HeadacheAdapter;
 import com.example.quang.project_sdo.Models.ListDrugModel;
 
@@ -41,7 +41,7 @@ public class BackStackActivity extends AppCompatActivity {
     private NavigationView navigationView;
 
     ArrayList<ListDrugModel> listDrug = new ArrayList<ListDrugModel>();
-    DrugAdapter adapter;
+    //DrugAdapter adapter;
     ListView listView;
 
     @Override

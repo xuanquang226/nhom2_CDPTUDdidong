@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.quang.project_sdo.Adapters.DrugAdapter;
+
 import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
 import com.example.quang.project_sdo.Models.HeadacheModel;
 import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
@@ -41,13 +41,13 @@ public class HomeFragment extends Fragment {
     ArrayList<ListDrugForHomeModel> searchDrug = new ArrayList<ListDrugForHomeModel>();
     HomeListDrugAdapter adapter = null;
     HomeListDrugAdapter searchArray = null;
-    View view = null;
+
 
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+        View view = null;
         view = inflater.inflate(R.layout.home_layout, container, false);
         setHasOptionsMenu(true);
         //ListView

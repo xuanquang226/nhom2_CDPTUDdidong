@@ -15,35 +15,46 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_weight="2"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imgSDrug"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="120dp"
                 android:layout_gravity="start"
-                android:background="@drawable/ic_launcher_background"
+                android:src="@drawable/addimage"
                 android:textAlignment="textStart"></ImageView>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/txtTenThuoc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tên thuốc:" />
-
-            <EditText
-                android:id="@+id/edtNhapTenThuoc"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Nhập tên thuốc ở đây"
-                android:lines="3" />
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/txtTenThuoc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tên thuốc:" />
+
+                <EditText
+                    android:id="@+id/edtNhapTenThuoc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nhập tên thuốc ở đây"
+                    android:lines="2" />
+            </LinearLayout>
+
+
         </LinearLayout>
     </LinearLayout>
 
@@ -128,8 +139,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/txtNguonGoc"
-            android:hint="Nhập số lượng"
-            android:layout_toRightOf="@+id/txtCongDung" />
+            android:layout_toRightOf="@+id/txtCongDung"
+            android:hint="Nhập số lượng" />
 
         <EditText
             android:id="@+id/edtNhapMoTa"
