@@ -67,7 +67,7 @@
             android:drawableLeft="@drawable/phone"
             android:drawableStart="@drawable/phone"
             android:hint="Tên hãng"
-            android:inputType="number" />
+             />
     </LinearLayout>
 
     <LinearLayout

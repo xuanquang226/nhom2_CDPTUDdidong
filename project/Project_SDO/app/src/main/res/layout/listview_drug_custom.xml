@@ -1,33 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_weight="3">
+
         <ImageView
+            android:id="@+id/imgDrug"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_cefixim"
-            android:id="@+id/imgDrug"/>
+            android:src="@drawable/img_cefixim" />
     </LinearLayout>
 
     <LinearLayout
-        android:paddingLeft="5dp"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_weight="2"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="5dp">
+
         <TextView
             android:id="@+id/txtNameDrug"
-            android:textColor="@color/colorDen"
+            style="@style/Txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/listviewdrug"
-            style="@style/Txt"/>
+            android:textColor="@color/colorDen" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -36,38 +38,50 @@
 
             <ImageView
                 android:id="@+id/imgPrice"
-                android:paddingTop="7dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="7dp"
                 android:src="@drawable/coin" />
 
             <TextView
-                style="@style/paddingLeft"
-                android:paddingTop="7dp"
                 android:id="@+id/txtGia"
-                android:textColor="@color/colorDo"
+                style="@style/paddingLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="7dp"
                 android:text="@string/gia"
+                android:textColor="@color/colorDo"
                 android:textStyle="bold" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/txtDrugStore"
-            android:paddingTop="7dp"
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drugstorename"
-            android:textColor="@color/colorXam"
-            style="@style/Txt"/>
+            android:orientation="horizontal">
+            <TextView
+                style="@style/Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="7dp"
+                android:text="Shop:"
+                android:textColor="@color/colorXam" />
+            <TextView
+                android:id="@+id/txtDrugStore"
+                style="@style/Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="7dp"
+                android:text="@string/drugstorename"
+                android:textColor="@color/colorXam" />
 
-        <ImageButton
-            android:id="@+id/imgShopCart"
-            style="@style/paddingRight"
-            android:paddingTop="7dp"
-            android:background="@color/trang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/cart"/>
-
+        </LinearLayout>
     </LinearLayout>
+    <ImageButton
+        android:id="@+id/imgShopCart"
+        style="@style/paddingRight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/trang"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/cart" />
 </LinearLayout>
