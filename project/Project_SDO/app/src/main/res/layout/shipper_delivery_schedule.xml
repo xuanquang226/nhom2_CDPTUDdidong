@@ -4,16 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.quang.project_sdo.ShipperDeliverySchedule"
-    android:orientation="vertical"
-    android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
+    android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp">
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/lv_deliverySchedule">
-    </ListView>
+    android:layout_marginTop="10dp"
+    android:orientation="vertical"
+    tools:context="com.example.quang.project_sdo.ShipperDeliverySchedule">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8">
+
+        <ListView
+            android:id="@+id/lv_deliverySchedule"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ListView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_deletedSchedule"
+            android:text="Confirm"
+            style="@style/dangkyButtonStyle" />
+    </LinearLayout>
 </LinearLayout>

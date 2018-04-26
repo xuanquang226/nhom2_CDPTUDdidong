@@ -1,7 +1,9 @@
 package com.example.quang.project_sdo;
 
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -30,5 +32,19 @@ public class ShipperDeliverySchedule extends AppCompatActivity {
         listSchedule.add(new ScheduleModel(" Drug ","Dong nai","01638001520"));
         adapter = new ScheduleAdapter(ShipperDeliverySchedule.this, R.layout.listview_schedule_custom, listSchedule);
         listView.setAdapter(adapter);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
