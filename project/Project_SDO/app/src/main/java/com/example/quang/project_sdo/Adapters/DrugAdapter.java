@@ -27,7 +27,7 @@ import java.util.Locale;
  * Created by ITLAB on 4/4/2018.
  */
 
-public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
+public class  DrugAdapter extends ArrayAdapter<ListDrugModel> {
     AppCompatActivity context;
     int layout;
     ArrayList<ListDrugModel> listDrug;
@@ -73,6 +73,7 @@ public class DrugAdapter extends ArrayAdapter<ListDrugModel> {
         viewHolder.priceDrug.setText(listDrug.get(position).getGia());
         Picasso.get().load(listDrug.get(position).getLinkhinh()).into(viewHolder.drugImage);
         viewHolder.nameStore.setText(listDrug.get(position).getTenshop());
+
 
         return convertView;
     }

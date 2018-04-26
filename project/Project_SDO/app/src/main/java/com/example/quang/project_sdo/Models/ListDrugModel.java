@@ -6,6 +6,7 @@ package com.example.quang.project_sdo.Models;
 
 public class ListDrugModel {
     public String tenthuoc, gia, linkhinh, tenshop;
+    public boolean isChecked;
 
     public ListDrugModel() {
     }
@@ -15,6 +16,7 @@ public class ListDrugModel {
         this.gia = gia;
         this.linkhinh = linkhinh;
         this.tenshop = tenshop;
+        this.isChecked = false;
     }
 
     public String getTenthuoc() {
@@ -47,6 +49,14 @@ public class ListDrugModel {
 
     public void setTenshop(String tenshop) {
         this.tenshop = tenshop;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }
 

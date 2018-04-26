@@ -45,6 +45,15 @@
     <string name="price_shoppingcart_front">129</string>
     <string name="amount_number_shopping_cart">1</string>
 
+    <string name="cefixim">Cefixim</string>
+    <string name="drug_store">Drug store : APA</string>
+    <string name="user_text">Kháng sinh, Tang sức đề kháng, điều trị nhiễm khuẩn</string>
+    <string name="sources_text">Nhãn hiệu nước ngoài, được nhập từ nước Mỹ</string>
+    <string name="description_text">Liều trị là 1 gói 1 lần. Vào buổi sáng và buổi trưa</string>
+    <string name="gia_ctthuoc">129.000d/1 hộp</string>
+    <string name="sources">Sources</string>
+    <string name="description">Description</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

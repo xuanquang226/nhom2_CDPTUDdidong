@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
 import com.example.quang.project_sdo.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,9 +60,9 @@ public class HomeListDrugAdapter extends ArrayAdapter<ListDrugForHomeModel> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.nameDrug.setText(homeListDrug.get(position).getDrugName());
-        viewHolder.postDate.setText(homeListDrug.get(position).getDrugPostDate());
+        viewHolder.postDate.setText(homeListDrug.get(position).getDrugPost());
         viewHolder.description.setText(homeListDrug.get(position).getDrugDescription());
-        viewHolder.drugImage.setImageResource(homeListDrug.get(position).getDrugImage());
+        Picasso.get().load(homeListDrug.get(position).drugImage).into(viewHolder.drugImage);
 
 
         return convertView;

@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EnteringDrugActivity" ></activity>
+        <activity android:name=".EnteringDrugActivity" />
         <activity android:name=".SalesStatisticsActivity" />
-        <activity android:name=".BackStackActivity"><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".BackStackActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ArcticleDetailActivity" />
         <activity android:name=".SignInSignUpActivity" />
         <activity android:name=".SignInActivity" />
@@ -23,13 +25,12 @@
         <activity android:name=".CoughActivity" />
         <activity android:name=".StomachActivity" />
         <activity android:name=".HeadacheActivity" />
-        <activity android:name=".ShoppingCartActivity">
-
-        </activity>
+        <activity android:name=".ShoppingCartActivity"></activity>
         <activity android:name=".ShipperDeliverySchedule" />
         <activity android:name=".ChatDetailActivity" />
         <activity android:name=".SaleStatisticActivity" />
-        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".DrugDetailActivity"></activity>
     </application>
 
 </manifest>
