@@ -1,18 +1,15 @@
 package com.example.quang.project_sdo;
 
+import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ListView;
 
 import com.example.quang.project_sdo.Adapters.ScheduleAdapter;
 import com.example.quang.project_sdo.Models.ScheduleModel;
 
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class ShipperDeliverySchedule extends AppCompatActivity {
     ListView listView;
