@@ -29,7 +29,18 @@ public class CarrierFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_carrier_layout, container, false);
         Button btnLogout= (Button) view.findViewById(R.id.btnLogOut);
+        Button btnDeliverySchedule = (Button) view.findViewById(R.id.btn_deliverySchedule);
+
         mAuth = FirebaseAuth.getInstance();
+
+        btnDeliverySchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), CarrierDeliverySchedule.class);
+                startActivity(intent);
+            }
+        });
+
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
