@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment {
         loadData();
         return view;
     }
-
+    //a
     public void loadData(){
         root.addChildEventListener(new ChildEventListener() {
             @Override
