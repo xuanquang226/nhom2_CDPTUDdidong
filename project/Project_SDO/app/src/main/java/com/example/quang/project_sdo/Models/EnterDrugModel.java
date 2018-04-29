@@ -5,12 +5,12 @@ package com.example.quang.project_sdo.Models;
  */
 
 public class EnterDrugModel {
-    public String tenthuoc, congdung, gia, nguongoc, mota, soluong, linkhinh, tenshop;
+    public String tenthuoc, congdung, gia, nguongoc, mota, soluong, linkhinh, tenshop,id;
 
     public EnterDrugModel() {
     }
 
-    public EnterDrugModel(String tenthuoc, String congdung, String gia, String nguongoc, String mota, String soluong, String linkhinh, String tenshop) {
+    public EnterDrugModel(String tenthuoc, String congdung, String gia, String nguongoc, String mota, String soluong, String linkhinh, String tenshop,String id) {
         this.tenthuoc = tenthuoc;
         this.congdung = congdung;
         this.gia = gia;
@@ -19,6 +19,15 @@ public class EnterDrugModel {
         this.soluong = soluong;
         this.linkhinh = linkhinh;
         this.tenshop = tenshop;
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTenthuoc() {

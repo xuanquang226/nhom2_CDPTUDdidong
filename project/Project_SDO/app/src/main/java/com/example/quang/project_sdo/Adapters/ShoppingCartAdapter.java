@@ -45,9 +45,6 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
     }
 
 
-
-
-
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {

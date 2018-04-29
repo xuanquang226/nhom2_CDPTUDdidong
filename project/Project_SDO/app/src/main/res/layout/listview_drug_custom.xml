@@ -4,17 +4,12 @@
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imgDrug"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_weight="3">
-
-        <ImageView
-            android:id="@+id/imgDrug"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/img_cefixim" />
-    </LinearLayout>
+        android:layout_weight="3"
+        android:src="@drawable/img_cefixim" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -76,12 +71,5 @@
 
         </LinearLayout>
     </LinearLayout>
-    <ImageButton
-        android:id="@+id/imgShopCart"
-        style="@style/paddingRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/trang"
-        android:layout_gravity="center_vertical"
-        android:src="@drawable/cart" />
+
 </LinearLayout>

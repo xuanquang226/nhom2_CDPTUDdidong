@@ -1,7 +1,6 @@
 package com.example.quang.project_sdo;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -11,25 +10,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.Toast;
-import android.widget.SearchView.OnQueryTextListener;
 
 //import com.example.quang.project_sdo.Adapters.DrugAdapter;
-import com.example.quang.project_sdo.Adapters.HeadacheAdapter;
-import com.example.quang.project_sdo.Models.ListDrugModel;
 
 import java.util.ArrayList;
-
-import static java.security.AccessController.getContext;
 
 public class BackStackActivity extends AppCompatActivity {
     ImageButton imgHome;
@@ -39,10 +28,6 @@ public class BackStackActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView navigationView;
-
-    ArrayList<ListDrugModel> listDrug = new ArrayList<ListDrugModel>();
-    //DrugAdapter adapter;
-    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

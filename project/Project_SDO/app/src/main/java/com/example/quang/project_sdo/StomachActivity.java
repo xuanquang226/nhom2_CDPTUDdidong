@@ -6,10 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ListView;
 
-import com.example.quang.project_sdo.Adapters.CoughAdapter;
 import com.example.quang.project_sdo.Adapters.StomachAdapter;
-import com.example.quang.project_sdo.Models.CoughModel;
-import com.example.quang.project_sdo.Models.ListDrugModel;
 import com.example.quang.project_sdo.Models.StomachModel;
 
 import java.util.ArrayList;

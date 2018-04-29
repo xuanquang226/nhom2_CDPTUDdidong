@@ -13,25 +13,12 @@
         android:orientation="vertical"
         android:gravity="center">
         <ImageView
-            android:id="@+id/imgCefixim"
+            android:id="@+id/imgDrugD"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/img_cefixim" />
 
-        <TextView
-            android:id="@+id/txtCefixim"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/cefixim"
-            android:textColor="@color/colorDo"
-            android:textSize="20dp"
-            android:textStyle="bold" />
-        <TextView
-            android:id="@+id/txtDrugStore"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/drug_store"
-            />
+
 
     </LinearLayout>
 
@@ -64,6 +51,7 @@
 
                 />
             <TextView
+                android:id="@+id/txtCongDungD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -91,6 +79,7 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
+                android:id="@+id/txtNguonGocD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -116,12 +105,34 @@
                 android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
+                android:id="@+id/txtMoTaD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:textStyle="bold"
                 android:text="@string/description_text"/>
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name shop"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimaryDark"
+                />
+            <TextView
+                android:id="@+id/txtTenShopD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textStyle="bold"
+                android:text="Shop A"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -132,17 +143,20 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:gravity="center">
-        <ImageView
+        <TextView
+            android:id="@+id/txtGia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:text="100.000"
+            android:textColor="@color/colorDo"
+            android:layout_marginLeft="10dp"
+            android:textStyle="bold"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gia_ctthuoc"
+            android:text=" VND/1 hộp"
             android:textColor="@color/colorDo"
-            android:layout_marginLeft="10dp"
             android:textStyle="bold"
             />
     </LinearLayout>

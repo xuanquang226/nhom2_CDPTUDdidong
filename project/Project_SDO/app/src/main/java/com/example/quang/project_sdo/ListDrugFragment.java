@@ -1,34 +1,24 @@
 package com.example.quang.project_sdo;
 
+
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.DrugAdapter;
-import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
 import com.example.quang.project_sdo.Models.EnterDrugModel;
-import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
-import com.example.quang.project_sdo.Models.ListDrugModel;
+import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -37,24 +27,25 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
-//ss
+
 
 /**
- * Created by Quang on 3/11/2018.
+ * A simple {@link Fragment} subclass.
  */
-
 public class ListDrugFragment extends Fragment {
+
+
     ListView listView;
-    ArrayList<ListDrugModel> listDrug = new ArrayList<ListDrugModel>();
+    ArrayList<EnterDrugModel> listDrug = new ArrayList<EnterDrugModel>();
     DrugAdapter adapter;
     ImageView img;
     DatabaseReference root;
     FirebaseAuth mAuth;
 
 
-    ArrayList<ListDrugModel> searchDrug = new ArrayList<ListDrugModel>();
+
+    ArrayList<EnterDrugModel> searchDrug = new ArrayList<EnterDrugModel>();
     DrugAdapter searchArray = null;
 
 
@@ -69,10 +60,13 @@ public class ListDrugFragment extends Fragment {
         root = FirebaseDatabase.getInstance().getReference();
 
         //List view
-        listView = (ListView) view.findViewById(R.id.drug_listview);
+        listView = (ListView) view.findViewById(R.id.drugList);
         adapter = new DrugAdapter((AppCompatActivity) getContext(), R.layout.listview_drug_custom, listDrug);
         listView.setAdapter(adapter);
         loadData();
+
+
+
         return view;
 
     }
@@ -81,9 +75,24 @@ public class ListDrugFragment extends Fragment {
         root.child("Drug").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ListDrugModel drugModel = dataSnapshot.getValue(ListDrugModel.class);
-                listDrug.add(new ListDrugModel(drugModel.tenthuoc, drugModel.gia, drugModel.linkhinh, drugModel.tenshop));
+                EnterDrugModel drugModel = dataSnapshot.getValue(EnterDrugModel.class);
+                listDrug.add(new EnterDrugModel(drugModel.tenthuoc, drugModel.congdung, drugModel.gia, drugModel.nguongoc,drugModel.mota,drugModel.soluong,drugModel.linkhinh,drugModel.tenshop,drugModel.id));
                 adapter.notifyDataSetChanged();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("hinhanh",listDrug.get(i).linkhinh);
+                        bundle.putString("congdung",listDrug.get(i).congdung);
+                        bundle.putString("nguongoc",listDrug.get(i).nguongoc);
+                        bundle.putString("mota",listDrug.get(i).mota);
+                        bundle.putString("gia",listDrug.get(i).gia);
+                        bundle.putString("tenshop",listDrug.get(i).tenshop);
+                        Intent intent = new Intent(getActivity(),DrugDetailActivity.class);
+                        intent.putExtra("data",bundle);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -109,14 +118,6 @@ public class ListDrugFragment extends Fragment {
 
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        if(mToggle.isDrawerIndicatorEnabled() ){
-//            mDrawerLayout.openDrawer(Gravity.LEFT);
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
 
     @Override
@@ -156,8 +157,8 @@ public class ListDrugFragment extends Fragment {
 //                searchArray = new DrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom,searchDrug);
 //                listView.setAdapter(adapter);
                 if (newText != null && !newText.isEmpty()) {
-                    ArrayList<ListDrugModel> listFound = new ArrayList<ListDrugModel>();
-                    for (ListDrugModel item : listDrug) {
+                    ArrayList<EnterDrugModel> listFound = new ArrayList<EnterDrugModel>();
+                    for (EnterDrugModel item : listDrug) {
                         if (item.tenthuoc.toLowerCase(Locale.getDefault()).contains(newText)) {
                             listFound.add(item);
                         }

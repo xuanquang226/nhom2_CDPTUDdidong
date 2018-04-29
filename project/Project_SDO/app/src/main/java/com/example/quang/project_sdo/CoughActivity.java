@@ -8,10 +8,7 @@ import android.widget.ListView;
 
 import com.example.quang.project_sdo.Adapters.CoughAdapter;
 //import com.example.quang.project_sdo.Adapters.DrugAdapter;
-import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
 import com.example.quang.project_sdo.Models.CoughModel;
-import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
-import com.example.quang.project_sdo.Models.ListDrugModel;
 
 import java.util.ArrayList;
 
