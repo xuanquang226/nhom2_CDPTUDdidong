@@ -25,7 +25,7 @@
                 android:id="@+id/imguser"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/user" />
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -41,7 +41,7 @@
                 android:textColor="@color/colorDen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nguy?n Van A"/>
+                />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                     android:textColor="@color/colorDo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="096988xxx"
+
                     android:layout_marginLeft="7dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -75,7 +75,7 @@
                     android:id="@+id/txtIDCard"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="025997766"
+
                     android:layout_marginLeft="7dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -99,7 +99,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
-            android:text="74/x/x Ðu?ng 6, Linh dông, Qu?n Th? Ð?c"/>
+            />
 
     </LinearLayout>
     <LinearLayout

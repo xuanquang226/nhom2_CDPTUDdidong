@@ -24,7 +24,7 @@
                 android:id="@+id/imgshipper"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:src="@drawable/user" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -42,7 +42,7 @@
                 android:textColor="@color/colorDen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nguyễn Văn A"/>
+                />
             <LinearLayout
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                     android:textColor="@color/colorDo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="096988xxx"
+
                     android:layout_marginLeft="7dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -79,7 +79,7 @@
                     android:textColor="@color/colorDo"
                     android:textStyle="bold"
                     android:paddingLeft="5dp"
-                    android:text="60-B8 31349"/>
+                    />
 
             </LinearLayout>
 
@@ -105,7 +105,7 @@
             android:textColor="@color/colorXanhBien"
             android:textStyle="bold"
             android:textSize="17dp"
-            android:text="74/x/x Ðường 6, Linh đông, quận Thủ Đức"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"

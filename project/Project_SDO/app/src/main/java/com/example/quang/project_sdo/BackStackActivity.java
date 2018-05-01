@@ -38,6 +38,8 @@ public class BackStackActivity extends AppCompatActivity {
     ImageButton imgDrug;
     ImageButton imgChat;
     ImageButton imgAccount;
+    ImageView imgAccountA;
+    TextView txtNameAcc;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView navigationView;
@@ -109,23 +111,7 @@ public class BackStackActivity extends AppCompatActivity {
 
 
 
-        root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-        root.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("email").getValue().toString();
-                String hinhanh = dataSnapshot.child("linkhinh").getValue().toString();
-                ImageView imgAccountA = (ImageView) navigationView.findViewById(R.id.imgAccount);
-                TextView txtNameAcc = (TextView) navigationView.findViewById(R.id.nameAccount);
-                txtNameAcc.setText(name);
-                Picasso.get().load(hinhanh).into(imgAccountA);
-            }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -205,6 +191,27 @@ public class BackStackActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        if(mAuth.getCurrentUser() != null){
+            root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
+            root.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String name = dataSnapshot.child("email").getValue().toString();
+                    String hinhanh = dataSnapshot.child("linkhinh").getValue().toString();
+                    ImageView imgAccountA = (ImageView) navigationView.findViewById(R.id.imgAccount);
+                    TextView txtNameAcc = (TextView) navigationView.findViewById(R.id.nameAccount);
+                    txtNameAcc.setText(name);
+                    Picasso.get().load(hinhanh).into(imgAccountA);
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }else{
+
+        }
         super.onStart();
     }
 }

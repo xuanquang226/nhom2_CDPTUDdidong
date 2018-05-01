@@ -12,15 +12,12 @@
         android:orientation="horizontal"
         android:layout_marginLeft="15dp"
         >
-
-
-
             <ImageView
                 android:id="@+id/imguser"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:src="@drawable/addimage" />
+                 />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -35,7 +32,7 @@
                 android:textColor="@color/colorDen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nguyễn Văn A"/>
+                />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,7 +48,6 @@
                     android:textColor="@color/colorDo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="096988xxx"
                     android:layout_marginLeft="7dp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -76,7 +72,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="@color/colorXanhBien"
             android:textStyle="bold"
-            android:text="74/x/x Ðường 6, Linh đông, quận Thủ Đức"/>
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
