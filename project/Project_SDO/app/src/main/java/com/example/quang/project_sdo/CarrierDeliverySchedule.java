@@ -13,14 +13,14 @@ import java.util.ArrayList;
 
 public class CarrierDeliverySchedule extends AppCompatActivity {
     ListView listView;
-    ArrayList<CarrierDeliveryScheduleModel> listCarrierSchedule = new ArrayList<>();
+    ArrayList<CarrierDeliveryScheduleModel> listCarrierSchedule = new ArrayList<CarrierDeliveryScheduleModel>();
     CarrierDeliveryScheduleAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_carrier_delivery_schedule);
 
-        listView = (ListView) findViewById(R.id.lv_deliverySchedule);
+        listView = (ListView) findViewById(R.id.lv_carrierSchedule);
         listCarrierSchedule.add(new CarrierDeliveryScheduleModel("Đồng Nai","panacitamol"));
         listCarrierSchedule.add(new CarrierDeliveryScheduleModel("TP HCM","panadol"));
         listCarrierSchedule.add(new CarrierDeliveryScheduleModel("Hà Nội","redbull"));

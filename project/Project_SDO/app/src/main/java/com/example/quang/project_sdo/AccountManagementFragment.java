@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.List;
+
 /**
  * Created by Quang on 3/11/2018.
  */
@@ -30,6 +33,7 @@ public class AccountManagementFragment extends Fragment {
     FirebaseAuth mAuth;
     DatabaseReference root;
     String userType;
+    private FragmentManager fragmentManager;
 
     @Nullable
     @Override
@@ -64,10 +68,10 @@ public class AccountManagementFragment extends Fragment {
                     FragmentTransaction fragmentTransaction1 = getFragmentManager().beginTransaction();
                     fragmentTransaction1.replace(R.id.flAccount, fragment3);
                     fragmentTransaction1.commit();
-                } else if(userType.equalsIgnoreCase("Carrier")){
+                } else if (userType.equalsIgnoreCase("Carrier")) {
                     CarrierFragment fragment4 = new CarrierFragment();
                     FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-                    fragmentTransaction.replace(R.id.flAccount,fragment4);
+                    fragmentTransaction.replace(R.id.flAccount, fragment4);
                     fragmentTransaction.commit();
                 }
             }
@@ -89,4 +93,5 @@ public class AccountManagementFragment extends Fragment {
             account();
         }
     }
+
 }

@@ -16,4 +16,5 @@
         android:text="Take a photo"
         android:id="@+id/takePhoto"
         android:textAllCaps="false"/>
+
 </LinearLayout>

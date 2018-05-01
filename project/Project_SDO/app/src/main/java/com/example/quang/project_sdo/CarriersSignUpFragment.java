@@ -81,8 +81,9 @@ public class CarriersSignUpFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     String accountType = "Carrier";
                                     String userID = mAuth.getCurrentUser().getUid();
+                                    String linkhinh = "";
                                     DatabaseReference current_user_id = root.child(userID);
-                                    CarrierModel model = new CarrierModel(email, password, address, phone, cmnd, nameCarrier, accountType);
+                                    CarrierModel model = new CarrierModel(email, password, address, phone, cmnd, nameCarrier, accountType,userID,linkhinh);
                                     current_user_id.setValue(model);
                                     Toast.makeText(getActivity(), "SignUp Successfully", Toast.LENGTH_SHORT).show();
                                     mProgress.dismiss();

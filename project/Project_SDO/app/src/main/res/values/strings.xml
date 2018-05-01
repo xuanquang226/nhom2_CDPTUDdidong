@@ -9,6 +9,7 @@
     <string name="drug">Drug</string>
     <string name="chat">Chat</string>
     <string name="user">User</string>
+    <string name="uses">Uses</string>
     <string name="dangky_username">Username</string>
     <string name="dangky_pass">Password</string>
     <string name="dangky_re_pass">Re-Password</string>

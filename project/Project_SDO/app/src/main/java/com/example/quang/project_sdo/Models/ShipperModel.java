@@ -1,9 +1,9 @@
 package com.example.quang.project_sdo.Models;
 
 public class ShipperModel {
-    String email, pass, address, phone, cmnd, vehicle,accountType;
+    public String email, pass, address, phone, cmnd, vehicle,accountType,id,linkhinh;
 
-    public ShipperModel(String email, String pass, String address, String phone,String cmnd,String vehicle,String accountType) {
+    public ShipperModel(String email, String pass, String address, String phone,String cmnd,String vehicle,String accountType,String id,String linkhinh) {
         this.email = email;
         this.pass = pass;
         this.address = address;
@@ -11,10 +11,27 @@ public class ShipperModel {
         this.cmnd = cmnd;
         this.vehicle = vehicle;
         this.accountType = accountType;
-
+        this.id = id;
+        this.linkhinh = linkhinh;
     }
 
     public ShipperModel() {
+    }
+
+    public String getLinkhinh() {
+        return linkhinh;
+    }
+
+    public void setLinkhinh(String linkhinh) {
+        this.linkhinh = linkhinh;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAccountType() {

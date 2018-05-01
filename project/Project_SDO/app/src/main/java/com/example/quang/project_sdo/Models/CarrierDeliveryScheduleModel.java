@@ -1,7 +1,10 @@
 package com.example.quang.project_sdo.Models;
 
 public class CarrierDeliveryScheduleModel {
-    String area, order;
+    public String area, order;
+
+    public CarrierDeliveryScheduleModel() {
+    }
 
     public CarrierDeliveryScheduleModel(String area, String order) {
         this.area = area;

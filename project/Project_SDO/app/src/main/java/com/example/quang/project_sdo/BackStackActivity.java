@@ -19,6 +19,7 @@ import android.widget.ListView;
 //import com.example.quang.project_sdo.Adapters.DrugAdapter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BackStackActivity extends AppCompatActivity {
     ImageButton imgHome;
@@ -28,6 +29,7 @@ public class BackStackActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView navigationView;
+    private FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +75,7 @@ public class BackStackActivity extends AppCompatActivity {
 
         //NavigationView
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close){
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -95,16 +97,16 @@ public class BackStackActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.ThuocA:
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT, true);
                         startActivity(new Intent(BackStackActivity.this, CoughActivity.class));
                         return true;
                     case R.id.ThuocB:
                         //setThuocB();
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT, true);
                         startActivity(new Intent(BackStackActivity.this, HeadacheActivity.class));
                         return true;
                     case R.id.ThuocC:
-                        mDrawerLayout.closeDrawer(Gravity.LEFT,true);
+                        mDrawerLayout.closeDrawer(Gravity.LEFT, true);
                         startActivity(new Intent(BackStackActivity.this, StomachActivity.class));
                         return true;
 
@@ -124,7 +126,7 @@ public class BackStackActivity extends AppCompatActivity {
         }
     }
 
-//    @Override
+    //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
 //        // dua nut search vao action bar
 //        getMenuInflater().inflate(R.menu.menu_search_home,menu);
@@ -155,13 +157,15 @@ public class BackStackActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @Override
-    public void onBackPressed(){
-        if(mDrawerLayout.isDrawerOpen(navigationView)){
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(navigationView)) {
             mDrawerLayout.closeDrawer(navigationView);
-        }else {
+        } else {
             finish();
         }
     }
+
 
 }

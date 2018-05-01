@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:id="@+id/fragmentUser">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -12,17 +13,14 @@
         android:layout_marginLeft="15dp"
         >
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
+
 
             <ImageView
                 android:id="@+id/imguser"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/user" />
-        </LinearLayout>
+                android:layout_weight="2"
+                android:src="@drawable/addimage" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -72,7 +70,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/adress"/>
         <TextView
-            android:id="@+id/txtadress"
+            android:id="@+id/txtaddress"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"

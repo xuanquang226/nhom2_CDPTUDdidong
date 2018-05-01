@@ -1,5 +1,6 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -33,12 +35,9 @@ import java.util.Locale;
 public class HomeFragment extends Fragment {
     ListView listView;
     ArrayList<ListDrugForHomeModel> listHomeDrug = new ArrayList<ListDrugForHomeModel>();
-    ArrayList<ListDrugForHomeModel> searchDrug = new ArrayList<ListDrugForHomeModel>();
     HomeListDrugAdapter adapter = null;
-    HomeListDrugAdapter searchArray = null;
     FirebaseAuth mAuth;
     DatabaseReference root;
-
 
 
     @Nullable
@@ -52,7 +51,6 @@ public class HomeFragment extends Fragment {
         root = FirebaseDatabase.getInstance().getReference("Article");
 
 
-
         setHasOptionsMenu(true);
         //ListView
         listView = (ListView) view.findViewById(R.id.listViewHome);
@@ -61,13 +59,25 @@ public class HomeFragment extends Fragment {
         loadData();
         return view;
     }
-    public void loadData(){
+
+    public void loadData() {
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ListDrugForHomeModel data = dataSnapshot.getValue(ListDrugForHomeModel.class);
-                listHomeDrug.add(new ListDrugForHomeModel(data.drugName,data.drugImage,data.drugPost,data.drugDescription));
+                final ListDrugForHomeModel data = dataSnapshot.getValue(ListDrugForHomeModel.class);
+                listHomeDrug.add(new ListDrugForHomeModel(data.drugName, data.drugImage, data.drugPost, data.drugDescription, data.id, data.mota));
                 adapter.notifyDataSetChanged();
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("hinhanh",listHomeDrug.get(i).drugImage);
+                        bundle.putString("mota",listHomeDrug.get(i).mota);
+                        Intent intent = new Intent(getActivity(),ArcticleDetailActivity.class);
+                        intent.putExtra("Data",bundle);
+                        startActivity(intent);
+                    }
+                });
             }
 
             @Override
@@ -97,7 +107,7 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // dua nut search vao action bar
 
-        inflater.inflate(R.menu.menu_search_home,menu);
+        inflater.inflate(R.menu.menu_search_home, menu);
         // tao 1 search view
         final android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView) menu.findItem(R.id.menuSearchHome).getActionView();
         //bat su kien cho nut search
@@ -134,17 +144,16 @@ public class HomeFragment extends Fragment {
 
                 if (newText != null && !newText.isEmpty()) {
                     ArrayList<ListDrugForHomeModel> listFound = new ArrayList<ListDrugForHomeModel>();
-                    for(ListDrugForHomeModel item:listHomeDrug) {
+                    for (ListDrugForHomeModel item : listHomeDrug) {
                         if (item.getDrugName().toLowerCase(Locale.getDefault()).contains(newText)) {
                             listFound.add(item);
                         }
                     }
-                    adapter = new HomeListDrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom, listFound);
+                    adapter = new HomeListDrugAdapter((AppCompatActivity) getActivity(), R.layout.listview_home_custom, listFound);
                     listView.setAdapter(adapter);
 
-                }
-                else {
-                    adapter = new HomeListDrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom, listHomeDrug);
+                } else {
+                    adapter = new HomeListDrugAdapter((AppCompatActivity) getActivity(), R.layout.listview_home_custom, listHomeDrug);
                     listView.setAdapter(adapter);
                 }
 
@@ -160,22 +169,6 @@ public class HomeFragment extends Fragment {
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
-//
-//    // Filter Class
-//    public void filter(String charText) {
-//        charText = charText.toLowerCase(Locale.getDefault());
-//        listHomeDrug.clear();
-//        if (charText.length() == 0) {
-//            listHomeDrug.addAll(searchDrug);
-//        } else {
-//            for (ListDrugForHomeModel wp : searchDrug) {
-//                if (wp.getDrugName().toLowerCase(Locale.getDefault())
-//                        .contains(charText)) {
-//                    listHomeDrug.add(wp);
-//                }
-//            }
-//        }
-//        adapter.notifyDataSetChanged();
-//    }
+
 
 }

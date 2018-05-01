@@ -1,12 +1,12 @@
 package com.example.quang.project_sdo.Models;
 
 public class SellerModel {
-    String email, pass, address, phone, cmnd, drugstore,accountType;
+    public String email, pass, address, phone, cmnd, drugstore,accountType,id,linkhinh;
 
 
 
 
-    public SellerModel(String email, String pass, String address, String phone, String cmnd, String drugstore, String accountType) {
+    public SellerModel(String email, String pass, String address, String phone, String cmnd, String drugstore, String accountType,String id,String linkhinh) {
         this.email = email;
         this.pass = pass;
         this.address = address;
@@ -14,10 +14,28 @@ public class SellerModel {
         this.cmnd = cmnd;
         this.drugstore = drugstore;
         this.accountType = accountType;
+        this.id = id;
+        this.linkhinh = linkhinh;
 
     }
 
     public SellerModel() {
+    }
+
+    public String getLinkhinh() {
+        return linkhinh;
+    }
+
+    public void setLinkhinh(String linkhinh) {
+        this.linkhinh = linkhinh;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getEmail() {

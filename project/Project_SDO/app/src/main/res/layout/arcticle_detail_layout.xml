@@ -20,8 +20,8 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageArctical"
-                android:layout_width="wrap_content"
+                android:id="@+id/imageArcticle"
+                android:layout_width="250dp"
                 android:layout_height="250dp"
                 android:src="@drawable/drug_demo" />
 
@@ -29,13 +29,14 @@
                 android:id="@+id/titleDrug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Các bài thuốc              "
+                android:text="Thông tin  "
                 android:layout_gravity="left"
                 style="@style/icon_text"
                 android:background="@drawable/radius_right"
                 android:drawableLeft="@drawable/info_person"
                 />
             <TextView
+                android:id="@+id/txtArcticleDrug"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/contentInfo"
@@ -43,12 +44,7 @@
                 android:layout_marginBottom="10dp"
 
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tác Giả : "
-                android:layout_gravity="right"
-                />
+
         </LinearLayout>
 
 

@@ -21,7 +21,7 @@
             android:layout_weight="2">
 
             <ImageView
-                android:id="@+id/imgshipper"
+                android:id="@+id/imgCarrier"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:src="@drawable/user" />
@@ -38,7 +38,7 @@
             <TextView
                 android:textSize="17dp"
                 android:textStyle="bold"
-                android:id="@+id/txtnameShipper"
+                android:id="@+id/txtnameCarrier"
                 android:textColor="@color/colorDen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                     android:src="@drawable/phone" />
 
                 <TextView
-                    android:id="@+id/txtphoneShipper"
+                    android:id="@+id/txtphoneCarrier"
                     android:textColor="@color/colorDo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -71,15 +71,15 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/soxe"/>
+                    android:text="Name Carrier:"/>
                 <TextView
-                    android:id="@+id/codebike"
+                    android:id="@+id/txtNameC"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/colorDo"
                     android:textStyle="bold"
                     android:paddingLeft="5dp"
-                    android:text="60-B8 31349"/>
+                    android:text="GHN"/>
 
             </LinearLayout>
 
@@ -98,7 +98,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/adress"/>
         <TextView
-            android:id="@+id/txt_shipperAdress"
+            android:id="@+id/txtAddressC"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
@@ -146,7 +146,7 @@
                 android:src="@drawable/profile"
                 android:layout_marginTop="10dp"/>
             <Button
-                android:id="@+id/btn_profileShipper"
+                android:id="@+id/btn_profileCarrier"
                 android:layout_marginLeft="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

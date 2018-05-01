@@ -5,9 +5,9 @@ package com.example.quang.project_sdo.Models;
  */
 
 public class CarrierModel {
-    String email, pass, address, phone, cmnd, nameCarrier,accountType;
+    public String email, pass, address, phone, cmnd, nameCarrier,accountType,id,linkhinh;
 
-    public CarrierModel(String email, String pass, String address, String phone,String cmnd,String nameCarrier,String accountType) {
+    public CarrierModel(String email, String pass, String address, String phone,String cmnd,String nameCarrier,String accountType,String id,String linkhinh) {
         this.email = email;
         this.pass = pass;
         this.address = address;
@@ -15,10 +15,27 @@ public class CarrierModel {
         this.cmnd = cmnd;
         this.nameCarrier = nameCarrier;
         this.accountType = accountType;
-
+        this.id = id;
+        this.linkhinh = linkhinh;
     }
 
     public CarrierModel() {
+    }
+
+    public String getLinkhinh() {
+        return linkhinh;
+    }
+
+    public void setLinkhinh(String linkhinh) {
+        this.linkhinh = linkhinh;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getAccountType() {

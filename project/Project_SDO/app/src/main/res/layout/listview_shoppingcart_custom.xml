@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShoppingCartActivity"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    tools:context=".ShoppingCartActivity">
 
     <ImageView
         android:id="@+id/imgShoppingCartDrug"
@@ -41,8 +41,7 @@
                 android:id="@+id/imgShoppingCartPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/price_shopping_cart"
-                />
+                android:drawableLeft="@drawable/price_shopping_cart" />
 
             <TextView
                 android:id="@+id/txtShoppingCartPrice"
@@ -50,9 +49,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/price_shoppingcart_front"
                 android:textColor="@color/colorDo"
-                android:textStyle="bold"
                 android:textSize="17dp"
-                />
+                android:textStyle="bold" />
 
 
             <TextView
@@ -66,51 +64,51 @@
                 android:textColor="@color/colorDo"
                 android:textSize="17dp"
                 android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/priceA"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:id="@+id/priceA"
-                android:textColor="@color/trang"/>
+                android:textColor="@color/trang" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginLeft="50dp"
             android:layout_marginTop="30dp"
-            >
+            android:orientation="horizontal">
+
             <Button
                 android:id="@+id/btnDecrease"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@color/trang"
-                android:layout_height="wrap_content"
 
-                android:drawableRight="@drawable/minus_circle"
-                />
+                android:drawableRight="@drawable/minus_circle" />
+
             <TextView
                 android:id="@+id/txtPriceShoppingCart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/amount_number_shopping_cart"
-                android:layout_marginTop="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:text="@string/amount_number_shopping_cart"
                 android:textSize="25dp"
 
                 />
+
             <Button
                 android:id="@+id/btnIncrease"
 
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:background="@color/trang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/plus"
-                />
+                android:drawableLeft="@drawable/plus" />
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

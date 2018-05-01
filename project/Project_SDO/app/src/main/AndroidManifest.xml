@@ -31,6 +31,7 @@
         <activity android:name=".SaleStatisticActivity" />
         <activity android:name=".PaymentActivity" />
         <activity android:name=".DrugDetailActivity"></activity>
+        <activity android:name=".CarrierDeliverySchedule"></activity>
     </application>
 
 </manifest>

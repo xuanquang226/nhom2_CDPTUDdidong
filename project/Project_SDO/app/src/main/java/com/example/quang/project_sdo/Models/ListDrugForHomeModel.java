@@ -5,16 +5,34 @@ package com.example.quang.project_sdo.Models;
  */
 
 public class ListDrugForHomeModel {
-    public String drugName,drugImage, drugPost,drugDescription;
+    public String drugName,drugImage, drugPost,drugDescription,id,mota;
 
     public ListDrugForHomeModel() {
     }
 
-    public ListDrugForHomeModel(String drugName, String drugImage, String drugPost, String drugDescription) {
+    public ListDrugForHomeModel(String drugName, String drugImage, String drugPost, String drugDescription,String id,String mota) {
         this.drugName = drugName;
         this.drugImage = drugImage;
         this.drugPost = drugPost;
         this.drugDescription = drugDescription;
+        this.id = id;
+        this.mota = mota;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getMota() {
+        return mota;
+    }
+
+    public void setMota(String mota) {
+        this.mota = mota;
     }
 
     public String getDrugName() {

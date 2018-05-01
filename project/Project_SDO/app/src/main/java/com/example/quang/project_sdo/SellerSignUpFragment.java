@@ -82,8 +82,9 @@ public class SellerSignUpFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     String accountType = "Seller";
                                     String userID = mAuth.getCurrentUser().getUid();
+                                    String linkhinh = "";
                                     DatabaseReference current_user_id = root.child(userID);
-                                    SellerModel model = new SellerModel(email, password, address, phone,cmnd,nameStore,accountType);
+                                    SellerModel model = new SellerModel(email, password, address, phone,cmnd,nameStore,accountType,userID,linkhinh);
                                     current_user_id.setValue(model);
                                     Toast.makeText(getActivity(), "SignUp Successfully", Toast.LENGTH_SHORT).show();
                                     mProgress.dismiss();

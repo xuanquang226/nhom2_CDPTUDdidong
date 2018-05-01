@@ -77,8 +77,9 @@ public class UserSignUpFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     String userID = mAuth.getCurrentUser().getUid();
                                     String accountType = "User";
+                                    String linkhinh = "";
                                     DatabaseReference current_user_id = root.child(userID);
-                                    UsersModel model = new UsersModel(email, password, address, phone,accountType);
+                                    UsersModel model = new UsersModel(email, password, address, phone,accountType,userID,linkhinh);
                                     current_user_id.setValue(model);
                                     Toast.makeText(getActivity(), "SignUp Successfully", Toast.LENGTH_SHORT).show();
                                     mProgress.dismiss();

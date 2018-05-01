@@ -81,8 +81,9 @@ public class ShipperSignUpFragment extends Fragment {
                                 if (task.isSuccessful()) {
                                     String accountType = "Shipper";
                                     String userID = mAuth.getCurrentUser().getUid();
+                                    String linkhinh = "";
                                     DatabaseReference current_user_id = root.child(userID);
-                                    ShipperModel model = new ShipperModel(email, password, address, phone,cmnd,vehicle,accountType);
+                                    ShipperModel model = new ShipperModel(email, password, address, phone,cmnd,vehicle,accountType,userID,linkhinh);
                                     current_user_id.setValue(model);
                                     Toast.makeText(getActivity(), "SignUp Successfully", Toast.LENGTH_SHORT).show();
                                     mProgress.dismiss();
