@@ -113,7 +113,7 @@ public class EnteringDrugActivity extends AppCompatActivity {
                                 String idThuoc = FirebaseDatabase.getInstance().getReference().push().getKey();
                                 root = FirebaseDatabase.getInstance().getReference("Drug").child(idThuoc);
                                 enterDrugModel = new EnterDrugModel(edtTenThuoc.getText().toString().trim(), edtCongDung.getText().toString().trim(), edtGia.getText().toString().trim(),
-                                        edtNguonGoc.getText().toString().trim(), edtMoTa.getText().toString().trim(), edtSoLuong.getText().toString().trim(), downloadUrl + "", nameStore, idThuoc);
+                                        edtNguonGoc.getText().toString().trim(), edtMoTa.getText().toString().trim(), edtSoLuong.getText().toString().trim(), downloadUrl + "", nameStore, idThuoc,mAuth.getUid());
                                 root.setValue(enterDrugModel);
                                 Toast.makeText(EnteringDrugActivity.this, "Đã thêm thuốc thành công", Toast.LENGTH_SHORT).show();
                                 onBackPressed();

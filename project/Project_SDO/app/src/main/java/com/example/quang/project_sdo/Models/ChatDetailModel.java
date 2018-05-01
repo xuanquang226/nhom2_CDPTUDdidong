@@ -9,54 +9,53 @@ import java.util.Date;
 public class ChatDetailModel {
     private String UserName;
     private String Message;
-    private int Avatar;
+    private String Avatar;
     private boolean IsSender;
     private long CreatedDate;
+    private String idShop;
+    private String ID;
 
     public ChatDetailModel() {
         IsSender = true;
     }
 
-    public ChatDetailModel(String name, String message, int avatar, boolean isSender) {
+    public ChatDetailModel(String name, String message, String avatar, boolean isSender, String idshop, String id) {
         UserName = name;
         Message = message;
         Avatar = avatar;
         IsSender = isSender;
         CreatedDate = new Date().getTime();
-    }
+        idShop = idshop;
+        ID = id;
 
-
-    public void setName(String name) {
-        UserName = name;
-    }
-
-    public void setMessage(String message) {
-        Message = message;
-    }
-
-    public void setAvatar(int avatar) {
-        Avatar = avatar;
-    }
-
-    public void setSender(boolean sender) {
-        IsSender = sender;
     }
 
     public String getName() {
 
         return UserName;
     }
-
+    public void setName(String name) {
+        UserName = name;
+    }
     public String getMessage() {
         return Message;
     }
 
-    public int getAvatar() {
+    public void setMessage(String message) {
+        Message = message;
+    }
+    public String getAvatar() {
         return Avatar;
+    }
+    public void setAvatar(String avatar) {
+        Avatar = avatar;
     }
 
     public boolean isSender() {
         return IsSender;
+    }
+    public void setSender(boolean sender) {
+        IsSender = sender;
     }
 
     public long getCreatedDate() {
@@ -65,5 +64,21 @@ public class ChatDetailModel {
 
     public void setCreatedDate(long createdDate) {
         CreatedDate = createdDate;
+    }
+
+    public String getIdShop() {
+        return idShop;
+    }
+
+    public void setIdShop(String idShop) {
+        this.idShop = idShop;
+    }
+
+    public String getID() {
+        return ID;
+    }
+
+    public void setID(String ID) {
+        this.ID = ID;
     }
 }

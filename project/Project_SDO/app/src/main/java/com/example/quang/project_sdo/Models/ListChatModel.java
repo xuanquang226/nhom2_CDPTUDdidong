@@ -6,13 +6,28 @@ package com.example.quang.project_sdo.Models;
 
 public class ListChatModel {
     public String name;
-    public String recentChat;
-    public int avatar;
+    public String message;
+    public String avatar;
+    public String id;
+    public String idShop;
 
-    public ListChatModel(String name, String recentChat, int avatar) {
+    public ListChatModel() {
+    }
+
+    public ListChatModel(String name, String message, String avatar,String id,String idShop) {
         this.name = name;
-        this.recentChat = recentChat;
+        this.message = message;
         this.avatar = avatar;
+        this.id = id;
+        this.idShop = idShop;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -23,20 +38,29 @@ public class ListChatModel {
         this.name = name;
     }
 
-    public String getRecentChat() {
-        return recentChat;
+    public String getMessage() {
+        return message;
     }
 
-    public void setRecentChat(String recentChat) {
-        this.recentChat = recentChat;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public int getAvatar() {
+
+    public String getAvatar() {
         return avatar;
     }
 
-    public void setAvatar(int avatar) {
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public String getIdShop() {
+        return idShop;
+    }
+
+    public void setIdShop(String idShop) {
+        this.idShop = idShop;
     }
 }
 

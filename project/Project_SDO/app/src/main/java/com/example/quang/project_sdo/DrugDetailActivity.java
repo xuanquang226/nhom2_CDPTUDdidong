@@ -18,6 +18,7 @@ public class DrugDetailActivity extends AppCompatActivity {
     private ImageView imgHinhThuoc;
     private Button btnChat, btnAdd;
     private ActionBar actionBar;
+    String idShop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,7 @@ public class DrugDetailActivity extends AppCompatActivity {
             txtMota.setText(bundle.getString("mota"));
             txtTenShop.setText(bundle.getString("tenshop"));
             txtGia.setText(bundle.getString("gia"));
+            idShop = bundle.getString("idShop");
             Picasso.get().load(bundle.getString("hinhanh")).into(imgHinhThuoc);
         }
 
@@ -55,7 +57,11 @@ public class DrugDetailActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DrugDetailActivity.this,ChatDetailActivity.class));
+                Intent newIntent = new Intent(DrugDetailActivity.this,ChatDetailActivity.class);
+                Bundle bundleA = new Bundle();
+                bundleA.putString("idshop",idShop);
+                newIntent.putExtra("Data",bundleA);
+                startActivity(newIntent);
             }
         });
     }

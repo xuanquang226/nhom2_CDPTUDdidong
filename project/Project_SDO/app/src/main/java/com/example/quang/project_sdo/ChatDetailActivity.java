@@ -1,12 +1,16 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
 import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -21,20 +25,27 @@ import android.widget.Toast;
 import com.example.quang.project_sdo.Models.ChatDetailModel;
 import com.firebase.ui.database.FirebaseListAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
 public class ChatDetailActivity extends AppCompatActivity {
     ArrayList<ChatDetailModel> mess = new ArrayList<>();
     private String UserName = "";
-    private int Avatar = 1;
+    String avatar;
+    EditText edtMess;
 
     private int nowItem = 10;
     private int morePerTime = 12;
 
     private FirebaseListAdapter<ChatDetailModel> adapter;
     private FirebaseAuth mAuth;
+    private DatabaseReference root;
+    String idShop, idShopA, keyID, idUser, hinhUser;
 
 
     @Override
@@ -43,15 +54,30 @@ public class ChatDetailActivity extends AppCompatActivity {
         setContentView(R.layout.chat_detail_layout);
 
         mAuth = FirebaseAuth.getInstance();
-
+        root = FirebaseDatabase.getInstance().getReference();
         UserName = mAuth.getCurrentUser().getEmail();
-        Toast.makeText(this, UserName, Toast.LENGTH_LONG).show();
 
-        final EditText edtMess = (EditText) findViewById(R.id.edtInputChat);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        if (getIntent() != null && getIntent().getBundleExtra("Data") != null) {
+            Intent intent = getIntent();
+            Bundle bundle = intent.getBundleExtra("Data");
+            idShop = bundle.getString("idshop");
+        } else if (getIntent() != null && getIntent().getBundleExtra("dataChat") != null) {
+            Intent intentA = getIntent();
+            Bundle bundleA = intentA.getBundleExtra("dataChat");
+            idUser = bundleA.getString("id");
+            idShopA = bundleA.getString("idshopA");
+            hinhUser = bundleA.getString("hinhanh");
+
+        }
+
+
+        edtMess = (EditText) findViewById(R.id.edtInputChat);
         final ImageButton btnSend = (ImageButton) findViewById(R.id.imgSend);
         final ListView lvChat = (ListView) findViewById(R.id.lvChat);
         final SwipeRefreshLayout pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.refreshPull);
-        Avatar = 1;
 
 
         adapter = getMessage();
@@ -86,12 +112,9 @@ public class ChatDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // created first to get keyID
-                String keyID = FirebaseDatabase.getInstance().getReference().push().getKey();
+                keyID = FirebaseDatabase.getInstance().getReference().push().getKey();
                 // set data
-                FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText().toString(), Avatar, true));
-
-                // Clear the input
-                edtMess.setText("");
+                getLinkImage();
 
                 // hide keyboard
                 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
@@ -103,9 +126,9 @@ public class ChatDetailActivity extends AppCompatActivity {
     }
 
     private FirebaseListAdapter<ChatDetailModel> getMessage() {
-        return new FirebaseListAdapter<ChatDetailModel>(ChatDetailActivity.this, ChatDetailModel.class, R.layout.chat_detail_custom_layout, FirebaseDatabase.getInstance().getReferenceFromUrl("https://projectsdo-9812e.firebaseio.com/Info chat").orderByKey().limitToLast(nowItem)){
+        return new FirebaseListAdapter<ChatDetailModel>(ChatDetailActivity.this, ChatDetailModel.class, R.layout.chat_detail_custom_layout, FirebaseDatabase.getInstance().getReferenceFromUrl("https://projectsdo-9812e.firebaseio.com/Info chat").orderByKey().limitToLast(nowItem)) {
             @Override
-            protected void populateView(View v, ChatDetailModel model, int position) {
+            protected void populateView(View v, final ChatDetailModel model, int position) {
                 TextView lblName = (TextView) v.findViewById(R.id.lblName);
                 TextView lblMess = (TextView) v.findViewById(R.id.lblMess);
                 TextView lblDate = (TextView) v.findViewById(R.id.lblDate);
@@ -117,14 +140,18 @@ public class ChatDetailActivity extends AppCompatActivity {
                 if (model.getName().equals(UserName) == false) {
                     model.setSender(false);
                 }
-
-                @DrawableRes int avatarID = getAvatar(model.getAvatar());
-
-
                 // set data
-                lblName.setText(model.getName());
-                lblMess.setText(model.getMessage());
-                lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
+                if (idShop != null && mAuth.getUid().equalsIgnoreCase(model.getID()) && idShop.equalsIgnoreCase(model.getIdShop())) {
+                    lblName.setText(model.getName());
+                    lblMess.setText(model.getMessage());
+                    lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
+                }
+                if ((idShop == null && idUser.equalsIgnoreCase(model.getID()) && idShopA.equalsIgnoreCase(model.getIdShop())) && (mAuth.getUid().equalsIgnoreCase(model.getID()) || mAuth.getUid().equalsIgnoreCase(model.getIdShop()))) {
+
+                    lblName.setText(model.getName());
+                    lblMess.setText(model.getMessage());
+                    lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
+                }
 
                 if (model.isSender()) {
                     // set visibility
@@ -132,11 +159,16 @@ public class ChatDetailActivity extends AppCompatActivity {
                     imgSender.setVisibility(View.VISIBLE);
 
                     // set default img
-                    imgSender.setImageResource(avatarID);
+                    //imgSender.setImageResource(avatarID);
 
                     // set color
                     //lblMess.setBackgroundColor(Color.parseColor("#3498db"));
-                    lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_sender_style));
+
+                    if (lblMess.getText().equals("")) {
+                        lblMess.setVisibility(View.INVISIBLE);
+                    } else {
+                        lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_sender_style));
+                    }
 
                     // all on the right (sender)
                     llChatMess.setGravity(Gravity.END);
@@ -146,29 +178,66 @@ public class ChatDetailActivity extends AppCompatActivity {
                     imgSender.setVisibility(View.INVISIBLE);
 
                     // set default img
-                    imgReceiver.setImageResource(avatarID);
+                    //imgReceiver.setImageResource(avatarID);
 
                     // set color
+                    if (lblMess.getText().equals("")) {
+                        lblMess.setVisibility(View.INVISIBLE);
+                    } else {
+                        lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_receiver_style));
+                    }
                     //lblMess.setBackgroundColor(Color.parseColor("#95a5a6"));
-                    lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_receiver_style));
+
 
                     // mess should be in the left (receiver)
                     llChatMess.setGravity(Gravity.START);
                 }
-
-
             }
         };
     }
 
-    private @DrawableRes
-    int getAvatar(int type) {
-        switch (type) {
-            case 1:
-                return R.drawable.userchat;
-            default:
-                return R.drawable.userchata;
-        }
+
+    public void getLinkImage() {
+        root.child("Infomation account").child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                avatar = dataSnapshot.child("linkhinh").getValue().toString();
+
+                if (mAuth.getUid().equalsIgnoreCase(idUser)) {
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShopA, mAuth.getUid()));
+                } else if (mAuth.getUid().equalsIgnoreCase(idShopA)) {
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, mAuth.getUid(), idUser));
+                } else if (!mAuth.getUid().equalsIgnoreCase(idShop)) {
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShop, mAuth.getUid()));
+                }
+
+                // Clear the input
+                edtMess.setText("");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getUid().equalsIgnoreCase(idShop)) {
+            onBackPressed();
+            Toast.makeText(ChatDetailActivity.this, "Không thể tự chat với mình được", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

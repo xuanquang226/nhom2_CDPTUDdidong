@@ -33,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:text="Sender  Name Goes Here"/>
+            />
         <TextView
             android:id="@+id/lblMess"
             android:layout_width="wrap_content"
@@ -41,13 +41,13 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:padding="5dp"
-            android:text="aaaaa"/>
+            />
         <TextView
             android:id="@+id/lblDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            android:text="date"/>
+            />
     </LinearLayout>
 
     <LinearLayout

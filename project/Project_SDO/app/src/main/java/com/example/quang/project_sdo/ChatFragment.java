@@ -17,8 +17,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.ChatAdapter;
+import com.example.quang.project_sdo.Adapters.DrugAdapter;
+import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.example.quang.project_sdo.Models.ListChatModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -30,6 +37,8 @@ public class ChatFragment extends Fragment {
     private ArrayList<ListChatModel> chatModels = new ArrayList<ListChatModel>();
     private ChatAdapter adapter;
     private FirebaseAuth mAuth;
+    DatabaseReference root;
+    ListView listView;
 
     @Nullable
     @Override
@@ -37,29 +46,79 @@ public class ChatFragment extends Fragment {
         View view = null;
         view = inflater.inflate(R.layout.chat_layout, container, false);
 
+        //Ini
         mAuth = FirebaseAuth.getInstance();
-
-        ImageView ava = (ImageView) view.findViewById(R.id.imgChat);
+        root = FirebaseDatabase.getInstance().getReference();
+        //ImageView ava = (ImageView) view.findViewById(R.id.imgChat);
         TextView name = (TextView) view.findViewById(R.id.txtNameChat);
         TextView chat = (TextView) view.findViewById(R.id.txtChatRecent);
 
-        ListView listView = (ListView) view.findViewById(R.id.listChat);
 
+        listView = (ListView) view.findViewById(R.id.listChat);
+        /*
         chatModels.add(new ListChatModel("Shop A", "Thuốc này có tác dụng phụ không shop", R.drawable.supporta));
         chatModels.add(new ListChatModel("Shop B", "Thuốc này có tác dụng phụ không shop", R.drawable.supportb));
         chatModels.add(new ListChatModel("Shop C", "Thuốc này có tác dụng phụ không shop", R.drawable.supportc));
+        */
 
-        adapter = new ChatAdapter((AppCompatActivity) getActivity(), R.layout.list_chat_custom, chatModels);
-        listView.setAdapter(adapter);
+        adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
+        loadData();
 
 
+        /*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 startActivity(new Intent(getActivity(), ChatDetailActivity.class));
             }
         });
+        */
         return view;
+    }
+
+    public void loadData() {
+        root.child("Info chat").limitToLast(2).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                final ListChatModel chatModel = dataSnapshot.getValue(ListChatModel.class);
+                chatModels.add(new ListChatModel(chatModel.name, chatModel.message,chatModel.avatar, chatModel.id,chatModel.idShop));
+                listView.setAdapter(adapter);
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("id", chatModels.get(i).id);
+                        bundle.putString("idshopA", chatModels.get(i).idShop);
+                        bundle.putString("hinhanh",chatModels.get(i).avatar);
+                        Intent intent = new Intent(getActivity(), ChatDetailActivity.class);
+                        intent.putExtra("dataChat", bundle);
+                        startActivity(intent);
+
+                    }
+                });
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     @Override

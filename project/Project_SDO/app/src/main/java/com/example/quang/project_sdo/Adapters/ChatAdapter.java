@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.example.quang.project_sdo.Models.ListChatModel;
 import com.example.quang.project_sdo.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -52,9 +53,9 @@ public class ChatAdapter extends ArrayAdapter<ListChatModel> {
         }else{
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.ava.setImageResource(chatUser.get(position).getAvatar());
+        Picasso.get().load(chatUser.get(position).getAvatar()).into(viewHolder.ava);
         viewHolder.txtNameChat.setText(chatUser.get(position).getName());
-        viewHolder.txtRecentChat.setText(chatUser.get(position).getRecentChat());
+        viewHolder.txtRecentChat.setText(chatUser.get(position).getMessage());
         return convertView;
     }
 }

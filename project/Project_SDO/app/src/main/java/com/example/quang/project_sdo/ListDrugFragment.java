@@ -44,7 +44,6 @@ public class ListDrugFragment extends Fragment {
     FirebaseAuth mAuth;
 
 
-
     ArrayList<EnterDrugModel> searchDrug = new ArrayList<EnterDrugModel>();
     DrugAdapter searchArray = null;
 
@@ -66,7 +65,6 @@ public class ListDrugFragment extends Fragment {
         loadData();
 
 
-
         return view;
 
     }
@@ -75,22 +73,24 @@ public class ListDrugFragment extends Fragment {
         root.child("Drug").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                EnterDrugModel drugModel = dataSnapshot.getValue(EnterDrugModel.class);
-                listDrug.add(new EnterDrugModel(drugModel.tenthuoc, drugModel.congdung, drugModel.gia, drugModel.nguongoc,drugModel.mota,drugModel.soluong,drugModel.linkhinh,drugModel.tenshop,drugModel.id));
+                final EnterDrugModel drugModel = dataSnapshot.getValue(EnterDrugModel.class);
+                listDrug.add(new EnterDrugModel(drugModel.tenthuoc, drugModel.congdung, drugModel.gia, drugModel.nguongoc, drugModel.mota, drugModel.soluong, drugModel.linkhinh, drugModel.tenshop, drugModel.id, drugModel.idShop));
                 adapter.notifyDataSetChanged();
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Bundle bundle = new Bundle();
-                        bundle.putString("hinhanh",listDrug.get(i).linkhinh);
-                        bundle.putString("congdung",listDrug.get(i).congdung);
-                        bundle.putString("nguongoc",listDrug.get(i).nguongoc);
-                        bundle.putString("mota",listDrug.get(i).mota);
-                        bundle.putString("gia",listDrug.get(i).gia);
-                        bundle.putString("tenshop",listDrug.get(i).tenshop);
-                        Intent intent = new Intent(getActivity(),DrugDetailActivity.class);
-                        intent.putExtra("data",bundle);
+                        bundle.putString("hinhanh", listDrug.get(i).linkhinh);
+                        bundle.putString("congdung", listDrug.get(i).congdung);
+                        bundle.putString("nguongoc", listDrug.get(i).nguongoc);
+                        bundle.putString("mota", listDrug.get(i).mota);
+                        bundle.putString("gia", listDrug.get(i).gia);
+                        bundle.putString("tenshop", listDrug.get(i).tenshop);
+                        bundle.putString("idShop", listDrug.get(i).idShop);
+                        Intent intent = new Intent(getActivity(), DrugDetailActivity.class);
+                        intent.putExtra("data", bundle);
                         startActivity(intent);
+
                     }
                 });
             }
@@ -117,7 +117,6 @@ public class ListDrugFragment extends Fragment {
         });
 
     }
-
 
 
     @Override
