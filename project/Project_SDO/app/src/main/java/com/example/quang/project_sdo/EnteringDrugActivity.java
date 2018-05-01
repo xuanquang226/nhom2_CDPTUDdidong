@@ -169,12 +169,12 @@ public class EnteringDrugActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
             imgThuoc.setImageBitmap(bitmap);
-            Log.d("AAAA",bitmap + "");
+
         }
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
             imgThuoc.setImageURI(imageUri);
-            Log.d("AAAA",imageUri + "");
+
 
         }
 

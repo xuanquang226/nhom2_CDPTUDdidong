@@ -25,13 +25,13 @@
         <activity android:name=".CoughActivity" />
         <activity android:name=".StomachActivity" />
         <activity android:name=".HeadacheActivity" />
-        <activity android:name=".ShoppingCartActivity"></activity>
+        <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".ShipperDeliverySchedule" />
         <activity android:name=".ChatDetailActivity" />
         <activity android:name=".SaleStatisticActivity" />
         <activity android:name=".PaymentActivity" />
-        <activity android:name=".DrugDetailActivity"></activity>
-        <activity android:name=".CarrierDeliverySchedule"></activity>
+        <activity android:name=".DrugDetailActivity" />
+        <activity android:name=".CarrierDeliverySchedule" />
     </application>
 
 </manifest>

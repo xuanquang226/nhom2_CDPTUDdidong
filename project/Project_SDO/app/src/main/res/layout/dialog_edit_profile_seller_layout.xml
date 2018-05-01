@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="10dp">
+
+        <EditText
+            android:id="@+id/txtusernameD"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="Nguyễn Văn A"
+            android:textColor="@color/colorDen"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:id="@+id/txtsdtD"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="096988xxx"
+            android:textColor="@color/colorDo"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+        <EditText
+            android:id="@+id/txtCMNDD"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="096988xxx"
+            android:textColor="@color/colorDo"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+
+        <EditText
+            android:id="@+id/txtaddressD"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="74/x/x Ðường 6, Linh đông, quận Thủ Đức"
+            android:textColor="@color/colorXanhBien"
+            android:textStyle="bold"
+            android:textAlignment="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/btnConfirmEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OK"
+                android:textAllCaps="false"/>
+            <Button
+                android:id="@+id/btnCancelEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textAllCaps="false"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

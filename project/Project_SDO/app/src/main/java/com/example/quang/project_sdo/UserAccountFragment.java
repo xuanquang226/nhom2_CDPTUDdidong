@@ -7,37 +7,25 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.example.quang.project_sdo.Models.UsersModel;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
-
-import java.io.ByteArrayOutputStream;
-import java.util.Calendar;
-import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -51,7 +39,9 @@ public class UserAccountFragment extends Fragment {
     FirebaseStorage storage;
     StorageReference mountainImagesRef;
     TextView txtUserName, txtSDT, txtAddress;
+    TextView txtUserNameD, txtSDTD, txtAddressD;
     ImageView imgUser;
+    Button btnOk,btnCancel;
     Dialog dialoga;
     Uri downloadUrl;
     Uri imageUri;
@@ -109,8 +99,16 @@ public class UserAccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 dialoga = new Dialog(getActivity());
-                dialoga.setContentView(R.layout.dialog_edit_profile_layout);
+                dialoga.setContentView(R.layout.dialog_edit_profile__user_layout);
                 dialoga.setTitle("Edit profile");
+                txtUserNameD = (TextView) dialoga.findViewById(R.id.txtusernameD);
+                txtSDTD = (TextView) dialoga.findViewById(R.id.txtsdtD);
+                txtAddressD = (TextView) dialoga.findViewById(R.id.txtaddressD);
+                btnOk = (Button) dialoga.findViewById(R.id.btnConfirmEdit);
+                btnCancel = (Button) dialoga.findViewById(R.id.btnCancelEdit);
+
+
+                loadDataD();
                 dialoga.show();
             }
         });
@@ -204,7 +202,7 @@ public class UserAccountFragment extends Fragment {
                     txtUserName.setText(Data.email);
                     txtSDT.setText(Data.phone);
                     txtAddress.setText(Data.address);
-                    //Picasso.get().load(Data.linkhinh).into(imgUser);
+                    Picasso.get().load(Data.linkhinh).into(imgUser);
                 }
             }
 
@@ -230,5 +228,54 @@ public class UserAccountFragment extends Fragment {
         });
     }
 
+    public void loadDataD(){
+        root.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                UsersModel data = dataSnapshot.getValue(UsersModel.class);
+                if (data.id.equalsIgnoreCase(mAuth.getUid())) {
+                    txtUserNameD.setText(data.email);
+                    txtSDTD.setText(data.phone);
+                    txtAddressD.setText(data.address);
+                }
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("email").setValue(txtUserNameD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("phone").setValue(txtSDTD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("address").setValue(txtAddressD.getText().toString());
+                        dialoga.dismiss();
+                    }
+                });
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialoga.dismiss();
+                    }
+                });
 
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

@@ -8,15 +8,15 @@
     >
     <ImageView
         android:id="@+id/imgAccount"
-        android:layout_width="150dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
         android:src="@drawable/user"
         />
     <TextView
-        android:id="@+id/typeAccount"
-        android:layout_width="wrap_content"
+        android:id="@+id/nameAccount"
+        android:layout_width="match_parent"
         android:layout_marginTop="20sp"
         android:layout_marginLeft="20dp"
         android:layout_height="wrap_content"

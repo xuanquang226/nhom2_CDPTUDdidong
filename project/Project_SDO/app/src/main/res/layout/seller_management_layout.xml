@@ -61,6 +61,25 @@
                     android:layout_marginLeft="7dp"
                     android:textStyle="bold" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/idcard" />
+
+                <TextView
+                    android:id="@+id/txtIDCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="025997766"
+                    android:layout_marginLeft="7dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
         </LinearLayout>
     </LinearLayout>
 

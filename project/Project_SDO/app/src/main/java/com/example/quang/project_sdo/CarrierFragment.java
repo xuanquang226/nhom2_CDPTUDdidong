@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -38,8 +39,10 @@ public class CarrierFragment extends Fragment {
     FirebaseStorage storage;
     StorageReference mountainImagesRef;
     TextView txtUserName, txtSDT, txtAddress,txtNameC;
+    TextView txtUserNameD, txtSDTD, txtAddressD,txtNameCD;
     ImageView imgUser;
-    Dialog dialog;
+    Button btnOk,btnCancel;
+    Dialog dialoga;
     Uri downloadUrl;
     Uri imageUri;
     public CarrierFragment() {
@@ -76,10 +79,20 @@ public class CarrierFragment extends Fragment {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_edit_profile_layout);
-                dialog.setTitle("Edit profile");
-                dialog.show();
+                dialoga = new Dialog(getActivity());
+                dialoga.setContentView(R.layout.dialog_edit_profile_seller_layout);
+                dialoga.setTitle("Edit profile");
+
+                txtUserNameD = (TextView) dialoga.findViewById(R.id.txtusernameD);
+                txtSDTD = (TextView) dialoga.findViewById(R.id.txtsdtD);
+                txtAddressD = (TextView) dialoga.findViewById(R.id.txtaddressD);
+                txtNameCD = (TextView) dialoga.findViewById(R.id.txtCMNDD);
+                btnOk = (Button) dialoga.findViewById(R.id.btnConfirmEdit);
+                btnCancel = (Button) dialoga.findViewById(R.id.btnCancelEdit);
+
+                loadDataD();
+                dialoga.show();
+
             }
         });
 
@@ -189,8 +202,60 @@ public class CarrierFragment extends Fragment {
                     txtSDT.setText(Data.phone);
                     txtAddress.setText(Data.address);
                     txtNameC.setText(Data.nameCarrier);
-                    //Picasso.get().load(Data.linkhinh).into(imgUser);
+                    Picasso.get().load(Data.linkhinh).into(imgUser);
                 }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void loadDataD(){
+        root.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                CarrierModel data = dataSnapshot.getValue(CarrierModel.class);
+                if (data.id.equalsIgnoreCase(mAuth.getUid())) {
+                    txtUserNameD.setText(data.email);
+                    txtSDTD.setText(data.phone);
+                    txtAddressD.setText(data.address);
+                    txtNameCD.setText(data.nameCarrier);
+                }
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("email").setValue(txtUserNameD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("phone").setValue(txtSDTD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("address").setValue(txtAddressD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("nameCarrier").setValue(txtNameCD.getText().toString());
+                        dialoga.dismiss();
+                    }
+                });
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialoga.dismiss();
+                    }
+                });
+
             }
 
             @Override

@@ -7,18 +7,15 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quang.project_sdo.Models.SellerModel;
-import com.example.quang.project_sdo.Models.UsersModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -37,9 +35,11 @@ public class SellerManagementFragment extends Fragment {
     FirebaseStorage storage;
     StorageReference mountainImagesRef;
     Uri imageUri;
-    TextView txtUserName, txtSDT, txtAddress;
+    TextView txtUserName, txtSDT, txtAddress,txtIDCard;
+    TextView txtUserNameD, txtSDTD, txtAddressD,txtIDCardD;
+    Button btnOk,btnCancel;
     ImageView imgUser;
-    Dialog dialog;
+    Dialog dialoga;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class SellerManagementFragment extends Fragment {
         txtSDT = (TextView) view.findViewById(R.id.txtsdt);
         txtAddress = (TextView) view.findViewById(R.id.txtaddress);
         imgUser = (ImageView) view.findViewById(R.id.imguser);
+        txtIDCard = (TextView) view.findViewById(R.id.txtIDCard);
 
         Button btnAdddrugs = (Button) view.findViewById(R.id.btnadddrugs);
         Button btnViewStatistics = (Button) view.findViewById(R.id.btnviewStatistics);
@@ -83,10 +84,21 @@ public class SellerManagementFragment extends Fragment {
         btnEditprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_edit_profile_layout);
-                dialog.setTitle("Edit profile");
-                dialog.show();
+                dialoga = new Dialog(getActivity());
+                dialoga.setContentView(R.layout.dialog_edit_profile_seller_layout);
+                dialoga.setTitle("Edit profile");
+
+                txtUserNameD = (TextView) dialoga.findViewById(R.id.txtusernameD);
+                txtSDTD = (TextView) dialoga.findViewById(R.id.txtsdtD);
+                txtAddressD = (TextView) dialoga.findViewById(R.id.txtaddressD);
+                txtIDCardD = (TextView) dialoga.findViewById(R.id.txtCMNDD);
+                btnOk = (Button) dialoga.findViewById(R.id.btnConfirmEdit);
+                btnCancel = (Button) dialoga.findViewById(R.id.btnCancelEdit);
+
+
+                loadDataD();
+                dialoga.show();
+
             }
         });
 
@@ -143,7 +155,8 @@ public class SellerManagementFragment extends Fragment {
                     txtUserName.setText(Data.email);
                     txtSDT.setText(Data.phone);
                     txtAddress.setText(Data.address);
-                    //Picasso.get().load(Data.linkhinh).into(imgUser);
+                    txtIDCard.setText(Data.cmnd);
+                    Picasso.get().load(Data.linkhinh).into(imgUser);
                 }
             }
 
@@ -209,5 +222,57 @@ public class SellerManagementFragment extends Fragment {
                 */
 
         super.onActivityResult(requestCode, resultCode, data);
+    }
+    public void loadDataD(){
+        root.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                SellerModel data = dataSnapshot.getValue(SellerModel.class);
+                if (data.id.equalsIgnoreCase(mAuth.getUid())) {
+                    txtUserNameD.setText(data.email);
+                    txtSDTD.setText(data.phone);
+                    txtAddressD.setText(data.address);
+                    txtIDCardD.setText(data.cmnd);
+                }
+                btnOk.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("email").setValue(txtUserNameD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("phone").setValue(txtSDTD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("address").setValue(txtAddressD.getText().toString());
+                        rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("cmnd").setValue(txtIDCardD.getText().toString());
+                        dialoga.dismiss();
+                    }
+                });
+                btnCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        dialoga.dismiss();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

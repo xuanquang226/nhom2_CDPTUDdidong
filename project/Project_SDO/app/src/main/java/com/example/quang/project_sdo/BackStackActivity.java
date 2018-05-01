@@ -14,14 +14,26 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 //import com.example.quang.project_sdo.Adapters.DrugAdapter;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class BackStackActivity extends AppCompatActivity {
+    FirebaseAuth mAuth;
+    DatabaseReference root;
     ImageButton imgHome;
     ImageButton imgDrug;
     ImageButton imgChat;
@@ -35,6 +47,8 @@ public class BackStackActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.back_stack_layout);
+
+        mAuth = FirebaseAuth.getInstance();
 
         //Process
         imgHome = (ImageButton) findViewById(R.id.imgHome);
@@ -92,6 +106,26 @@ public class BackStackActivity extends AppCompatActivity {
         mToggle.syncState();
 
         navigationView = (NavigationView) findViewById(R.id.nav_drawer);
+
+
+
+        root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
+        root.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("email").getValue().toString();
+                String hinhanh = dataSnapshot.child("linkhinh").getValue().toString();
+                ImageView imgAccountA = (ImageView) navigationView.findViewById(R.id.imgAccount);
+                TextView txtNameAcc = (TextView) navigationView.findViewById(R.id.nameAccount);
+                txtNameAcc.setText(name);
+                Picasso.get().load(hinhanh).into(imgAccountA);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -114,6 +148,8 @@ public class BackStackActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
     }
 
     protected void addFragment(Fragment fragment) {
@@ -167,5 +203,8 @@ public class BackStackActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }
