@@ -47,7 +47,7 @@ public class CarrierFragment extends Fragment {
     StorageReference mountainImagesRef;
     TextView txtUserName, txtSDT, txtAddress,txtNameC;
     TextView txtUserNameD, txtSDTD, txtAddressD,txtNameCD;
-    ImageView imgUser;
+    ImageView imgUser,imgUserD;
     Button btnOk,btnCancel;
     Dialog dialoga;
     Uri downloadUrl;
@@ -96,7 +96,38 @@ public class CarrierFragment extends Fragment {
                 txtNameCD = (TextView) dialoga.findViewById(R.id.txtCMNDD);
                 btnOk = (Button) dialoga.findViewById(R.id.btnConfirmEdit);
                 btnCancel = (Button) dialoga.findViewById(R.id.btnCancelEdit);
+                imgUserD = (ImageView) dialoga.findViewById(R.id.imguserD);
+                imgUserD.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final Dialog dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.dialog_image_layout);
+                        dialog.setTitle("Choose");
+                        dialog.setCancelable(false);
 
+                        Button btnOpen = (Button) dialog.findViewById(R.id.openGallery);
+                        Button btnTakeP = (Button) dialog.findViewById(R.id.takePhoto);
+
+                        btnOpen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                                startActivityForResult(gallery, 9);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        btnTakeP.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, 10);
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
                 loadDataD();
                 dialoga.show();
 
@@ -119,83 +150,23 @@ public class CarrierFragment extends Fragment {
             }
         });
 
-
-
-
-
-
-        imgUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_image_layout);
-                dialog.setTitle("Choose");
-                dialog.setCancelable(false);
-
-                Button btnOpen = (Button) dialog.findViewById(R.id.openGallery);
-                Button btnTakeP = (Button) dialog.findViewById(R.id.takePhoto);
-
-                btnOpen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                        startActivityForResult(gallery, 7);
-                        dialog.dismiss();
-                    }
-                });
-
-                btnTakeP.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, 8);
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-        });
+        loadData();
         return view;
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 7 && resultCode == RESULT_OK) {
+        if (requestCode == 9 && resultCode == RESULT_OK) {
             imageUri = data.getData();
-            imgUser.setImageURI(imageUri);
+            imgUserD.setImageURI(imageUri);
         }
-        if (requestCode == 8 && resultCode == RESULT_OK) {
+        if (requestCode == 10 && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imgUser.setImageBitmap(bitmap);
+            imgUserD.setImageBitmap(bitmap);
 
         }
 
-                //Process for image
-                Calendar calendar = Calendar.getInstance();
-                StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
-
-                imgUser.setDrawingCacheEnabled(true);
-                imgUser.buildDrawingCache();
-                Bitmap bitmap = imgUser.getDrawingCache();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] dataA = baos.toByteArray();
-
-                UploadTask uploadTask = mountainsRef.putBytes(dataA);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        downloadUrl = taskSnapshot.getDownloadUrl();
-                        rootB = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-                        rootB.child("linkhinh").setValue(downloadUrl);
-                    }
-                });
 
     }
 
@@ -209,7 +180,11 @@ public class CarrierFragment extends Fragment {
                     txtSDT.setText(Data.phone);
                     txtAddress.setText(Data.address);
                     txtNameC.setText(Data.nameCarrier);
-                    Picasso.get().load(Data.linkhinh).into(imgUser);
+                    if(Data.linkhinh.equalsIgnoreCase("")){
+
+                    }else {
+                        Picasso.get().load(Data.linkhinh).into(imgUser);
+                    }
                 }
             }
 
@@ -244,15 +219,44 @@ public class CarrierFragment extends Fragment {
                     txtSDTD.setText(data.phone);
                     txtAddressD.setText(data.address);
                     txtNameCD.setText(data.nameCarrier);
+                    if(data.linkhinh.equalsIgnoreCase("")){
+
+                    }else {
+                        Picasso.get().load(data.linkhinh).into(imgUserD);
+                    }
                 }
                 btnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
+                        final DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("email").setValue(txtUserNameD.getText().toString());
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("phone").setValue(txtSDTD.getText().toString());
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("address").setValue(txtAddressD.getText().toString());
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("nameCarrier").setValue(txtNameCD.getText().toString());
+                        //Process for image
+                        Calendar calendar = Calendar.getInstance();
+                        StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
+
+                        imgUserD.setDrawingCacheEnabled(true);
+                        imgUserD.buildDrawingCache();
+                        Bitmap bitmap = imgUserD.getDrawingCache();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] dataA = baos.toByteArray();
+
+                        UploadTask uploadTask = mountainsRef.putBytes(dataA);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                downloadUrl = taskSnapshot.getDownloadUrl();
+                                rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("linkhinh").setValue(downloadUrl + "");
+                            }
+                        });
                         dialoga.dismiss();
                     }
                 });
@@ -290,6 +294,6 @@ public class CarrierFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        loadData();
+
     }
 }

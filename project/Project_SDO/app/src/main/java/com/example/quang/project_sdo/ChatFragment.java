@@ -55,24 +55,10 @@ public class ChatFragment extends Fragment {
 
 
         listView = (ListView) view.findViewById(R.id.listChat);
-        /*
-        chatModels.add(new ListChatModel("Shop A", "Thuốc này có tác dụng phụ không shop", R.drawable.supporta));
-        chatModels.add(new ListChatModel("Shop B", "Thuốc này có tác dụng phụ không shop", R.drawable.supportb));
-        chatModels.add(new ListChatModel("Shop C", "Thuốc này có tác dụng phụ không shop", R.drawable.supportc));
-        */
 
         adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
         loadData();
 
-
-        /*
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                startActivity(new Intent(getActivity(), ChatDetailActivity.class));
-            }
-        });
-        */
         return view;
     }
 

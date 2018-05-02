@@ -45,7 +45,7 @@ public class SellerManagementFragment extends Fragment {
     TextView txtUserName, txtSDT, txtAddress,txtIDCard;
     TextView txtUserNameD, txtSDTD, txtAddressD,txtIDCardD;
     Button btnOk,btnCancel;
-    ImageView imgUser;
+    ImageView imgUser,imgUserD;
     Uri downloadUrl;
     Dialog dialoga;
     @Nullable
@@ -100,6 +100,38 @@ public class SellerManagementFragment extends Fragment {
                 txtSDTD = (TextView) dialoga.findViewById(R.id.txtsdtD);
                 txtAddressD = (TextView) dialoga.findViewById(R.id.txtaddressD);
                 txtIDCardD = (TextView) dialoga.findViewById(R.id.txtCMNDD);
+                imgUserD = (ImageView) dialoga.findViewById(R.id.imguserD);
+                imgUserD.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final Dialog dialog = new Dialog(getActivity());
+                        dialog.setContentView(R.layout.dialog_image_layout);
+                        dialog.setTitle("Choose");
+                        dialog.setCancelable(false);
+
+                        Button btnOpen = (Button) dialog.findViewById(R.id.openGallery);
+                        Button btnTakeP = (Button) dialog.findViewById(R.id.takePhoto);
+
+                        btnOpen.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                                startActivityForResult(gallery, 5);
+                                dialog.dismiss();
+                            }
+                        });
+
+                        btnTakeP.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, 6);
+                                dialog.dismiss();
+                            }
+                        });
+                        dialog.show();
+                    }
+                });
                 btnOk = (Button) dialoga.findViewById(R.id.btnConfirmEdit);
                 btnCancel = (Button) dialoga.findViewById(R.id.btnCancelEdit);
 
@@ -119,38 +151,8 @@ public class SellerManagementFragment extends Fragment {
             }
         });
 
+        loadData();
 
-        imgUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog dialog = new Dialog(getActivity());
-                dialog.setContentView(R.layout.dialog_image_layout);
-                dialog.setTitle("Choose");
-                dialog.setCancelable(false);
-
-                Button btnOpen = (Button) dialog.findViewById(R.id.openGallery);
-                Button btnTakeP = (Button) dialog.findViewById(R.id.takePhoto);
-
-                btnOpen.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-                        startActivityForResult(gallery, 5);
-                        dialog.dismiss();
-                    }
-                });
-
-                btnTakeP.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, 6);
-                        dialog.dismiss();
-                    }
-                });
-                dialog.show();
-            }
-        });
         return view;
     }
 
@@ -164,7 +166,11 @@ public class SellerManagementFragment extends Fragment {
                     txtSDT.setText(Data.phone);
                     txtAddress.setText(Data.address);
                     txtIDCard.setText(Data.cmnd);
-                    Picasso.get().load(Data.linkhinh).into(imgUser);
+                    if(Data.linkhinh.equalsIgnoreCase("")){
+
+                    }else {
+                        Picasso.get().load(Data.linkhinh).into(imgUser);
+                    }
                 }
             }
 
@@ -194,42 +200,14 @@ public class SellerManagementFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 6 && resultCode == RESULT_OK && data != null) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            imgUser.setImageBitmap(bitmap);
+            imgUserD.setImageBitmap(bitmap);
         }
         if (requestCode == 5 && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
-            imgUser.setImageURI(imageUri);
+            imgUserD.setImageURI(imageUri);
 
         }
-
-                //Process for image
-                Calendar calendar = Calendar.getInstance();
-                StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
-
-                imgUser.setDrawingCacheEnabled(true);
-                imgUser.buildDrawingCache();
-                Bitmap bitmap = imgUser.getDrawingCache();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] dataA = baos.toByteArray();
-
-                UploadTask uploadTask = mountainsRef.putBytes(dataA);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        downloadUrl = taskSnapshot.getDownloadUrl();
-                        rootB = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-                        rootB.child("linkhinh").setValue(downloadUrl);
-                    }
-                });
-
-
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
     }
     public void loadDataD(){
         root.addChildEventListener(new ChildEventListener() {
@@ -241,15 +219,45 @@ public class SellerManagementFragment extends Fragment {
                     txtSDTD.setText(data.phone);
                     txtAddressD.setText(data.address);
                     txtIDCardD.setText(data.cmnd);
+                    if(data.linkhinh.equalsIgnoreCase("")){
+
+                    }else {
+                        Picasso.get().load(data.linkhinh).into(imgUserD);
+                    }
                 }
                 btnOk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
+                        final DatabaseReference rootC = FirebaseDatabase.getInstance().getReference();
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("email").setValue(txtUserNameD.getText().toString());
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("phone").setValue(txtSDTD.getText().toString());
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("address").setValue(txtAddressD.getText().toString());
                         rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("cmnd").setValue(txtIDCardD.getText().toString());
+
+                        //Process for image
+                        Calendar calendar = Calendar.getInstance();
+                        StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
+
+                        imgUserD.setDrawingCacheEnabled(true);
+                        imgUserD.buildDrawingCache();
+                        Bitmap bitmap = imgUserD.getDrawingCache();
+                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+                        byte[] dataA = baos.toByteArray();
+
+                        UploadTask uploadTask = mountainsRef.putBytes(dataA);
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle unsuccessful uploads
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                downloadUrl = taskSnapshot.getDownloadUrl();
+                                rootC.child("Infomation account").child(mAuth.getCurrentUser().getUid()).child("linkhinh").setValue(downloadUrl + "");
+                            }
+                        });
                         dialoga.dismiss();
                     }
                 });
@@ -287,6 +295,5 @@ public class SellerManagementFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        loadData();
     }
 }

@@ -33,7 +33,7 @@ public class AccountManagementFragment extends Fragment {
     FirebaseAuth mAuth;
     DatabaseReference root;
     String userType;
-    private FragmentManager fragmentManager;
+    FirebaseAuth.AuthStateListener authStateListener;
 
     @Nullable
     @Override
@@ -43,7 +43,6 @@ public class AccountManagementFragment extends Fragment {
         //Ini
         mAuth = FirebaseAuth.getInstance();
 
-        account();
         return view;
     }
 
@@ -89,6 +88,8 @@ public class AccountManagementFragment extends Fragment {
         if (mAuth.getCurrentUser() == null) {
             Toast.makeText(getActivity(), "Đăng nhập để thực hiện chức năng này", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getActivity(), SignInSignUpActivity.class));
+        }else{
+            account();
         }
     }
 

@@ -45,9 +45,7 @@ public class BackStackActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView navigationView;
-    private FragmentManager fragmentManager;
-    UserAccountFragment dataF;
-    Uri imageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +138,7 @@ public class BackStackActivity extends AppCompatActivity {
         });
 
 
+
     }
 
     protected void addFragment(Fragment fragment) {
@@ -195,6 +194,7 @@ public class BackStackActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        super.onStart();
         if(mAuth.getCurrentUser() != null){
             root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
             root.addValueEventListener(new ValueEventListener() {
@@ -205,7 +205,12 @@ public class BackStackActivity extends AppCompatActivity {
                     ImageView imgAccountA = (ImageView) navigationView.findViewById(R.id.imgAccount);
                     TextView txtNameAcc = (TextView) navigationView.findViewById(R.id.nameAccount);
                     txtNameAcc.setText(name);
-                    Picasso.get().load(hinhanh).into(imgAccountA);
+                    if(hinhanh.equalsIgnoreCase("")){
+
+                    }else{
+                        Picasso.get().load(hinhanh).into(imgAccountA);
+                    }
+
                 }
 
                 @Override
@@ -216,13 +221,11 @@ public class BackStackActivity extends AppCompatActivity {
         }else{
 
         }
-        super.onStart();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
 
     }
 
