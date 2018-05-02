@@ -20,6 +20,7 @@ public class ArcticleDetailActivity extends AppCompatActivity {
         //Ini
         ImageView imgArcticle = (ImageView) findViewById(R.id.imageArcticle);
         TextView txtArcticle = (TextView) findViewById(R.id.txtArcticleDrug);
+        TextView txtDrugName = (TextView) findViewById(R.id.titleDrug);
         ActionBar actionBar = getSupportActionBar();
 
         //Process
@@ -28,6 +29,7 @@ public class ArcticleDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("Data");
         txtArcticle.setText(bundle.getString("mota"));
+        txtDrugName.setText(bundle.getString("tenthuoc"));
         Picasso.get().load(bundle.getString("hinhanh")).into(imgArcticle);
     }
 

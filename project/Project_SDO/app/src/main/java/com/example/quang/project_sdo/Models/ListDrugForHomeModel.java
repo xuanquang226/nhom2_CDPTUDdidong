@@ -67,5 +67,7 @@ public class ListDrugForHomeModel {
     public void setDrugDescription(String drugDescription) {
         this.drugDescription = drugDescription;
     }
+
+
 }
 

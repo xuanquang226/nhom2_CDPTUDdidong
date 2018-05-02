@@ -73,6 +73,7 @@ public class HomeFragment extends Fragment {
                         Bundle bundle = new Bundle();
                         bundle.putString("hinhanh",listHomeDrug.get(i).drugImage);
                         bundle.putString("mota",listHomeDrug.get(i).mota);
+                        bundle.putString("tenthuoc",listHomeDrug.get(i).drugName);
                         Intent intent = new Intent(getActivity(),ArcticleDetailActivity.class);
                         intent.putExtra("Data",bundle);
                         startActivity(intent);

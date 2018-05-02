@@ -43,7 +43,7 @@ public class AccountManagementFragment extends Fragment {
         //Ini
         mAuth = FirebaseAuth.getInstance();
 
-
+        account();
         return view;
     }
 
@@ -89,9 +89,11 @@ public class AccountManagementFragment extends Fragment {
         if (mAuth.getCurrentUser() == null) {
             Toast.makeText(getActivity(), "Đăng nhập để thực hiện chức năng này", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getActivity(), SignInSignUpActivity.class));
-        } else {
-            account();
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

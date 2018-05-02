@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quang.project_sdo.Models.SellerModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -24,14 +27,18 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
 
 public class SellerManagementFragment extends Fragment {
     private FirebaseAuth mAuth;
-    private DatabaseReference root;
+    private DatabaseReference root,rootB;
     FirebaseStorage storage;
     StorageReference mountainImagesRef;
     Uri imageUri;
@@ -39,6 +46,7 @@ public class SellerManagementFragment extends Fragment {
     TextView txtUserNameD, txtSDTD, txtAddressD,txtIDCardD;
     Button btnOk,btnCancel;
     ImageView imgUser;
+    Uri downloadUrl;
     Dialog dialoga;
     @Nullable
     @Override
@@ -63,7 +71,7 @@ public class SellerManagementFragment extends Fragment {
         mountainImagesRef = storage.getReferenceFromUrl(
                 "gs://projectsdo-9812e.appspot.com");
 
-        loadData();
+
 
         //Process
         btnAdddrugs.setOnClickListener(new View.OnClickListener() {
@@ -193,7 +201,7 @@ public class SellerManagementFragment extends Fragment {
             imgUser.setImageURI(imageUri);
 
         }
-        /*
+
                 //Process for image
                 Calendar calendar = Calendar.getInstance();
                 StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
@@ -203,9 +211,9 @@ public class SellerManagementFragment extends Fragment {
                 Bitmap bitmap = imgUser.getDrawingCache();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] data = baos.toByteArray();
+                byte[] dataA = baos.toByteArray();
 
-                UploadTask uploadTask = mountainsRef.putBytes(data);
+                UploadTask uploadTask = mountainsRef.putBytes(dataA);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
@@ -216,10 +224,10 @@ public class SellerManagementFragment extends Fragment {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         downloadUrl = taskSnapshot.getDownloadUrl();
                         rootB = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-                        rootB.push().child("linkhinh").setValue(downloadUrl);
+                        rootB.child("linkhinh").setValue(downloadUrl);
                     }
                 });
-                */
+
 
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -274,5 +282,11 @@ public class SellerManagementFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadData();
     }
 }

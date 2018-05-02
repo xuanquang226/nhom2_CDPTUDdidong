@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import android.widget.TextView;
 
 import com.example.quang.project_sdo.Models.CarrierModel;
 import com.example.quang.project_sdo.Models.ShipperModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +28,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -114,7 +121,7 @@ public class CarrierFragment extends Fragment {
 
 
 
-        loadData();
+
 
 
         imgUser.setOnClickListener(new View.OnClickListener() {
@@ -163,7 +170,7 @@ public class CarrierFragment extends Fragment {
             imgUser.setImageBitmap(bitmap);
 
         }
-         /*
+
                 //Process for image
                 Calendar calendar = Calendar.getInstance();
                 StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
@@ -173,9 +180,9 @@ public class CarrierFragment extends Fragment {
                 Bitmap bitmap = imgUser.getDrawingCache();
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] data = baos.toByteArray();
+                byte[] dataA = baos.toByteArray();
 
-                UploadTask uploadTask = mountainsRef.putBytes(data);
+                UploadTask uploadTask = mountainsRef.putBytes(dataA);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
@@ -186,10 +193,10 @@ public class CarrierFragment extends Fragment {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         downloadUrl = taskSnapshot.getDownloadUrl();
                         rootB = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-                        rootB.push().child("linkhinh").setValue(downloadUrl);
+                        rootB.child("linkhinh").setValue(downloadUrl);
                     }
                 });
-                */
+
     }
 
     public void loadData() {
@@ -280,4 +287,9 @@ public class CarrierFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadData();
+    }
 }

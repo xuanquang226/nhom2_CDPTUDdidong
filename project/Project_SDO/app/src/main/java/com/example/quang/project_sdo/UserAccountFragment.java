@@ -7,8 +7,10 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quang.project_sdo.Models.UsersModel;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -25,7 +29,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
+import java.io.ByteArrayOutputStream;
+import java.util.Calendar;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -41,13 +49,10 @@ public class UserAccountFragment extends Fragment {
     TextView txtUserName, txtSDT, txtAddress;
     TextView txtUserNameD, txtSDTD, txtAddressD;
     ImageView imgUser;
-    Button btnOk,btnCancel;
+    Button btnOk, btnCancel;
     Dialog dialoga;
     Uri downloadUrl;
     Uri imageUri;
-
-
-    private FragmentManager fragmentManager;
 
 
     public UserAccountFragment() {
@@ -114,7 +119,7 @@ public class UserAccountFragment extends Fragment {
         });
 
         //Process data
-        loadData();
+
 
 
         imgUser.setOnClickListener(new View.OnClickListener() {
@@ -131,7 +136,7 @@ public class UserAccountFragment extends Fragment {
                 btnOpen.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        Intent gallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
                         startActivityForResult(gallery, 3);
                         dialog.dismiss();
                     }
@@ -154,7 +159,7 @@ public class UserAccountFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        //super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 3 && resultCode == RESULT_OK) {
             imageUri = data.getData();
             imgUser.setImageURI(imageUri);
@@ -164,33 +169,33 @@ public class UserAccountFragment extends Fragment {
             imgUser.setImageBitmap(bitmap);
 
         }
-         /*
-                //Process for image
-                Calendar calendar = Calendar.getInstance();
-                StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
 
-                imgUser.setDrawingCacheEnabled(true);
-                imgUser.buildDrawingCache();
-                Bitmap bitmap = imgUser.getDrawingCache();
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-                byte[] data = baos.toByteArray();
 
-                UploadTask uploadTask = mountainsRef.putBytes(data);
-                uploadTask.addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                        // Handle unsuccessful uploads
-                    }
-                }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        downloadUrl = taskSnapshot.getDownloadUrl();
-                        rootB = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-                        rootB.push().child("linkhinh").setValue(downloadUrl);
-                    }
-                });
-                */
+        //Process for image
+        Calendar calendar = Calendar.getInstance();
+        StorageReference mountainsRef = mountainImagesRef.child("image" + calendar.getTimeInMillis() + ".png");
+
+        imgUser.setDrawingCacheEnabled(true);
+        imgUser.buildDrawingCache();
+        Bitmap bitmap = imgUser.getDrawingCache();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        byte[] dataA = baos.toByteArray();
+
+        UploadTask uploadTask = mountainsRef.putBytes(dataA);
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                downloadUrl = taskSnapshot.getDownloadUrl();
+                rootB = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
+                rootB.child("linkhinh").setValue(downloadUrl);
+            }
+        });
     }
 
     public void loadData() {
@@ -228,7 +233,7 @@ public class UserAccountFragment extends Fragment {
         });
     }
 
-    public void loadDataD(){
+    public void loadDataD() {
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -277,5 +282,11 @@ public class UserAccountFragment extends Fragment {
 
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        loadData();
     }
 }

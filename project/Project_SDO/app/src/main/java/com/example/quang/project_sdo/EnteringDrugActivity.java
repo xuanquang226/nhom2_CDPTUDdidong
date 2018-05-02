@@ -174,8 +174,6 @@ public class EnteringDrugActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK && data != null) {
             imageUri = data.getData();
             imgThuoc.setImageURI(imageUri);
-
-
         }
 
         super.onActivityResult(requestCode, resultCode, data);
@@ -190,5 +188,6 @@ public class EnteringDrugActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
 
 }
