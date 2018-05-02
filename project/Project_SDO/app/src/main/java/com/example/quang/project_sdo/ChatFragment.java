@@ -1,5 +1,6 @@
 package com.example.quang.project_sdo;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -35,6 +36,7 @@ import java.util.ArrayList;
 
 public class ChatFragment extends Fragment {
     private ArrayList<ListChatModel> chatModels = new ArrayList<ListChatModel>();
+    private ArrayList<ListChatModel> chatModels2 = new ArrayList<ListChatModel>();
     private ChatAdapter adapter;
     private FirebaseAuth mAuth;
     DatabaseReference root;
@@ -56,7 +58,7 @@ public class ChatFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.listChat);
 
-        adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
+
         loadData();
 
         return view;
@@ -67,15 +69,29 @@ public class ChatFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 final ListChatModel chatModel = dataSnapshot.getValue(ListChatModel.class);
-                chatModels.add(new ListChatModel(chatModel.name, chatModel.message,chatModel.avatar, chatModel.id,chatModel.idShop));
-                listView.setAdapter(adapter);
+                chatModels.add(new ListChatModel(chatModel.name, chatModel.message, chatModel.avatar, chatModel.id, chatModel.idShop,chatModel.nameShop));
+                if (mAuth.getCurrentUser() != null) {
+                    if (mAuth.getCurrentUser().getUid().equalsIgnoreCase(chatModel.id) ) {
+                        adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
+                        listView.setAdapter(adapter);
+                    }else if (mAuth.getCurrentUser().getUid().equalsIgnoreCase(chatModel.idShop)){
+                        chatModels2.add(new ListChatModel(chatModel.name, chatModel.message, chatModel.avatar, chatModel.id, chatModel.idShop,chatModel.nameShop));
+                        adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels2);
+                        listView.setAdapter(adapter);
+                    }
+
+                }
+
+
                 listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Bundle bundle = new Bundle();
                         bundle.putString("id", chatModels.get(i).id);
                         bundle.putString("idshopA", chatModels.get(i).idShop);
-                        bundle.putString("hinhanh",chatModels.get(i).avatar);
+                        bundle.putString("hinhanh", chatModels.get(i).avatar);
+                        bundle.putString("tenshopB",chatModels.get(i).nameShop);
+                        bundle.putString("tenuser",chatModels.get(i).name);
                         Intent intent = new Intent(getActivity(), ChatDetailActivity.class);
                         intent.putExtra("dataChat", bundle);
                         startActivity(intent);
@@ -115,4 +131,5 @@ public class ChatFragment extends Fragment {
             startActivity(new Intent(getActivity(), SignInSignUpActivity.class));
         }
     }
+
 }

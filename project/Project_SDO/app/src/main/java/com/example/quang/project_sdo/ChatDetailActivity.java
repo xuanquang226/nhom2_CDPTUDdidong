@@ -34,7 +34,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class ChatDetailActivity extends AppCompatActivity {
-    ArrayList<ChatDetailModel> mess = new ArrayList<>();
+    ArrayList<ChatDetailModel> mess = new ArrayList<ChatDetailModel>();
     private String UserName = "";
     String avatar;
     EditText edtMess;
@@ -45,7 +45,7 @@ public class ChatDetailActivity extends AppCompatActivity {
     private FirebaseListAdapter<ChatDetailModel> adapter;
     private FirebaseAuth mAuth;
     private DatabaseReference root;
-    String idShop, idShopA, keyID, idUser, hinhUser;
+    String idShop, idShopA, keyID, idUser, hinhUser,nameShop,nameShopB,userNameA,nameDefault;
 
 
     @Override
@@ -56,6 +56,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         root = FirebaseDatabase.getInstance().getReference();
         UserName = mAuth.getCurrentUser().getEmail();
+        nameDefault = mAuth.getCurrentUser().getEmail();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -64,13 +65,16 @@ public class ChatDetailActivity extends AppCompatActivity {
             Intent intent = getIntent();
             Bundle bundle = intent.getBundleExtra("Data");
             idShop = bundle.getString("idshop");
+            nameShop = bundle.getString("tenshopA");
+            Log.d("BBBB",nameShop + "");
         } else if (getIntent() != null && getIntent().getBundleExtra("dataChat") != null) {
             Intent intentA = getIntent();
             Bundle bundleA = intentA.getBundleExtra("dataChat");
             idUser = bundleA.getString("id");
             idShopA = bundleA.getString("idshopA");
             hinhUser = bundleA.getString("hinhanh");
-
+            nameShopB = bundleA.getString("tenshopB");
+            userNameA = bundleA.getString("tenuser");
         }
 
 
@@ -137,21 +141,22 @@ public class ChatDetailActivity extends AppCompatActivity {
                 LinearLayout llChatMess = (LinearLayout) v.findViewById(R.id.llChatMess);
 
                 // check if this is a receiver or not
-                if (model.getName().equals(UserName) == false) {
+                if (!model.getNameDefault().equals(UserName)) {
                     model.setSender(false);
                 }
                 // set data
                 if (idShop != null && mAuth.getUid().equalsIgnoreCase(model.getID()) && idShop.equalsIgnoreCase(model.getIdShop())) {
-                    lblName.setText(model.getName());
+                    lblName.setText(model.getNameDefault());
                     lblMess.setText(model.getMessage());
                     lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
                 }
-                if ((idShop == null && idUser.equalsIgnoreCase(model.getID()) && idShopA.equalsIgnoreCase(model.getIdShop())) && (mAuth.getUid().equalsIgnoreCase(model.getID()) || mAuth.getUid().equalsIgnoreCase(model.getIdShop()))) {
+                if ((idShop == null && idUser.equalsIgnoreCase(model.getID()) && idShopA.equalsIgnoreCase(model.getIdShop())) && mAuth.getUid().equalsIgnoreCase(idShopA)) {
 
-                    lblName.setText(model.getName());
+                    lblName.setText(model.getNameDefault());
                     lblMess.setText(model.getMessage());
                     lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
                 }
+
 
                 if (model.isSender()) {
                     // set visibility
@@ -162,10 +167,13 @@ public class ChatDetailActivity extends AppCompatActivity {
                     //imgSender.setImageResource(avatarID);
 
                     // set color
-                    //lblMess.setBackgroundColor(Color.parseColor("#3498db"));
-
                     if (lblMess.getText().equals("")) {
-                        lblMess.setVisibility(View.INVISIBLE);
+                        for (position = 0; position < mess.size(); position++) {
+                            lblMess.setVisibility(View.INVISIBLE);
+                            lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_empty_style));
+                            mess.remove(position);
+                            adapter.notifyDataSetChanged();
+                        }
                     } else {
                         lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_sender_style));
                     }
@@ -182,10 +190,17 @@ public class ChatDetailActivity extends AppCompatActivity {
 
                     // set color
                     if (lblMess.getText().equals("")) {
-                        lblMess.setVisibility(View.INVISIBLE);
+                        for (position = 0; position < mess.size(); position++) {
+                            lblMess.setVisibility(View.INVISIBLE);
+                            lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_empty_style));
+                            mess.remove(position);
+                            adapter.notifyDataSetChanged();
+                        }
                     } else {
                         lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_receiver_style));
                     }
+
+
                     //lblMess.setBackgroundColor(Color.parseColor("#95a5a6"));
 
 
@@ -204,11 +219,11 @@ public class ChatDetailActivity extends AppCompatActivity {
                 avatar = dataSnapshot.child("linkhinh").getValue().toString();
 
                 if (mAuth.getUid().equalsIgnoreCase(idUser)) {
-                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShopA, mAuth.getUid()));
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShopA, mAuth.getUid(),nameShop,nameDefault));
                 } else if (mAuth.getUid().equalsIgnoreCase(idShopA)) {
-                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, mAuth.getUid(), idUser));
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(userNameA, edtMess.getText() + "", avatar, true, mAuth.getUid(), idUser,nameShopB,nameDefault));
                 } else if (!mAuth.getUid().equalsIgnoreCase(idShop)) {
-                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShop, mAuth.getUid()));
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShop, mAuth.getUid(),nameShop,nameDefault));
                 }
 
                 // Clear the input

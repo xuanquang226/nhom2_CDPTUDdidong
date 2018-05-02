@@ -10,16 +10,18 @@ public class ListChatModel {
     public String avatar;
     public String id;
     public String idShop;
+    public String nameShop;
 
     public ListChatModel() {
     }
 
-    public ListChatModel(String name, String message, String avatar,String id,String idShop) {
+    public ListChatModel(String name, String message, String avatar,String id,String idShop,String nameShop) {
         this.name = name;
         this.message = message;
         this.avatar = avatar;
         this.id = id;
         this.idShop = idShop;
+        this.nameShop = nameShop;
     }
 
     public String getId() {
@@ -61,6 +63,14 @@ public class ListChatModel {
 
     public void setIdShop(String idShop) {
         this.idShop = idShop;
+    }
+
+    public String getNameShop() {
+        return nameShop;
+    }
+
+    public void setNameShop(String nameShop) {
+        this.nameShop = nameShop;
     }
 }
 

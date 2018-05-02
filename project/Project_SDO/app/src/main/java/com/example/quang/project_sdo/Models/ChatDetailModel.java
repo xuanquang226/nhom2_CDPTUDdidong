@@ -14,12 +14,14 @@ public class ChatDetailModel {
     private long CreatedDate;
     private String idShop;
     private String ID;
+    private String nameShop;
+    private String nameDefault;
 
     public ChatDetailModel() {
-        IsSender = true;
+
     }
 
-    public ChatDetailModel(String name, String message, String avatar, boolean isSender, String idshop, String id) {
+    public ChatDetailModel(String name, String message, String avatar, boolean isSender, String idshop, String id,String namshop,String namedefault) {
         UserName = name;
         Message = message;
         Avatar = avatar;
@@ -27,7 +29,8 @@ public class ChatDetailModel {
         CreatedDate = new Date().getTime();
         idShop = idshop;
         ID = id;
-
+        nameShop = namshop;
+        nameDefault = namedefault;
     }
 
     public String getName() {
@@ -80,5 +83,21 @@ public class ChatDetailModel {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public String getNameShop() {
+        return nameShop;
+    }
+
+    public void setNameShop(String nameShop) {
+        this.nameShop = nameShop;
+    }
+
+    public String getNameDefault() {
+        return nameDefault;
+    }
+
+    public void setNameDefault(String nameDefault) {
+        this.nameDefault = nameDefault;
     }
 }
