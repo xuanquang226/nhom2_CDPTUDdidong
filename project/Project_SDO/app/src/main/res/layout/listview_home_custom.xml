@@ -36,7 +36,11 @@
             android:text="@string/home_description"
             android:textColor="@color/colorDo"
             android:textSize="17dp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:maxLength="30"
+            android:ellipsize="end"
+            />
 
 
         <LinearLayout
