@@ -92,6 +92,7 @@ public class ChatFragment extends Fragment {
                         bundle.putString("hinhanh", chatModels.get(i).avatar);
                         bundle.putString("tenshopB",chatModels.get(i).nameShop);
                         bundle.putString("tenuser",chatModels.get(i).name);
+
                         Intent intent = new Intent(getActivity(), ChatDetailActivity.class);
                         intent.putExtra("dataChat", bundle);
                         startActivity(intent);
