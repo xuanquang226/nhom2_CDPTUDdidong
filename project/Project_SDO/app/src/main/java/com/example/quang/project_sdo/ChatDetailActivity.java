@@ -150,7 +150,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                     lblMess.setText(model.getMessage());
                     lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
                 }
-                if ((idShop == null) && ((mAuth.getUid().equalsIgnoreCase(idShopA) && idUser.equalsIgnoreCase(model.getID())) || (mAuth.getUid().equalsIgnoreCase(idUser) && idShopA.equalsIgnoreCase(model.getIdShop())))) {
+                if ((idShop == null && idUser.equalsIgnoreCase(model.getID()) && idShopA.equalsIgnoreCase(model.getIdShop())) && mAuth.getUid().equalsIgnoreCase(idShopA)) {
                     lblName.setText(model.getNameDefault());
                     lblMess.setText(model.getMessage());
                     lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
