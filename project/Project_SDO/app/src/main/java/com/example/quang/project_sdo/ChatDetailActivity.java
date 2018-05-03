@@ -145,15 +145,19 @@ public class ChatDetailActivity extends AppCompatActivity {
                     model.setSender(false);
                 }
                 // set data
-                if (idShop != null && mAuth.getUid().equalsIgnoreCase(model.getID()) && idShop.equalsIgnoreCase(model.getIdShop())) {
-                    lblName.setText(model.getNameDefault());
-                    lblMess.setText(model.getMessage());
-                    lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
-                }
-                if ((idShop == null && idUser.equalsIgnoreCase(model.getID()) && idShopA.equalsIgnoreCase(model.getIdShop())) && mAuth.getUid().equalsIgnoreCase(idShopA)) {
-                    lblName.setText(model.getNameDefault());
-                    lblMess.setText(model.getMessage());
-                    lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
+                if (idShop != null) {
+                    if (mAuth.getUid().equalsIgnoreCase(model.getID()) && idShop.equalsIgnoreCase(model.getIdShop()))
+                    {
+                        lblName.setText(model.getNameDefault());
+                        lblMess.setText(model.getMessage());
+                        lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
+                    }
+                } else {
+                    if (mAuth.getUid().equalsIgnoreCase(idUser) || mAuth.getUid().equalsIgnoreCase(idShopA)) {
+                        lblName.setText(model.getNameDefault());
+                        lblMess.setText(model.getMessage());
+                        lblDate.setText(DateFormat.format("dd/MM/yy hh:mm", model.getCreatedDate()));
+                    }
                 }
 
 
@@ -217,9 +221,12 @@ public class ChatDetailActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 avatar = dataSnapshot.child("linkhinh").getValue().toString();
 
-                if (mAuth.getUid().equalsIgnoreCase(idUser)) {
+                if (mAuth.getUid().equalsIgnoreCase(idUser) && idShop == null) {
+                    FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShopA, mAuth.getUid(), nameShopB, nameDefault));
+                }else if (mAuth.getUid().equalsIgnoreCase(idUser) && idShop != null) {
                     FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShopA, mAuth.getUid(), nameShop, nameDefault));
-                } else if (mAuth.getUid().equalsIgnoreCase(idShopA)) {
+                }
+                else if (mAuth.getUid().equalsIgnoreCase(idShopA)) {
                     FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(userNameA, edtMess.getText() + "", avatar, true, mAuth.getUid(), idUser, nameShopB, nameDefault));
                 } else if (!mAuth.getUid().equalsIgnoreCase(idShop)) {
                     FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(UserName, edtMess.getText() + "", avatar, true, idShop, mAuth.getUid(), nameShop, nameDefault));
