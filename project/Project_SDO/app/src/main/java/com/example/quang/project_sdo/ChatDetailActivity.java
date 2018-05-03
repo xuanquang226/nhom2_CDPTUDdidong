@@ -158,7 +158,7 @@ public class ChatDetailActivity extends AppCompatActivity {
 
 
                 if (model.isSender()) {
-                    // set visibilityll
+                    // set visibility
                     imgReceiver.setVisibility(View.INVISIBLE);
                     imgSender.setVisibility(View.VISIBLE);
 
