@@ -1,76 +1,100 @@
 package com.example.quang.project_sdo.Models;
 
+import java.util.Date;
+
 /**
  * Created by Trang on 4/5/2018.
  */
 
 public class ListChatModel {
-    public String name;
-    public String message;
-    public String avatar;
-    public String id;
-    public String idShop;
-    public String nameShop;
+    public String idUser;
+    public String idSeller;
+    public String imgUser;
+    public String imgSeller;
+    public String chatUser;
+    public String chatSeller;
+    public String nameUser;
+    public String nameSeller;
 
     public ListChatModel() {
+
     }
 
-    public ListChatModel(String name, String message, String avatar,String id,String idShop,String nameShop) {
-        this.name = name;
-        this.message = message;
-        this.avatar = avatar;
-        this.id = id;
-        this.idShop = idShop;
-        this.nameShop = nameShop;
+    public ListChatModel(String idUser, String idSeller, String imgUser, String imgSeller, String chatUser, String chatSeller,String nameUser, String nameSeller) {
+        this.idUser = idUser;
+        this.idSeller = idSeller;
+        this.imgUser = imgUser;
+        this.imgSeller = imgSeller;
+        this.chatUser = chatUser;
+        this.chatSeller = chatSeller;
+        this.nameUser = nameUser;
+        this.nameSeller = nameSeller;
+
     }
 
-    public String getId() {
-        return id;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
-    public String getName() {
-        return name;
+    public String getIdSeller() {
+        return idSeller;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setIdSeller(String idSeller) {
+        this.idSeller = idSeller;
     }
 
-    public String getMessage() {
-        return message;
+    public String getImgUser() {
+        return imgUser;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setImgUser(String imgUser) {
+        this.imgUser = imgUser;
+    }
+
+    public String getImgSeller() {
+        return imgSeller;
+    }
+
+    public void setImgSeller(String imgSeller) {
+        this.imgSeller = imgSeller;
+    }
+
+    public String getChatUser() {
+        return chatUser;
+    }
+
+    public void setChatUser(String chatUser) {
+        this.chatUser = chatUser;
+    }
+
+    public String getChatSeller() {
+        return chatSeller;
+    }
+
+    public void setChatSeller(String chatSeller) {
+        this.chatSeller = chatSeller;
     }
 
 
-    public String getAvatar() {
-        return avatar;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
-    public String getIdShop() {
-        return idShop;
+    public String getNameSeller() {
+        return nameSeller;
     }
 
-    public void setIdShop(String idShop) {
-        this.idShop = idShop;
-    }
-
-    public String getNameShop() {
-        return nameShop;
-    }
-
-    public void setNameShop(String nameShop) {
-        this.nameShop = nameShop;
+    public void setNameSeller(String nameSeller) {
+        this.nameSeller = nameSeller;
     }
 }
 

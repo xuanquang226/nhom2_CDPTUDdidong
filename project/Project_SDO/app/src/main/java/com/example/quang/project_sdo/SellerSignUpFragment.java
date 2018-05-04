@@ -88,7 +88,7 @@ public class SellerSignUpFragment extends Fragment {
                                     current_user_id.setValue(model);
                                     Toast.makeText(getActivity(), "SignUp Successfully", Toast.LENGTH_SHORT).show();
                                     mProgress.dismiss();
-                                    startActivity(new Intent(getActivity(), SignInActivity.class));
+                                    startActivity(new Intent(getActivity(), BackStackActivity.class));
                                 } else {
                                     Toast.makeText(getActivity(), "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();

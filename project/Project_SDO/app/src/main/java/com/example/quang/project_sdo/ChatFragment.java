@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.ChatAdapter;
 import com.example.quang.project_sdo.Adapters.DrugAdapter;
+import com.example.quang.project_sdo.Models.ChatDetailModel;
 import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.example.quang.project_sdo.Models.ListChatModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +38,6 @@ import java.util.ArrayList;
 
 public class ChatFragment extends Fragment {
     private ArrayList<ListChatModel> chatModels = new ArrayList<ListChatModel>();
-    private ArrayList<ListChatModel> chatModels2 = new ArrayList<ListChatModel>();
     private ChatAdapter adapter;
     private FirebaseAuth mAuth;
     DatabaseReference root;
@@ -55,9 +56,7 @@ public class ChatFragment extends Fragment {
         TextView name = (TextView) view.findViewById(R.id.txtNameChat);
         TextView chat = (TextView) view.findViewById(R.id.txtChatRecent);
 
-
         listView = (ListView) view.findViewById(R.id.listChat);
-
 
         loadData();
 
@@ -65,40 +64,36 @@ public class ChatFragment extends Fragment {
     }
 
     public void loadData() {
-        root.child("Info chat").limitToLast(2).addChildEventListener(new ChildEventListener() {
+        root.child("Info chat").limitToLast(3).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                final ListChatModel chatModel = dataSnapshot.getValue(ListChatModel.class);
-                chatModels.add(new ListChatModel(chatModel.name, chatModel.message, chatModel.avatar, chatModel.id, chatModel.idShop,chatModel.nameShop));
                 if (mAuth.getCurrentUser() != null) {
-                    if (mAuth.getCurrentUser().getUid().equalsIgnoreCase(chatModel.id) ) {
+                    final ListChatModel chatModel = dataSnapshot.getValue(ListChatModel.class);
+                    if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser()) || (mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller())))) {
+                        chatModels.add(new ListChatModel(chatModel.idUser, chatModel.idSeller, chatModel.imgUser, chatModel.imgSeller, chatModel.chatUser, chatModel.chatSeller, chatModel.nameUser, chatModel.nameSeller));
                         adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
                         listView.setAdapter(adapter);
-                    }else if (mAuth.getCurrentUser().getUid().equalsIgnoreCase(chatModel.idShop)){
-                        chatModels2.add(new ListChatModel(chatModel.name, chatModel.message, chatModel.avatar, chatModel.id, chatModel.idShop,chatModel.nameShop));
-                        adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels2);
-                        listView.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
                     }
+                    listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                            Bundle bundle = new Bundle();
+                            bundle.putString("idUser", chatModels.get(i).idUser);
+                            bundle.putString("idSeller", chatModels.get(i).idSeller);
+                            bundle.putString("imgUser", chatModels.get(i).imgUser);
+                            bundle.putString("imgSeller", chatModels.get(i).imgSeller);
+                            bundle.putString("nameUser", chatModels.get(i).nameUser);
+                            bundle.putString("nameSeller", chatModels.get(i).nameSeller);
+                            bundle.putString("nameUser", chatModels.get(i).nameUser);
 
+                            Intent intent = new Intent(getActivity(), ChatDetailActivity.class);
+                            intent.putExtra("dataChat", bundle);
+                            startActivity(intent);
+
+                        }
+                    });
                 }
-
-
-                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("id", chatModels.get(i).id);
-                        bundle.putString("idshopA", chatModels.get(i).idShop);
-                        bundle.putString("hinhanh", chatModels.get(i).avatar);
-                        bundle.putString("tenshopB",chatModels.get(i).nameShop);
-                        bundle.putString("tenuser",chatModels.get(i).name);
-
-                        Intent intent = new Intent(getActivity(), ChatDetailActivity.class);
-                        intent.putExtra("dataChat", bundle);
-                        startActivity(intent);
-
-                    }
-                });
             }
 
             @Override
@@ -120,7 +115,9 @@ public class ChatFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
+
         });
+
 
     }
 

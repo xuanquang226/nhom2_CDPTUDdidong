@@ -7,58 +7,105 @@ import java.util.Date;
  */
 
 public class ChatDetailModel {
-    private String UserName;
-    private String Message;
-    private String Avatar;
-    private boolean IsSender;
+    public String idUser;
+    public String idSeller;
+    public String imgUser;
+    public String imgSeller;
+    public String chatUser;
+    public String chatSeller;
+    public boolean IsSender;
+    public String nameUser;
+    public String nameSeller;
     private long CreatedDate;
-    private String idShop;
-    private String ID;
-    private String nameShop;
-    private String nameDefault;
 
     public ChatDetailModel() {
 
     }
 
-    public ChatDetailModel(String name, String message, String avatar, boolean isSender, String idshop, String id,String namshop,String namedefault) {
-        UserName = name;
-        Message = message;
-        Avatar = avatar;
+    public ChatDetailModel(String idUser, String idSeller, String imgUser, String imgSeller, String chatUser, String chatSeller, boolean isSender, String nameUser, String nameSeller) {
+        this.idUser = idUser;
+        this.idSeller = idSeller;
+        this.imgUser = imgUser;
+        this.imgSeller = imgSeller;
+        this.chatUser = chatUser;
+        this.chatSeller = chatSeller;
         IsSender = isSender;
+        this.nameUser = nameUser;
+        this.nameSeller = nameSeller;
         CreatedDate = new Date().getTime();
-        idShop = idshop;
-        ID = id;
-        nameShop = namshop;
-        nameDefault = namedefault;
+
     }
 
-    public String getName() {
-
-        return UserName;
-    }
-    public void setName(String name) {
-        UserName = name;
-    }
-    public String getMessage() {
-        return Message;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setMessage(String message) {
-        Message = message;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
-    public String getAvatar() {
-        return Avatar;
+
+    public String getIdSeller() {
+        return idSeller;
     }
-    public void setAvatar(String avatar) {
-        Avatar = avatar;
+
+    public void setIdSeller(String idSeller) {
+        this.idSeller = idSeller;
+    }
+
+    public String getImgUser() {
+        return imgUser;
+    }
+
+    public void setImgUser(String imgUser) {
+        this.imgUser = imgUser;
+    }
+
+    public String getImgSeller() {
+        return imgSeller;
+    }
+
+    public void setImgSeller(String imgSeller) {
+        this.imgSeller = imgSeller;
+    }
+
+    public String getChatUser() {
+        return chatUser;
+    }
+
+    public void setChatUser(String chatUser) {
+        this.chatUser = chatUser;
+    }
+
+    public String getChatSeller() {
+        return chatSeller;
+    }
+
+    public void setChatSeller(String chatSeller) {
+        this.chatSeller = chatSeller;
     }
 
     public boolean isSender() {
         return IsSender;
     }
+
     public void setSender(boolean sender) {
         IsSender = sender;
+    }
+
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
+    public String getNameSeller() {
+        return nameSeller;
+    }
+
+    public void setNameSeller(String nameSeller) {
+        this.nameSeller = nameSeller;
     }
 
     public long getCreatedDate() {
@@ -69,35 +116,4 @@ public class ChatDetailModel {
         CreatedDate = createdDate;
     }
 
-    public String getIdShop() {
-        return idShop;
-    }
-
-    public void setIdShop(String idShop) {
-        this.idShop = idShop;
-    }
-
-    public String getID() {
-        return ID;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
-    }
-
-    public String getNameShop() {
-        return nameShop;
-    }
-
-    public void setNameShop(String nameShop) {
-        this.nameShop = nameShop;
-    }
-
-    public String getNameDefault() {
-        return nameDefault;
-    }
-
-    public void setNameDefault(String nameDefault) {
-        this.nameDefault = nameDefault;
-    }
 }

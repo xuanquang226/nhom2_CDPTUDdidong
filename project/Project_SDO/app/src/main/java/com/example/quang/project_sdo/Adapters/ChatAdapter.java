@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.quang.project_sdo.ChatDetailActivity;
+import com.example.quang.project_sdo.Models.ChatDetailModel;
 import com.example.quang.project_sdo.Models.ListChatModel;
 import com.example.quang.project_sdo.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,16 +35,15 @@ import java.util.ArrayList;
 public class ChatAdapter extends ArrayAdapter<ListChatModel> {
     AppCompatActivity context;
     int layout;
-    ArrayList<ListChatModel> chatUser;
+    ArrayList<ListChatModel> chatModel;
     private FirebaseAuth mAuth;
-    DatabaseReference root;
-    private ArrayList<ListChatModel> chatModels = new ArrayList<ListChatModel>();
+
 
     public ChatAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ListChatModel> objects) {
         super(context, resource, objects);
         this.context = context;
         this.layout = resource;
-        this.chatUser = objects;
+        this.chatModel = objects;
     }
     public class ViewHolder{
         ImageView ava;
@@ -55,7 +56,6 @@ public class ChatAdapter extends ArrayAdapter<ListChatModel> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         mAuth = FirebaseAuth.getInstance();
-        root = FirebaseDatabase.getInstance().getReference();
 
         final ViewHolder viewHolder;
         if(convertView == null){
@@ -70,44 +70,15 @@ public class ChatAdapter extends ArrayAdapter<ListChatModel> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-
-        root.child("Info chat").limitToLast(2).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                final ListChatModel chatModel = dataSnapshot.getValue(ListChatModel.class);
-                chatModels.add(new ListChatModel(chatModel.name, chatModel.message, chatModel.avatar, chatModel.id, chatModel.idShop,chatModel.nameShop));
-
-                if(mAuth.getCurrentUser().getUid().equalsIgnoreCase(chatModel.idShop)){
-                    Picasso.get().load(chatUser.get(position).getAvatar()).into(viewHolder.ava);
-                    viewHolder.txtNameChat.setText(chatUser.get(position).getName());
-                    viewHolder.txtRecentChat.setText(chatUser.get(position).getMessage());
-                }else if(mAuth.getCurrentUser().getUid().equalsIgnoreCase(chatModel.id)){
-                    Picasso.get().load(chatUser.get(position).getAvatar()).into(viewHolder.ava);
-                    viewHolder.txtNameChat.setText(chatUser.get(position).getNameShop());
-                    viewHolder.txtRecentChat.setText(chatUser.get(position).getMessage());
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
+        if(mAuth.getUid().equalsIgnoreCase(chatModel.get(position).getIdUser())){
+            Picasso.get().load(chatModel.get(position).getImgSeller()).into(viewHolder.ava);
+            viewHolder.txtNameChat.setText(chatModel.get(position).getNameSeller());
+            viewHolder.txtRecentChat.setText(chatModel.get(position).getChatSeller());
+        }else if(mAuth.getUid().equalsIgnoreCase(chatModel.get(position).getIdSeller())){
+            Picasso.get().load(chatModel.get(position).getImgUser()).into(viewHolder.ava);
+            viewHolder.txtNameChat.setText(chatModel.get(position).getNameUser());
+            viewHolder.txtRecentChat.setText(chatModel.get(position).getChatUser());
+        }
         return convertView;
     }
 }
