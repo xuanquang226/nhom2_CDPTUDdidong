@@ -38,7 +38,7 @@ public class ChatDetailActivity extends AppCompatActivity {
     String imgUser, imgSeller, idAccountUser, idAccountSeller;
     EditText edtMess;
 
-    private int nowItem = 5;
+    private int nowItem = 6;
     private int morePerTime = 3;
 
     private FirebaseListAdapter<ChatDetailModel> adapter;
@@ -56,6 +56,8 @@ public class ChatDetailActivity extends AppCompatActivity {
     LinearLayout llChatMess;
     ImageView imgSender;
     ImageView imgReceiver;
+    SwipeRefreshLayout pullToRefresh;
+    ListView lvChat;
 
 
     @Override
@@ -74,8 +76,8 @@ public class ChatDetailActivity extends AppCompatActivity {
 
         edtMess = (EditText) findViewById(R.id.edtInputChat);
         final ImageButton btnSend = (ImageButton) findViewById(R.id.imgSend);
-        final ListView lvChat = (ListView) findViewById(R.id.lvChat);
-        final SwipeRefreshLayout pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.refreshPull);
+        lvChat = (ListView) findViewById(R.id.lvChat);
+        pullToRefresh = (SwipeRefreshLayout) findViewById(R.id.refreshPull);
 
 
         //Get data from intent
@@ -85,7 +87,7 @@ public class ChatDetailActivity extends AppCompatActivity {
 
         adapter = getMessage();
         lvChat.setAdapter(adapter);
-
+        loadItem();
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -119,6 +121,9 @@ public class ChatDetailActivity extends AppCompatActivity {
                 // hide keyboard
                 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 im.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
+                //Load item
+                loadItem();
             }
         });
 
@@ -220,6 +225,9 @@ public class ChatDetailActivity extends AppCompatActivity {
 
                     if (lblMess.getText().equals("")) {
                         lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_empty_style));
+                        llChatMess.setVisibility(View.GONE);
+                        imgSender.setVisibility(View.GONE);
+                        imgReceiver.setVisibility(View.GONE);
                     } else {
                         lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_sender_style));
                     }
@@ -241,6 +249,9 @@ public class ChatDetailActivity extends AppCompatActivity {
 
                     if (lblMess.getText().equals("")) {
                         lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_empty_style));
+                        llChatMess.setVisibility(View.GONE);
+                        imgSender.setVisibility(View.GONE);
+                        imgReceiver.setVisibility(View.GONE);
                     } else {
                         lblMess.setBackground(ContextCompat.getDrawable(ChatDetailActivity.this, R.drawable.chat_receiver_style));
                     }
@@ -367,6 +378,22 @@ public class ChatDetailActivity extends AppCompatActivity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void loadItem(){
+        int scrollX = lvChat.getScrollX();
+        int scrollY = lvChat.getScrollY();
+
+        // set again data
+        adapter = getMessage();
+
+        // set item again
+        lvChat.setAdapter(adapter);
+
+        // scroll
+        lvChat.scrollTo(scrollX, scrollY);
+
+        // stop refreshing
+        pullToRefresh.setRefreshing(false);
     }
 
     @Override
