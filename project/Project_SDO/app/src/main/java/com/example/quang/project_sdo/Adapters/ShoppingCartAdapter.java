@@ -25,6 +25,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
     int layout;
     ArrayList<ShoppingCartModel> listShoppingCart;
     int dem;
+    int soLuong = 0;
 
     public ShoppingCartAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ShoppingCartModel> objects) {
         super(context, resource, objects);
@@ -80,7 +81,17 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
                 int sum = dem * defaultPrice;
                 viewHolder.drugPrice.setText(sum + "");
                 listShoppingCart.get(position).setDrugTextAmount(dem+"");
-
+                if (dem >= 10) {
+                    viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
+                    viewHolder.btnDecrease.setVisibility(View.VISIBLE);
+                }
+                else if (dem <= 1) {
+                    viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
+                }
+                else if (dem >= 1) {
+                    viewHolder.btnDecrease.setVisibility(View.VISIBLE);
+                    viewHolder.btnIncrease.setVisibility(View.VISIBLE);
+                }
 
                 //Log.d("price",viewHolder.drugPrice.get);
             }
@@ -96,8 +107,32 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
                 int sum = dem * defaultPrice;
                 viewHolder.drugPrice.setText(sum + "");
                 listShoppingCart.get(position).setDrugTextAmount(dem+"");
+                if (dem >= 10) {
+                    viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
+                    viewHolder.btnDecrease.setVisibility(View.VISIBLE);
+                }
+                else if (dem <= 1) {
+                    viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
+                }
+                else if (dem >= 1) {
+                    viewHolder.btnDecrease.setVisibility(View.VISIBLE);
+                    viewHolder.btnIncrease.setVisibility(View.VISIBLE);
+                }
             }
         });
+
+        if (dem >= 10) {
+            viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
+            viewHolder.btnDecrease.setVisibility(View.VISIBLE);
+        }
+        else if (dem < 1) {
+            viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
+        }
+        else if (dem >= 1) {
+            viewHolder.btnDecrease.setVisibility(View.VISIBLE);
+            viewHolder.btnIncrease.setVisibility(View.VISIBLE);
+        }
+
 
 
         return convertView;

@@ -85,6 +85,8 @@ public class SellerManagementFragment extends Fragment {
         btnViewStatistics.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),SalesStatisticsActivity.class);
+                startActivity(intent);
 
             }
         });
