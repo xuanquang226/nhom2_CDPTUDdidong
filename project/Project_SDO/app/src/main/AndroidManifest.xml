@@ -26,7 +26,9 @@
         <activity android:name=".CoughActivity" />
         <activity android:name=".StomachActivity" />
         <activity android:name=".HeadacheActivity" />
-        <activity android:name=".ShoppingCartActivity" />
+        <activity android:name=".ShoppingCartActivity" >
+
+        </activity>
         <activity android:name=".ShipperDeliverySchedule" />
         <activity android:name=".ChatDetailActivity" />
         <activity android:name=".SaleStatisticActivity" />
