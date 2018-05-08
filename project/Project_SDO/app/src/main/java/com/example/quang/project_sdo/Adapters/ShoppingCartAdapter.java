@@ -13,21 +13,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.quang.project_sdo.Models.OrderModel;
 import com.example.quang.project_sdo.Models.ShoppingCartModel;
 import com.example.quang.project_sdo.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
+public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
 
     AppCompatActivity context;
     int layout;
-    ArrayList<ShoppingCartModel> listShoppingCart;
+    ArrayList<OrderModel> listShoppingCart;
     int dem;
     int soLuong = 0;
 
-    public ShoppingCartAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<ShoppingCartModel> objects) {
+    public ShoppingCartAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<OrderModel> objects) {
         super(context, resource, objects);
         this.context = context;
         this.layout = resource;
@@ -41,7 +43,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
         ImageView drugImage;
         Button btnDecrease;
         Button btnIncrease;
-
+        TextView txtTotal;
 
     }
 
@@ -61,26 +63,29 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
             viewHolder.drugImage = (ImageView) convertView.findViewById(R.id.imgShoppingCartDrug);
             viewHolder.btnDecrease = (Button) convertView.findViewById(R.id.btnDecrease);
             viewHolder.btnIncrease = (Button) convertView.findViewById(R.id.btnIncrease);
+            viewHolder.txtTotal = (TextView) convertView.findViewById(R.id.txtTotal);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.drugName.setText(listShoppingCart.get(position).getDrugName());
-        viewHolder.drugPrice.setText(Integer.toString(listShoppingCart.get(position).getDrugPrice()));
-        viewHolder.drugAmount.setText(listShoppingCart.get(position).getDrugTextAmount());
-        viewHolder.drugImage.setImageResource(listShoppingCart.get(position).getDrugImage());
+        viewHolder.drugName.setText(listShoppingCart.get(position).getTen());
+        viewHolder.drugPrice.setText(Integer.toString(listShoppingCart.get(position).getGia()));
+        viewHolder.drugAmount.setText(Integer.toString(listShoppingCart.get(position).getSoLuong()));
+
+        Picasso.get().load(listShoppingCart.get(position).getHinh()).into(viewHolder.drugImage);
+
 
 
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dem = Integer.parseInt(listShoppingCart.get(position).getDrugTextAmount());
+                dem = listShoppingCart.get(position).getSoLuong();
                 dem++;
                 viewHolder.drugAmount.setText(Integer.toString(dem));
-                int defaultPrice = (Integer.parseInt(listShoppingCart.get(position).getDrugPrice().toString()));
+                int defaultPrice = listShoppingCart.get(position).getGia();
                 int sum = dem * defaultPrice;
                 viewHolder.drugPrice.setText(sum + "");
-                listShoppingCart.get(position).setDrugTextAmount(dem+"");
+                listShoppingCart.get(position).setSoLuong(dem);
                 if (dem >= 10) {
                     viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
                     viewHolder.btnDecrease.setVisibility(View.VISIBLE);
@@ -100,13 +105,13 @@ public class ShoppingCartAdapter extends ArrayAdapter<ShoppingCartModel> {
         viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dem = Integer.parseInt(listShoppingCart.get(position).getDrugTextAmount());
+                dem =listShoppingCart.get(position).getSoLuong();
                 dem--;
                 viewHolder.drugAmount.setText(Integer.toString(dem));
-                int defaultPrice = (Integer.parseInt(listShoppingCart.get(position).getDrugPrice().toString()));
+                int defaultPrice = listShoppingCart.get(position).getGia();
                 int sum = dem * defaultPrice;
                 viewHolder.drugPrice.setText(sum + "");
-                listShoppingCart.get(position).setDrugTextAmount(dem+"");
+                listShoppingCart.get(position).setSoLuong(dem);
                 if (dem >= 10) {
                     viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
                     viewHolder.btnDecrease.setVisibility(View.VISIBLE);

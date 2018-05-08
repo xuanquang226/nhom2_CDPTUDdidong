@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.quang.project_sdo.Models.OrderModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,7 +28,8 @@ public class DrugDetailActivity extends AppCompatActivity {
     private ActionBar actionBar;
     String idShop, tenshopA;
     FirebaseAuth mAuth;
-    DatabaseReference root;
+    DatabaseReference root, rootOrder;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class DrugDetailActivity extends AppCompatActivity {
         //Process
         if (getIntent() != null && getIntent().getBundleExtra("data") != null) {
             Intent intent = getIntent();
-            Bundle bundle = intent.getBundleExtra("data");
+             bundle = intent.getBundleExtra("data");
             txtCongDung.setText(bundle.getString("congdung"));
             txtNguonGoc.setText(bundle.getString("nguongoc"));
             txtMota.setText(bundle.getString("mota"));
@@ -73,6 +75,14 @@ public class DrugDetailActivity extends AppCompatActivity {
 
                 getmImage();
 
+            }
+        });
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDrug();
+                Toast.makeText(DrugDetailActivity.this,"Qua Giỏ Hàng Để Đặt Mua Sản Phẩm",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -120,4 +130,12 @@ public class DrugDetailActivity extends AppCompatActivity {
             Toast.makeText(DrugDetailActivity.this, "Bạn cần đăng nhập để chat", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public void getDrug() {
+        rootOrder = FirebaseDatabase.getInstance().getReference("Order");
+        String idRandom = FirebaseDatabase.getInstance().getReference().push().getKey();
+        int soLuong = 1;
+        rootOrder.child(mAuth.getUid()).child(idRandom).setValue(new OrderModel(bundle.getString("tenThuoc"),bundle.getString("hinhanh"),Integer.parseInt(txtGia.getText().toString()),soLuong));
+    }
+
 }

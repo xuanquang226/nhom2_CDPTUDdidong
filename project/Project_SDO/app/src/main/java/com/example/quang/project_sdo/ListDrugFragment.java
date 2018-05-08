@@ -87,6 +87,7 @@ public class ListDrugFragment extends Fragment {
                         bundle.putString("gia", listDrug.get(i).gia);
                         bundle.putString("tenshop", listDrug.get(i).tenshop);
                         bundle.putString("idShop", listDrug.get(i).idShop);
+                        bundle.putString("tenThuoc",listDrug.get(i).tenthuoc);
                         Intent intent = new Intent(getActivity(), DrugDetailActivity.class);
                         intent.putExtra("data", bundle);
                         startActivity(intent);
