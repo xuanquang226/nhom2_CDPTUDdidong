@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,12 +43,14 @@ public class ShoppingCartActivity extends AppCompatActivity {
     int sum = 0;
     DatabaseReference root;
     FirebaseAuth mAuth;
+    int i;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.shopping_cart_layout);
+        root = FirebaseDatabase.getInstance().getReference("Order");
         mAuth = FirebaseAuth.getInstance();
         actionBar = getSupportActionBar();
         actionBar.setTitle("Shopping Cart");
@@ -61,9 +65,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
         txtGiaCaA = (TextView) findViewById(R.id.priceA);
         //ListView
         listView = (ListView) findViewById(R.id.lvShoppingCart);
-
-
-
 
 
         loadData();
@@ -90,12 +91,56 @@ public class ShoppingCartActivity extends AppCompatActivity {
             case android.R.id.home:
                 onBackPressed();
                 return true;
+            case R.id.delete_item:
+                delete();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public void delete() {
+
+        root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String idRandom = FirebaseDatabase.getInstance().getReference().push().getKey();
+                OrderModel orderModelA = dataSnapshot.getValue(OrderModel.class);
+                listShopping.add(orderModelA);
+                for (i = 0; i < listShopping.size(); i++) {
+                    if (listShopping.get(i).isChecked()) {
+                        listShopping.remove(i);
+                        --i;
+                        adapter.notifyDataSetChanged();
+                        root.child(mAuth.getUid()).setValue(null);
+                        listShopping.add(orderModelA);
+                        root.child(mAuth.getUid()).child(idRandom).setValue(orderModelA);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void loadData() {
-        root = FirebaseDatabase.getInstance().getReference("Order");
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -127,4 +172,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.delete_cart_item, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
 }

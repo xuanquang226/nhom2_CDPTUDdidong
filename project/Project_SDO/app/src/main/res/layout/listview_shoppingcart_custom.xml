@@ -74,6 +74,13 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:textColor="@color/trang" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/chkSelected"
+
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -114,35 +121,7 @@
     </LinearLayout>
 
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tổng Tiền: "
-            android:textStyle="bold"
-            android:textSize="20dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="100"
-            android:textStyle="bold"
-            android:textSize="20dp"
-            android:id="@+id/txtTotal"
-            />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Đ "
-            android:textStyle="bold"
-            android:textSize="20dp"
-            />
-    </LinearLayout>
 
 
 

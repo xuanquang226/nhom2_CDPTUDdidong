@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -44,6 +45,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         Button btnDecrease;
         Button btnIncrease;
         TextView txtTotal;
+        CheckBox chkSelected;
 
     }
 
@@ -64,6 +66,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
             viewHolder.btnDecrease = (Button) convertView.findViewById(R.id.btnDecrease);
             viewHolder.btnIncrease = (Button) convertView.findViewById(R.id.btnIncrease);
             viewHolder.txtTotal = (TextView) convertView.findViewById(R.id.txtTotal);
+            viewHolder.chkSelected = (CheckBox) convertView.findViewById(R.id.chkSelected);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
@@ -73,7 +76,6 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         viewHolder.drugAmount.setText(Integer.toString(listShoppingCart.get(position).getSoLuong()));
 
         Picasso.get().load(listShoppingCart.get(position).getHinh()).into(viewHolder.drugImage);
-
 
 
         viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
@@ -89,11 +91,9 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                 if (dem >= 10) {
                     viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
                     viewHolder.btnDecrease.setVisibility(View.VISIBLE);
-                }
-                else if (dem <= 1) {
+                } else if (dem <= 1) {
                     viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
-                }
-                else if (dem >= 1) {
+                } else if (dem >= 1) {
                     viewHolder.btnDecrease.setVisibility(View.VISIBLE);
                     viewHolder.btnIncrease.setVisibility(View.VISIBLE);
                 }
@@ -105,7 +105,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dem =listShoppingCart.get(position).getSoLuong();
+                dem = listShoppingCart.get(position).getSoLuong();
                 dem--;
                 viewHolder.drugAmount.setText(Integer.toString(dem));
                 int defaultPrice = listShoppingCart.get(position).getGia();
@@ -115,11 +115,9 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                 if (dem >= 10) {
                     viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
                     viewHolder.btnDecrease.setVisibility(View.VISIBLE);
-                }
-                else if (dem <= 1) {
+                } else if (dem <= 1) {
                     viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
-                }
-                else if (dem >= 1) {
+                } else if (dem >= 1) {
                     viewHolder.btnDecrease.setVisibility(View.VISIBLE);
                     viewHolder.btnIncrease.setVisibility(View.VISIBLE);
                 }
@@ -129,17 +127,29 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         if (dem >= 10) {
             viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
             viewHolder.btnDecrease.setVisibility(View.VISIBLE);
-        }
-        else if (dem < 1) {
+        } else if (dem < 1) {
             viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
-        }
-        else if (dem >= 1) {
+        } else if (dem >= 1) {
             viewHolder.btnDecrease.setVisibility(View.VISIBLE);
             viewHolder.btnIncrease.setVisibility(View.VISIBLE);
         }
 
+        if (listShoppingCart.get(position).isChecked()) {
+            viewHolder.chkSelected.setChecked(true);
+        } else {
+            viewHolder.chkSelected.setChecked(false);
+        }
 
-
+        viewHolder.chkSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (viewHolder.chkSelected.isChecked()) {
+                    listShoppingCart.get(position).setChecked(true);
+                } else {
+                    listShoppingCart.get(position).setChecked(false);
+                }
+            }
+        });
         return convertView;
     }
 

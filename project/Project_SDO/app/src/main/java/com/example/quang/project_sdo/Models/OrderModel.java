@@ -7,6 +7,7 @@ public class OrderModel {
     public String ten, hinh;
     public int gia, soLuong;
     public long time;
+    public boolean isChecked;
 
 
 
@@ -19,6 +20,7 @@ public class OrderModel {
         this.gia = gia;
         this.soLuong = soLuong;
         this.time = new Date().getTime();
+        this.isChecked = false;
     }
 
     public String getTen() {
@@ -59,5 +61,13 @@ public class OrderModel {
 
     public void setTime(long time) {
         this.time = time;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }
