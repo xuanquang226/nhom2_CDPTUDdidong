@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.quang.project_sdo">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -26,15 +26,13 @@
         <activity android:name=".CoughActivity" />
         <activity android:name=".StomachActivity" />
         <activity android:name=".HeadacheActivity" />
-        <activity android:name=".ShoppingCartActivity" >
-
-        </activity>
+        <activity android:name=".ShoppingCartActivity"></activity>
         <activity android:name=".ShipperDeliverySchedule" />
         <activity android:name=".ChatDetailActivity" />
         <activity android:name=".SaleStatisticActivity" />
-        <activity android:name=".PaymentActivity" />
         <activity android:name=".DrugDetailActivity" />
         <activity android:name=".CarrierDeliverySchedule" />
+        <activity android:name=".PaymentConfirmActivity"></activity>
     </application>
 
 </manifest>

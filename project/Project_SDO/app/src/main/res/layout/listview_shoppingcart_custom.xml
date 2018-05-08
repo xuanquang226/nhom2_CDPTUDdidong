@@ -87,7 +87,7 @@
                 android:id="@+id/btnDecrease"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@color/trang"
+                android:background="@color/backgroundButton"
 
                 android:drawableRight="@drawable/minus_circle" />
 
@@ -105,10 +105,9 @@
 
             <Button
                 android:id="@+id/btnIncrease"
-
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@color/trang"
+                android:background="@color/backgroundButton"
                 android:drawableLeft="@drawable/plus" />
         </LinearLayout>
 

@@ -9,4 +9,5 @@
     <color name="colorXam">#FF737171</color>
     <color name="trang">#FFFFFFFF</color>
     <color name="colorXanhBien">#FF1149A3</color>
+    <color name="backgroundButton">#EEEEEE</color>
 </resources>
