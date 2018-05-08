@@ -1,9 +1,12 @@
 package com.example.quang.project_sdo.Models;
 
+import java.util.Date;
+
 public class OrderModel {
 
     public String ten, hinh;
     public int gia, soLuong;
+    public long time;
 
 
 
@@ -15,6 +18,7 @@ public class OrderModel {
         this.hinh = hinh;
         this.gia = gia;
         this.soLuong = soLuong;
+        this.time = new Date().getTime();
     }
 
     public String getTen() {
@@ -49,5 +53,11 @@ public class OrderModel {
         this.soLuong = soLuong;
     }
 
+    public long getTime() {
+        return time;
+    }
 
+    public void setTime(long time) {
+        this.time = time;
+    }
 }
