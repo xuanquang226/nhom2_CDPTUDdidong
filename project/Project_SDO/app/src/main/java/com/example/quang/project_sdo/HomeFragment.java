@@ -122,27 +122,9 @@ public class HomeFragment extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.d("ABC", newText);
 
                 newText = newText.toLowerCase(Locale.getDefault());
-//                searchDrug.clear();
-//                if(newText.length() == 0)
-//                {
-//                    searchDrug.addAll(listHomeDrug);
 //
-//
-//                }else
-//                {
-//                    for (ListDrugForHomeModel listDrugForHomeModel  : listHomeDrug)
-//                    {
-//                        if (listDrugForHomeModel.getDrugName().toLowerCase(Locale.getDefault()).contains(newText)){
-//                            searchDrug.add(listDrugForHomeModel);
-//                        }
-//                    }
-//                }
-//                searchArray = new HomeListDrugAdapter((AppCompatActivity) getActivity(),R.layout.listview_home_custom,searchDrug);
-//                listView.setAdapter(adapter);
-
                 if (newText != null && !newText.isEmpty()) {
                     ArrayList<ListDrugForHomeModel> listFound = new ArrayList<ListDrugForHomeModel>();
                     for (ListDrugForHomeModel item : listHomeDrug) {

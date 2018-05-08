@@ -1,6 +1,7 @@
 package com.example.quang.project_sdo;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
@@ -58,6 +59,8 @@ public class ChatDetailActivity extends AppCompatActivity {
     ImageView imgReceiver;
     SwipeRefreshLayout pullToRefresh;
     ListView lvChat;
+    Handler setDelay;
+    Runnable startDelay;
 
 
     @Override
@@ -73,7 +76,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-
+        setDelay = new Handler();
         edtMess = (EditText) findViewById(R.id.edtInputChat);
         final ImageButton btnSend = (ImageButton) findViewById(R.id.imgSend);
         lvChat = (ListView) findViewById(R.id.lvChat);
@@ -84,7 +87,6 @@ public class ChatDetailActivity extends AppCompatActivity {
 
         getDataForNameSellerI();
         getDataForNameSellerA();
-
         adapter = getMessage();
         lvChat.setAdapter(adapter);
         loadItem();
@@ -134,17 +136,27 @@ public class ChatDetailActivity extends AppCompatActivity {
         return new FirebaseListAdapter<ChatDetailModel>(ChatDetailActivity.this, ChatDetailModel.class, R.layout.chat_detail_custom_layout, FirebaseDatabase.getInstance().getReferenceFromUrl("https://projectsdo-9812e.firebaseio.com/Info chat").orderByKey().limitToLast(nowItem)) {
             @Override
             protected void populateView(View v, final ChatDetailModel model, int position) {
-                TextView lblName = (TextView) v.findViewById(R.id.lblName);
+                final TextView lblName = (TextView) v.findViewById(R.id.lblName);
                 lblMess = (TextView) v.findViewById(R.id.lblMess);
-                TextView lblDate = (TextView) v.findViewById(R.id.lblDate);
+                final TextView lblDate = (TextView) v.findViewById(R.id.lblDate);
                 imgReceiver = (ImageView) v.findViewById(R.id.imgReceiver);
                 imgSender = (ImageView) v.findViewById(R.id.imgSender);
                 llChatMess = (LinearLayout) v.findViewById(R.id.llChatMess);
 
+
+                //Delay
+
+                setDelay.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+                },5000);
+
+
                 // check if this is a receiver or not
 
                 // set data
-
                 if (getIDSellerI != null) {
                     if ((mAuth.getUid().equalsIgnoreCase(model.getIdUser()) && (getIDSellerI.equalsIgnoreCase(model.getIdSeller())))) {
                         if (model.getNameUser().equalsIgnoreCase(UserName) && !model.getChatUser().equalsIgnoreCase("")) {
@@ -210,6 +222,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                         }
                     }
                 }
+
 
                 if (model.isSender())
 
@@ -301,8 +314,6 @@ public class ChatDetailActivity extends AppCompatActivity {
                 } else {
                     idAccountUser = dataSnapshot.child(mAuth.getUid()).child("id").getValue().toString();
                     idAccountSeller = dataSnapshot.child(getIDSellerA).child("id").getValue().toString();
-
-
                     if (mAuth.getUid().equalsIgnoreCase(idAccountUser)) {
                         imgUser = dataSnapshot.child(idAccountUser).child("linkhinh").getValue().toString();
                         getIDUser = dataSnapshot.child(idAccountUser).child("id").getValue().toString();
@@ -404,5 +415,9 @@ public class ChatDetailActivity extends AppCompatActivity {
             onBackPressed();
             Toast.makeText(ChatDetailActivity.this, "Không thể tự chat với mình được", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void deLay(){
+
     }
 }
