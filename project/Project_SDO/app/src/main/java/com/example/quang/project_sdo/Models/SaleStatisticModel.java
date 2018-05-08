@@ -1,9 +1,10 @@
 package com.example.quang.project_sdo.Models;
 
 public class SaleStatisticModel {
-    public String drugName,drugImage, drugPrice, drugDate, drugAmount;
+    public String drugName,drugImage, drugPrice, drugAmount;
+    public long drugDate;
 
-    public SaleStatisticModel(String drugName, String drugImage, String drugPrice, String drugDate,String drugAmount) {
+    public SaleStatisticModel(String drugName, String drugImage, String drugPrice,String drugAmount) {
         this.drugName = drugName;
         this.drugImage = drugImage;
         this.drugPrice = drugPrice;
@@ -35,11 +36,11 @@ public class SaleStatisticModel {
         this.drugPrice = drugPrice;
     }
 
-    public String getDrugDate() {
+    public long getDrugDate() {
         return drugDate;
     }
 
-    public void setDrugDate(String drugDate) {
+    public void setDrugDate(long drugDate) {
         this.drugDate = drugDate;
     }
 

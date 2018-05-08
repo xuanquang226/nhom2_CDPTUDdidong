@@ -1,13 +1,113 @@
 package com.example.quang.project_sdo;
 
+import android.content.Intent;
+import android.media.Image;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
+import com.example.quang.project_sdo.Adapters.SaleStatisticAdapter;
+import com.example.quang.project_sdo.Adapters.ShoppingCartAdapter;
+import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
+import com.example.quang.project_sdo.Models.OrderModel;
+import com.example.quang.project_sdo.Models.SaleStatisticModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
+
+import java.text.DateFormat;
+import java.util.ArrayList;
 
 public class SaleStatisticActivity extends AppCompatActivity {
-
+    ActionBar actionBar;
+    ListView listView;
+    ArrayList<SaleStatisticModel> listSale = new ArrayList<SaleStatisticModel>();
+    SaleStatisticAdapter adapter;
+    TextView txtSoLuong, txtGia, txtTen, txtDate;
+    ImageView imgDrug;
+    DatabaseReference root;
+    FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sale_statistic_layout);
+        actionBar = getSupportActionBar();
+        actionBar.setTitle("View Statistic");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        txtTen = (TextView) findViewById(R.id.txtNameDrugSale);
+        txtSoLuong = (TextView) findViewById(R.id.txtAmount);
+        txtGia = (TextView) findViewById(R.id.txtGiaSale);
+        txtDate = (TextView) findViewById(R.id.txtpostDate);
+        txtTen = (TextView) findViewById(R.id.txtNameDrugSale);
+        imgDrug = (ImageView) findViewById(R.id.imgDrug);
+
+        //Ini firebase
+        mAuth = FirebaseAuth.getInstance();
+        root = FirebaseDatabase.getInstance().getReference("Drug");
+
+
+        //ListView
+        listView = (ListView) findViewById(R.id.lsvsaleSta);
+        adapter = new SaleStatisticAdapter(SaleStatisticActivity.this, R.layout.listview_salestatistic_custom, listSale);
+        listView.setAdapter(adapter);
+        loadData();
+    }
+
+    public void loadData() {
+        root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                final SaleStatisticModel data = dataSnapshot.getValue(SaleStatisticModel.class);
+                listSale.add(new SaleStatisticModel(data.drugName, data.drugAmount, data.drugImage, data.drugPrice));
+                adapter.notifyDataSetChanged();
+                txtDate.setText(android.text.format.DateFormat.format("dd/MM/yy hh:mm", data.getDrugDate()));
+                Picasso.get().load(data.getDrugImage()).into(imgDrug);
+                txtGia.setText(data.getDrugPrice());
+                txtSoLuong.setText(data.getDrugAmount());
+                txtTen.setText(data.getDrugName());
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
