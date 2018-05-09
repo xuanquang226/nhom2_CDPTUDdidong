@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -36,14 +37,17 @@ public class ShoppingCartActivity extends AppCompatActivity {
     ActionBar actionBar;
     ListView listView;
     ArrayList<OrderModel> listShopping = new ArrayList<OrderModel>();
+    ArrayList<String> keys = new ArrayList<String>();
     ShoppingCartAdapter adapter;
     Button btnContinue, btnOrder, btnIncrease, btnDecrease;
-    TextView txtSoLuong, txtGiaCa, txtGiaCaA;
+    TextView txtSoLuong, txtGiaCa, txtGiaCaA, txtTotal;
     int dem = 0;
     int sum = 0;
     DatabaseReference root;
     FirebaseAuth mAuth;
-    int i;
+    int i, total;
+    OrderModel orderModel;
+
 
 
     @Override
@@ -63,6 +67,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
         txtSoLuong = (TextView) findViewById(R.id.txtPriceShoppingCart);
         txtGiaCa = (TextView) findViewById(R.id.txtShoppingCartPrice);
         txtGiaCaA = (TextView) findViewById(R.id.priceA);
+        txtTotal = (TextView) findViewById(R.id.txtTotal);
         //ListView
         listView = (ListView) findViewById(R.id.lvShoppingCart);
 
@@ -99,33 +104,39 @@ public class ShoppingCartActivity extends AppCompatActivity {
     }
 
     public void delete() {
-
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String idRandom = FirebaseDatabase.getInstance().getReference().push().getKey();
-                OrderModel orderModelA = dataSnapshot.getValue(OrderModel.class);
-                listShopping.add(orderModelA);
+                String key = dataSnapshot.getKey().toString();
+                keys.add(key);
                 for (i = 0; i < listShopping.size(); i++) {
-                    if (listShopping.get(i).isChecked()) {
-                        listShopping.remove(i);
-                        --i;
-                        adapter.notifyDataSetChanged();
-                        root.child(mAuth.getUid()).setValue(null);
-                        listShopping.add(orderModelA);
-                        root.child(mAuth.getUid()).child(idRandom).setValue(orderModelA);
+                    for(int j = 0; j < keys.size(); j++){
+                        if(!listShopping.get(i).getKey().equals(null) && !keys.get(j).equals(null)){
+                            if (listShopping.get(i).isChecked() && listShopping.get(i).getKey().equals(keys.get(j))) {
+                                listShopping.remove(i);
+                                root.child(mAuth.getUid()).child(keys.get(i)).setValue(null);
+                                keys.remove(j);
+                                --i;
+                                --j;
+                                adapter.notifyDataSetChanged();
+                            }else{
+
+                            }
+                        }else{
+                            Toast.makeText(ShoppingCartActivity.this,"Giỏ hàng rỗng",Toast.LENGTH_SHORT).show();
+                        }
                     }
                 }
+
+
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
             }
 
             @Override
@@ -138,17 +149,32 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     public void loadData() {
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                OrderModel orderModel = dataSnapshot.getValue(OrderModel.class);
+                orderModel = dataSnapshot.getValue(OrderModel.class);
                 listShopping.add(orderModel);
                 adapter = new ShoppingCartAdapter(ShoppingCartActivity.this, R.layout.listview_shoppingcart_custom, listShopping);
                 listView.setAdapter(adapter);
-                //Toast.makeText(ShoppingCartActivity.this,orderModel.ten,Toast.LENGTH_SHORT).show();
+
+                //set total price textview
+                for (i = 0; i < listShopping.size(); i++) {
+                    if (!listShopping.get(i).isChecked()) {
+                        total += listShopping.get(i).getGia();
+                        Log.d("AAAA",total +"");
+                        txtTotal.setText(total+"");
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(ShoppingCartActivity.this,"AAA",Toast.LENGTH_SHORT);
+                    }
+
+                }
+
+
             }
 
             @Override

@@ -135,7 +135,7 @@ public class DrugDetailActivity extends AppCompatActivity {
         rootOrder = FirebaseDatabase.getInstance().getReference("Order");
         String idRandom = FirebaseDatabase.getInstance().getReference().push().getKey();
         int soLuong = 1;
-        rootOrder.child(mAuth.getUid()).child(idRandom).setValue(new OrderModel(bundle.getString("tenThuoc"),bundle.getString("hinhanh"),Integer.parseInt(txtGia.getText().toString()),soLuong));
+        rootOrder.child(mAuth.getUid()).child(idRandom).setValue(new OrderModel(bundle.getString("tenThuoc"),bundle.getString("hinhanh"),Integer.parseInt(txtGia.getText().toString()),soLuong,idRandom));
     }
 
 }
