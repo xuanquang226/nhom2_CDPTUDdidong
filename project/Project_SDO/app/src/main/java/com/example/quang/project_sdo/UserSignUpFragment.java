@@ -37,7 +37,7 @@ public class UserSignUpFragment extends Fragment {
     private FirebaseAuth mAuth;
     DatabaseReference root;
 
-
+    //a
     public UserSignUpFragment() {
         // Required empty public constructor
     }
