@@ -8,19 +8,21 @@ public class OrderModel {
     public int gia, soLuong;
     public long time;
     public boolean isChecked;
+    public String key;
 
 
 
     public OrderModel() {
     }
 
-    public OrderModel(String ten, String hinh, int gia, int soLuong) {
+    public OrderModel(String ten, String hinh, int gia, int soLuong,String key) {
         this.ten = ten;
         this.hinh = hinh;
         this.gia = gia;
         this.soLuong = soLuong;
         this.time = new Date().getTime();
         this.isChecked = false;
+        this.key = key;
     }
 
     public String getTen() {
@@ -69,5 +71,13 @@ public class OrderModel {
 
     public void setChecked(boolean checked) {
         isChecked = checked;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
 }
