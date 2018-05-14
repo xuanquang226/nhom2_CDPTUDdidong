@@ -5,6 +5,7 @@ import android.media.Image;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
 import com.example.quang.project_sdo.Adapters.SaleStatisticAdapter;
 import com.example.quang.project_sdo.Adapters.ShoppingCartAdapter;
+import com.example.quang.project_sdo.Models.EnterDrugModel;
 import com.example.quang.project_sdo.Models.ListDrugForHomeModel;
 import com.example.quang.project_sdo.Models.OrderModel;
 import com.example.quang.project_sdo.Models.SaleStatisticModel;
@@ -33,12 +35,13 @@ import java.util.ArrayList;
 public class SaleStatisticActivity extends AppCompatActivity {
     ActionBar actionBar;
     ListView listView;
-    ArrayList<SaleStatisticModel> listSale = new ArrayList<SaleStatisticModel>();
+    ArrayList<EnterDrugModel> listSale = new ArrayList<EnterDrugModel>();
     SaleStatisticAdapter adapter;
     TextView txtSoLuong, txtGia, txtTen, txtDate;
     ImageView imgDrug;
     DatabaseReference root;
     FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,23 +63,23 @@ public class SaleStatisticActivity extends AppCompatActivity {
 
         //ListView
         listView = (ListView) findViewById(R.id.lsvsaleSta);
-        adapter = new SaleStatisticAdapter(SaleStatisticActivity.this, R.layout.listview_salestatistic_custom, listSale);
-        listView.setAdapter(adapter);
+
         loadData();
     }
 
     public void loadData() {
-        root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
+        root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                final SaleStatisticModel data = dataSnapshot.getValue(SaleStatisticModel.class);
-                listSale.add(new SaleStatisticModel(data.drugName, data.drugAmount, data.drugImage, data.drugPrice));
-                adapter.notifyDataSetChanged();
-                txtDate.setText(android.text.format.DateFormat.format("dd/MM/yy hh:mm", data.getDrugDate()));
-                Picasso.get().load(data.getDrugImage()).into(imgDrug);
-                txtGia.setText(data.getDrugPrice());
-                txtSoLuong.setText(data.getDrugAmount());
-                txtTen.setText(data.getDrugName());
+                final EnterDrugModel data = dataSnapshot.getValue(EnterDrugModel.class);
+                if(mAuth.getUid().equalsIgnoreCase(data.idShop)) {
+                    listSale.add(new EnterDrugModel(data.tenthuoc, data.congdung, data.gia, data.nguongoc, data.mota, data.soluong, data.linkhinh, data.tenshop, data.id, data.idShop));
+                    adapter = new SaleStatisticAdapter(SaleStatisticActivity.this, R.layout.listview_salestatistic_custom, listSale);
+                    Log.d("aaaa", data.getTenthuoc());
+
+                    listView.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -101,6 +104,7 @@ public class SaleStatisticActivity extends AppCompatActivity {
         });
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
