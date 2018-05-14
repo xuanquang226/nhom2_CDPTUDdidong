@@ -11,9 +11,9 @@
         android:layout_weight="3">
 
         <ImageView
-            android:id="@+id/imgDrug"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/imgDrugSale"
+            android:layout_width="150dp"
+            android:layout_height="120dp"
             android:src="@drawable/img_cefixim" />
     </LinearLayout>
 
@@ -22,12 +22,12 @@
         android:layout_height="120dp"
         android:layout_weight="2"
         android:orientation="vertical"
-        android:paddingLeft="5dp">
+        android:layout_marginLeft="5dp">
 
         <TextView
             android:id="@+id/txtNameDrugSale"
             style="@style/Txt"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/listviewdrug"
             android:textColor="@color/colorDen"
@@ -50,7 +50,7 @@
                 style="@style/paddingLeft"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/gia"
                 android:textColor="@color/colorDo"
                 android:textStyle="bold" />
@@ -95,13 +95,12 @@
 
         <ImageButton
             android:id="@+id/imgShopCart"
-            style="@style/paddingRight"
+            android:layout_gravity="right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/trang"
             android:paddingTop="20dp"
             android:src="@drawable/cart" />
-
 
 
 

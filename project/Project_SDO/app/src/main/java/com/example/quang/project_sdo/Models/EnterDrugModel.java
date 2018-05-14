@@ -1,11 +1,14 @@
 package com.example.quang.project_sdo.Models;
 
+import java.util.Date;
+
 /**
  * Created by Trang on 4/24/2018.
  */
 
 public class EnterDrugModel {
     public String tenthuoc, congdung, gia, nguongoc, mota, soluong, linkhinh, tenshop,id,idShop;
+    public long date;
 
     public EnterDrugModel() {
     }
@@ -21,6 +24,7 @@ public class EnterDrugModel {
         this.tenshop = tenshop;
         this.id = id;
         this.idShop = idShop;
+        this.date = new Date().getTime();
     }
 
     public String getIdShop() {
@@ -101,6 +105,14 @@ public class EnterDrugModel {
 
     public void setTenshop(String tenshop) {
         this.tenshop = tenshop;
+    }
+
+    public long getDate() {
+        return date;
+    }
+
+    public void setDate(long date) {
+        this.date = date;
     }
 }
 
