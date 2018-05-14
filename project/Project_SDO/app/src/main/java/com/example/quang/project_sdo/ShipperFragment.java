@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,7 +111,9 @@ public class ShipperFragment extends Fragment {
                 dialoga.setTitle("Edit profile");
 
                 txtUserNameD = (TextView) dialoga.findViewById(R.id.txtusernameD);
+                txtUserNameD.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS | InputType.TYPE_CLASS_TEXT);
                 txtSDTD = (TextView) dialoga.findViewById(R.id.txtsdtD);
+                txtSDTD.setInputType(InputType.TYPE_CLASS_PHONE);
                 txtAddressD = (TextView) dialoga.findViewById(R.id.txtaddressD);
                 txtCodeBD = (TextView) dialoga.findViewById(R.id.txtCMNDD);
                 btnOk = (Button) dialoga.findViewById(R.id.btnConfirmEdit);

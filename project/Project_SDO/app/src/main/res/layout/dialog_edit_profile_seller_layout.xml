@@ -23,7 +23,8 @@
             android:layout_height="wrap_content"
             android:text="Nguyễn Văn A"
             android:textColor="@color/colorDen"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:maxLength="35"/>
 
         <EditText
             android:id="@+id/txtsdtD"
@@ -33,16 +34,18 @@
             android:text="096988xxx"
             android:textColor="@color/colorDo"
             android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:maxLength="12" />
         <EditText
             android:id="@+id/txtCMNDD"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
-            android:text="096988xxx"
+            android:text="Tên Hãng"
             android:textColor="@color/colorDo"
             android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:maxLength="50"/>
 
         <EditText
             android:id="@+id/txtaddressD"
@@ -52,7 +55,8 @@
             android:text="74/x/x Ðường 6, Linh đông, quận Thủ Đức"
             android:textColor="@color/colorXanhBien"
             android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:maxLength="50"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
