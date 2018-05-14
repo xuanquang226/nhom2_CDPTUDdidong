@@ -94,9 +94,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // get now scroll
-                int scrollX = lvChat.getScrollX();
-                int scrollY = lvChat.getScrollY();
+
                 // increase item to get
                 nowItem = nowItem + morePerTime;
 
@@ -105,9 +103,6 @@ public class ChatDetailActivity extends AppCompatActivity {
 
                 // set item again
                 lvChat.setAdapter(adapter);
-
-                // scroll
-                lvChat.scrollTo(scrollX, scrollY);
 
                 // stop refreshing
                 pullToRefresh.setRefreshing(false);
@@ -122,7 +117,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 getLinkImage();
                 // hide keyboard
                 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                im.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                im.hideSoftInputFromInputMethod(getCurrentFocus().getWindowToken(),0);
 
                 //Load item
                 loadItem();

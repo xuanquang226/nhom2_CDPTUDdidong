@@ -68,31 +68,27 @@ public class ChatFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (mAuth.getCurrentUser() != null) {
+
                     final ListChatModel chatModel = dataSnapshot.getValue(ListChatModel.class);
-                    chatModels.add(new ListChatModel(chatModel.idUser, chatModel.idSeller, chatModel.imgUser, chatModel.imgSeller, chatModel.chatUser, chatModel.chatSeller, chatModel.nameUser, chatModel.nameSeller));
-                    if (mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser())) {
+                    if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser())) || (mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller()))) {
+                        chatModels.add(new ListChatModel(chatModel.idUser, chatModel.idSeller, chatModel.imgUser, chatModel.imgSeller, chatModel.chatUser, chatModel.chatSeller, chatModel.nameUser, chatModel.nameSeller));
+                        adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
                         for (int x = 0; x < chatModels.size() - 1; x++) {
                             for (int y = 1; y < chatModels.size(); y++) {
-                                if (chatModels.get(x).getNameSeller().equalsIgnoreCase(chatModels.get(y).getNameSeller())) {
-                                    chatModels.remove(y);
-                                    --x;
-                                    --y;
-                                    adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
-                                    listView.setAdapter(adapter);
-                                    adapter.notifyDataSetChanged();
-                                }
-                            }
-                        }
-                    }else if (mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller())){
-                        for (int x = 0; x < chatModels.size() - 1; x++) {
-                            for (int y = 1; y < chatModels.size(); y++) {
-                                if (chatModels.get(x).getNameUser().equalsIgnoreCase(chatModels.get(y).getNameUser())) {
-                                    chatModels.remove(y);
-                                    --x;
-                                    --y;
-                                    adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
-                                    listView.setAdapter(adapter);
-                                    adapter.notifyDataSetChanged();
+                                if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser()))) {
+                                    if (chatModels.get(x).getNameSeller().equalsIgnoreCase(chatModels.get(y).getNameSeller())) {
+                                        chatModels.remove(y);
+                                        --x;
+                                        --y;
+                                        listView.setAdapter(adapter);
+                                    }
+                                } else if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller()))) {
+                                    if (chatModels.get(x).getNameUser().equalsIgnoreCase(chatModels.get(y).getNameUser())) {
+                                        chatModels.remove(y);
+                                        --x;
+                                        --y;
+                                        listView.setAdapter(adapter);
+                                    }
                                 }
                             }
                         }

@@ -144,8 +144,7 @@ public class BackStackActivity extends AppCompatActivity {
 
     protected void addFragment(Fragment fragment) {
         if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.flScreen, fragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
