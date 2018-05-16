@@ -328,7 +328,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(getIDUser, getIDSeller, imgUser, imgSeller, edtMess.getText().toString(), chatSeller, true, nameUser, nameSellerI));
                 } else {
                     if (mAuth.getUid().equalsIgnoreCase(getIDUserA)) {
-                        FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(getIDUserA, getIDSellerA, imgUserA, imgUserA, edtMess.getText().toString(), "", true, nameUserA, nameSellerA));
+                        FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(getIDUserA, getIDSellerA, imgUserA, imgSellerA, edtMess.getText().toString(), "", true, nameUserA, nameSellerA));
                     } else if (mAuth.getUid().equalsIgnoreCase(getIDSellerA)) {
                         FirebaseDatabase.getInstance().getReference("Info chat").child(keyID).setValue(new ChatDetailModel(getIDUserA, getIDSellerA, imgUserA, imgSellerA, "", edtMess.getText().toString(), true, nameUserA, nameSellerA));
                     }

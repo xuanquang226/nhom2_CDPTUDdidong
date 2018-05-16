@@ -72,20 +72,18 @@ public class ChatFragment extends Fragment {
                     if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser())) || (mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller()))) {
                         chatModels.add(new ListChatModel(chatModel.idUser, chatModel.idSeller, chatModel.imgUser, chatModel.imgSeller, chatModel.chatUser, chatModel.chatSeller, chatModel.nameUser, chatModel.nameSeller));
                         adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
-                        //listView.setAdapter(adapter);
+                        listView.setAdapter(adapter);
                         for (int x = chatModels.size() - 1; x > 0 ; x--) {
                             for (int y = chatModels.size() - 2; y >= 0; y--) {
-                                //Log.d("aaaaa",chatModels.size() + "");
                                 if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser()))) {
                                     if (chatModels.get(x).getNameSeller().equalsIgnoreCase(chatModels.get(y).getNameSeller())) {
                                         chatModels.remove(y);
-
-                                        listView.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
                                     }
                                 } else if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller()))) {
                                     if (chatModels.get(x).getNameUser().equalsIgnoreCase(chatModels.get(y).getNameUser())) {
                                         chatModels.remove(y);
-                                        listView.setAdapter(adapter);
+                                        adapter.notifyDataSetChanged();
                                     }
                                 }
                             }
