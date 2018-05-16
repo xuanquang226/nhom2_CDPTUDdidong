@@ -73,11 +73,20 @@ public class ChatAdapter extends ArrayAdapter<ListChatModel> {
         if(mAuth.getUid().equalsIgnoreCase(chatModel.get(position).getIdUser())){
             Picasso.get().load(chatModel.get(position).getImgSeller()).into(viewHolder.ava);
             viewHolder.txtNameChat.setText(chatModel.get(position).getNameSeller());
-            viewHolder.txtRecentChat.setText(chatModel.get(position).getChatSeller());
+            if(chatModel.get(position).getChatSeller().isEmpty()){
+                viewHolder.txtRecentChat.setText(chatModel.get(position).getChatUser());
+            }else{
+                viewHolder.txtRecentChat.setText(chatModel.get(position).getChatSeller());
+            }
         }else if(mAuth.getUid().equalsIgnoreCase(chatModel.get(position).getIdSeller())){
             Picasso.get().load(chatModel.get(position).getImgUser()).into(viewHolder.ava);
             viewHolder.txtNameChat.setText(chatModel.get(position).getNameUser());
-            viewHolder.txtRecentChat.setText(chatModel.get(position).getChatUser());
+            if(chatModel.get(position).getChatUser().isEmpty()){
+                viewHolder.txtRecentChat.setText(chatModel.get(position).getChatSeller());
+            }else{
+                viewHolder.txtRecentChat.setText(chatModel.get(position).getChatUser());
+            }
+
         }
         return convertView;
     }

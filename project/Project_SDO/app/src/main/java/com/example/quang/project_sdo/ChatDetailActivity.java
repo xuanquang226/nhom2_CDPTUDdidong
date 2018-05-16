@@ -139,14 +139,6 @@ public class ChatDetailActivity extends AppCompatActivity {
                 llChatMess = (LinearLayout) v.findViewById(R.id.llChatMess);
 
 
-                //Delay
-
-                setDelay.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                    }
-                },5000);
 
 
                 // check if this is a receiver or not
