@@ -73,21 +73,28 @@ public class ChatFragment extends Fragment {
                         chatModels.add(new ListChatModel(chatModel.idUser, chatModel.idSeller, chatModel.imgUser, chatModel.imgSeller, chatModel.chatUser, chatModel.chatSeller, chatModel.nameUser, chatModel.nameSeller));
                         adapter = new ChatAdapter((AppCompatActivity) getContext(), R.layout.list_chat_custom, chatModels);
                         listView.setAdapter(adapter);
-                        for (int x = chatModels.size() - 1; x > 0 ; x--) {
-                            for (int y = chatModels.size() - 2; y >= 0; y--) {
-                                if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser()))) {
-                                    if (chatModels.get(x).getNameSeller().equalsIgnoreCase(chatModels.get(y).getNameSeller())) {
-                                        chatModels.remove(y);
+                        for (int i = 0; i < chatModels.size() - 1; i++) {
+                            for (int j = 1; j < chatModels.size(); j++) {
+                                if (mAuth.getUid().equalsIgnoreCase(chatModel.getIdUser())) {
+                                    if (chatModels.get(i).getNameSeller().equalsIgnoreCase(chatModels.get(j).getNameSeller())) {
+                                        chatModels.remove(i);
+                                        --i;
+                                        --j;
                                         adapter.notifyDataSetChanged();
                                     }
-                                } else if ((mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller()))) {
-                                    if (chatModels.get(x).getNameUser().equalsIgnoreCase(chatModels.get(y).getNameUser())) {
-                                        chatModels.remove(y);
+                                } else if (mAuth.getUid().equalsIgnoreCase(chatModel.getIdSeller())) {
+                                    if (chatModels.get(i).getNameUser().equalsIgnoreCase(chatModels.get(j).getNameUser())) {
+                                        chatModels.remove(i);
+                                        --i;
+                                        --j;
                                         adapter.notifyDataSetChanged();
                                     }
                                 }
+
                             }
+
                         }
+
                     }
                     listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
