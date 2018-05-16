@@ -1,5 +1,6 @@
 package com.example.quang.project_sdo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
@@ -32,9 +33,7 @@ public class SignInActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText edtUsername;
     EditText edtPassword;
-    private ArrayList<String> arrayListSpinner;
-    Spinner spinner;
-    AccountManagementFragment accountManagementFragment;
+    ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +46,17 @@ public class SignInActivity extends AppCompatActivity {
         edtPassword = (EditText) findViewById(R.id.edtPass);
         Button btnSignIn = (Button) findViewById(R.id.btnSignInP);
         Button btnCancel = (Button) findViewById(R.id.btnCancel);
+        mProgress = new ProgressDialog(SignInActivity.this);
+        mProgress.setTitle("Signing....");
+        mProgress.setMessage("Waiting for sign in success");
+        mProgress.setCancelable(false);
 
 
         //Process
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mProgress.show();
                 String email = edtUsername.getText().toString();
                 String password = edtPassword.getText().toString();
                 mAuth.signInWithEmailAndPassword(email, password)
@@ -64,6 +68,7 @@ public class SignInActivity extends AppCompatActivity {
                                     Toast.makeText(SignInActivity.this, "Sign In Success", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(SignInActivity.this, BackStackActivity.class);
                                     startActivity(intent);
+                                    mProgress.dismiss();
 
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -71,6 +76,7 @@ public class SignInActivity extends AppCompatActivity {
                                     Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(SignInActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
+                                    mProgress.dismiss();
                                 }
                             }
                         });

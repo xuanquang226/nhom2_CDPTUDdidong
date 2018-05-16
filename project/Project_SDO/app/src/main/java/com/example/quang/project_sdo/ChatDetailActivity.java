@@ -59,8 +59,7 @@ public class ChatDetailActivity extends AppCompatActivity {
     ImageView imgReceiver;
     SwipeRefreshLayout pullToRefresh;
     ListView lvChat;
-    Handler setDelay;
-    Runnable startDelay;
+    Handler handler;
 
 
     @Override
@@ -76,7 +75,7 @@ public class ChatDetailActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        setDelay = new Handler();
+        handler = new Handler();
         edtMess = (EditText) findViewById(R.id.edtInputChat);
         final ImageButton btnSend = (ImageButton) findViewById(R.id.imgSend);
         lvChat = (ListView) findViewById(R.id.lvChat);
@@ -89,7 +88,6 @@ public class ChatDetailActivity extends AppCompatActivity {
         getDataForNameSellerA();
         adapter = getMessage();
         lvChat.setAdapter(adapter);
-        loadItem();
 
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -118,9 +116,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 // hide keyboard
                 InputMethodManager im = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 im.hideSoftInputFromInputMethod(getCurrentFocus().getWindowToken(),0);
-
-                //Load item
-                loadItem();
+                handler();
             }
         });
 
@@ -377,22 +373,6 @@ public class ChatDetailActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void loadItem(){
-        int scrollX = lvChat.getScrollX();
-        int scrollY = lvChat.getScrollY();
-
-        // set again data
-        adapter = getMessage();
-
-        // set item again
-        lvChat.setAdapter(adapter);
-
-        // scroll
-        lvChat.scrollTo(scrollX, scrollY);
-
-        // stop refreshing
-        pullToRefresh.setRefreshing(false);
-    }
 
     @Override
     protected void onStart() {
@@ -404,7 +384,12 @@ public class ChatDetailActivity extends AppCompatActivity {
         }
     }
 
-    public void deLay(){
-
+    public void handler(){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getMessage();
+            }
+        },50000);
     }
 }

@@ -1,6 +1,7 @@
 package com.example.quang.project_sdo;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     ActionBar actionBar;
     ListView listView;
     ArrayList<OrderModel> listShopping = new ArrayList<OrderModel>();
+    ArrayList<OrderModel> listShoppings = new ArrayList<OrderModel>();
     ShoppingCartAdapter adapter;
     Button btnContinue, btnOrder, btnIncrease, btnDecrease;
     TextView txtSoLuong, txtGiaCa, txtGiaCaA, txtTotal;
@@ -45,7 +47,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
     DatabaseReference root;
     FirebaseAuth mAuth;
     int total;
+    int total2;
     OrderModel orderModel;
+    Handler handler;
 
 
     @Override
@@ -86,20 +90,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        handler = new Handler();
+
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            case R.id.delete_item:
-                delete();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void delete() {
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
@@ -141,23 +137,21 @@ public class ShoppingCartActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 orderModel = dataSnapshot.getValue(OrderModel.class);
-                listShopping.add(orderModel);
+                listShopping.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key));
                 adapter = new ShoppingCartAdapter(ShoppingCartActivity.this, R.layout.listview_shoppingcart_custom, listShopping);
                 listView.setAdapter(adapter);
 
-                //set total price textview
-                for (int i = 0; i < listShopping.size(); i++) {
-                    if (!listShopping.get(i).isChecked()) {
-                        total += listShopping.get(i).getGia();
-                        Log.d("AAAA", total + "");
+                listShoppings.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key));
+                for (int i = 0; i < listShoppings.size(); ++i) {
+                    if (!listShoppings.get(i).isChecked()) {
+                        total += listShoppings.get(i).gia;
+                        listShoppings.remove(i);
                         txtTotal.setText(total + "");
                         adapter.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(ShoppingCartActivity.this, "AAA", Toast.LENGTH_SHORT);
                     }
 
                 }
-
+                listShoppings.clear();
 
             }
 
@@ -183,11 +177,75 @@ public class ShoppingCartActivity extends AppCompatActivity {
         });
     }
 
+    public void setPrice() {
+
+        root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                orderModel = dataSnapshot.getValue(OrderModel.class);
+                listShoppings.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key));
+                for (int i = 0; i < listShoppings.size(); i++) {
+                    if (!listShoppings.get(i).isChecked()) {
+                        total2 += listShoppings.get(i).gia;
+                        listShoppings.remove(i);
+                        txtTotal.setText(total2 + "");
+                        Log.d("AAAAA",total2 + "");
+                    }
+                }adapter.notifyDataSetChanged();
+                listShoppings.clear();
+            }
+
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        total2 = 0;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.delete_cart_item, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.delete_item:
+                delete();
+                setHandler();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    public void setHandler(){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                setPrice();
+            }
+        },2000);
+    }
 }

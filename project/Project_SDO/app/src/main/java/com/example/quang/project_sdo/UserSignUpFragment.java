@@ -63,7 +63,7 @@ public class UserSignUpFragment extends Fragment {
                 mProgress = new ProgressDialog(getActivity());
                 mProgress.setTitle("Signing Up ....");
                 mProgress.setMessage("Please wait");
-                mProgress.setCanceledOnTouchOutside(false);
+                mProgress.setCancelable(false);
                 mProgress.show();
 
                 final String email = edtUser.getText().toString();
