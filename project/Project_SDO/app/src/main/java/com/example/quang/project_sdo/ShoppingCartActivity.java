@@ -37,7 +37,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
     ActionBar actionBar;
     ListView listView;
     ArrayList<OrderModel> listShopping = new ArrayList<OrderModel>();
-    ArrayList<String> keys = new ArrayList<String>();
     ShoppingCartAdapter adapter;
     Button btnContinue, btnOrder, btnIncrease, btnDecrease;
     TextView txtSoLuong, txtGiaCa, txtGiaCaA, txtTotal;
@@ -45,9 +44,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
     int sum = 0;
     DatabaseReference root;
     FirebaseAuth mAuth;
-    int i, total;
+    int total;
     OrderModel orderModel;
-
 
 
     @Override
@@ -107,28 +105,14 @@ public class ShoppingCartActivity extends AppCompatActivity {
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String key = dataSnapshot.getKey().toString();
-                keys.add(key);
-                for (i = 0; i < listShopping.size(); i++) {
-                    for(int j = 0; j < keys.size(); j++){
-                        if(!listShopping.get(i).getKey().equals(null) && !keys.get(j).equals(null)){
-                            if (listShopping.get(i).isChecked() && listShopping.get(i).getKey().equals(keys.get(j))) {
-                                listShopping.remove(i);
-                                root.child(mAuth.getUid()).child(keys.get(i)).setValue(null);
-                                keys.remove(j);
-                                --i;
-                                --j;
-                                adapter.notifyDataSetChanged();
-                            }else{
-
-                            }
-                        }else{
-                            Toast.makeText(ShoppingCartActivity.this,"Giỏ hàng rỗng",Toast.LENGTH_SHORT).show();
-                        }
+                for (int i = 0; i < listShopping.size(); i++) {
+                    if (listShopping.get(i).isChecked()) {
+                        root.child(mAuth.getUid()).child(listShopping.get(i).getKey()).setValue(null);
+                        listShopping.remove(i);
+                        --i;
+                        adapter.notifyDataSetChanged();
                     }
                 }
-
-
             }
 
             @Override
@@ -162,14 +146,14 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
 
                 //set total price textview
-                for (i = 0; i < listShopping.size(); i++) {
+                for (int i = 0; i < listShopping.size(); i++) {
                     if (!listShopping.get(i).isChecked()) {
                         total += listShopping.get(i).getGia();
-                        Log.d("AAAA",total +"");
-                        txtTotal.setText(total+"");
+                        Log.d("AAAA", total + "");
+                        txtTotal.setText(total + "");
                         adapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(ShoppingCartActivity.this,"AAA",Toast.LENGTH_SHORT);
+                        Toast.makeText(ShoppingCartActivity.this, "AAA", Toast.LENGTH_SHORT);
                     }
 
                 }
