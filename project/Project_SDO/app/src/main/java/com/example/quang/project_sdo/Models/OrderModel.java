@@ -5,7 +5,7 @@ import java.util.Date;
 public class OrderModel {
 
     public String ten, hinh;
-    public int gia, soLuong;
+    public Integer gia, soLuong;
     public long time;
     public boolean isChecked;
     public String key;
@@ -15,7 +15,7 @@ public class OrderModel {
     public OrderModel() {
     }
 
-    public OrderModel(String ten, String hinh, int gia, int soLuong,String key) {
+    public OrderModel(String ten, String hinh, Integer gia, Integer soLuong, String key) {
         this.ten = ten;
         this.hinh = hinh;
         this.gia = gia;
@@ -41,19 +41,19 @@ public class OrderModel {
         this.hinh = hinh;
     }
 
-    public int getGia() {
+    public Integer getGia() {
         return gia;
     }
 
-    public void setGia(int gia) {
+    public void setGia(Integer gia) {
         this.gia = gia;
     }
 
-    public int getSoLuong() {
+    public Integer getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(Integer soLuong) {
         this.soLuong = soLuong;
     }
 

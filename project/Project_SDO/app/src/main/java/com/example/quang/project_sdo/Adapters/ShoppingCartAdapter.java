@@ -17,12 +17,14 @@ import android.widget.TextView;
 import com.example.quang.project_sdo.Models.OrderModel;
 import com.example.quang.project_sdo.Models.ShoppingCartModel;
 import com.example.quang.project_sdo.R;
+import com.example.quang.project_sdo.ShoppingCartActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -32,12 +34,13 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
 
     AppCompatActivity context;
     int layout;
-    ArrayList<OrderModel> listShoppingCart;
-    int dem;
+    ArrayList<OrderModel> listShoppingCart = new ArrayList<OrderModel>();
+    int dem,dem2;
     int soLuong = 0;
     DatabaseReference root;
     FirebaseAuth mAuth;
-    ArrayList<String> keys;
+    ArrayList<String> keys = new ArrayList<String>();
+    int sum,minus;
 
 
     public ShoppingCartAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<OrderModel> objects) {
@@ -63,7 +66,35 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        mAuth = FirebaseAuth.getInstance();
+        root = FirebaseDatabase.getInstance().getReference("Order").child(mAuth.getUid());
+        root.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                keys.add(dataSnapshot.getKey());
+                listShoppingCart.get(position).getKey().equalsIgnoreCase(keys + "");
+            }
 
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
         final ViewHolder viewHolder;
         if (convertView == null) {
             LayoutInflater inflater = context.getLayoutInflater();
@@ -86,10 +117,6 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         viewHolder.drugAmount.setText(Integer.toString(listShoppingCart.get(position).getSoLuong()));
 
         Picasso.get().load(listShoppingCart.get(position).getHinh()).into(viewHolder.drugImage);
-
-
-
-
 
 
         if (dem >= 10) {
@@ -122,7 +149,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                             dem++;
                             viewHolder.drugAmount.setText(Integer.toString(dem));
                             int defaultPrice = listShoppingCart.get(position).getGia();
-                            int sum = dem * defaultPrice;
+                            sum = dem * defaultPrice;
                             viewHolder.drugPrice.setText(sum + "");
                             listShoppingCart.get(position).setSoLuong(dem);
                             if (dem >= 10) {
@@ -134,29 +161,31 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                                 viewHolder.btnDecrease.setVisibility(View.VISIBLE);
                                 viewHolder.btnIncrease.setVisibility(View.VISIBLE);
                             }
-
-                            //Log.d("price",viewHolder.drugPrice.get);
+                            root.child(listShoppingCart.get(position).getKey()).child("gia").setValue(sum);
+                            root.child(listShoppingCart.get(position).getKey()).child("soLuong").setValue(dem);
                         }
                     });
                     viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            dem = listShoppingCart.get(position).getSoLuong();
-                            dem--;
-                            viewHolder.drugAmount.setText(Integer.toString(dem));
+                            dem2 = listShoppingCart.get(position).getSoLuong();
+                            dem2--;
+                            viewHolder.drugAmount.setText(Integer.toString(dem2));
                             int defaultPrice = listShoppingCart.get(position).getGia();
-                            int sum = dem * defaultPrice;
-                            viewHolder.drugPrice.setText(sum + "");
-                            listShoppingCart.get(position).setSoLuong(dem);
-                            if (dem >= 10) {
+                            minus = dem2 * defaultPrice;
+                            viewHolder.drugPrice.setText(minus + "");
+                            listShoppingCart.get(position).setSoLuong(dem2);
+                            if (dem2 >= 10) {
                                 viewHolder.btnIncrease.setVisibility(View.INVISIBLE);
                                 viewHolder.btnDecrease.setVisibility(View.VISIBLE);
-                            } else if (dem <= 1) {
+                            } else if (dem2 <= 1) {
                                 viewHolder.btnDecrease.setVisibility(View.INVISIBLE);
-                            } else if (dem >= 1) {
+                            } else if (dem2 >= 1) {
                                 viewHolder.btnDecrease.setVisibility(View.VISIBLE);
                                 viewHolder.btnIncrease.setVisibility(View.VISIBLE);
                             }
+                            root.child(listShoppingCart.get(position).getKey()).child("gia").setValue(minus);
+                            root.child(listShoppingCart.get(position).getKey()).child("soLuong").setValue(dem2);
 
                         }
                     });
@@ -171,44 +200,8 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         return convertView;
     }
 
-    public void changeData(){
-        mAuth = FirebaseAuth.getInstance();
-        root = FirebaseDatabase.getInstance().getReference("Order").child(mAuth.getUid());
-        root.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                String key = dataSnapshot.getKey();
-                keys.add(key);
-                OrderModel orderModel = dataSnapshot.getValue(OrderModel.class);
-                listShoppingCart.add(orderModel);
-                for (int i = 0; i < listShoppingCart.size(); i++){
-                    if (listShoppingCart.get(i).isChecked){
-
-                    }
-                }
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+    public int getPrice(){
+        int price = sum + minus;
+        return price;
     }
-
 }

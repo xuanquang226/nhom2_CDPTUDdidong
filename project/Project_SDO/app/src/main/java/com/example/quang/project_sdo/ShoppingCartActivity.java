@@ -50,6 +50,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     int total2;
     OrderModel orderModel;
     Handler handler;
+    ShoppingCartAdapter a;
 
 
     @Override
@@ -90,8 +91,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-
         handler = new Handler();
 
     }
@@ -137,11 +136,10 @@ public class ShoppingCartActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 orderModel = dataSnapshot.getValue(OrderModel.class);
-                listShopping.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key));
+                listShopping.add(orderModel);
                 adapter = new ShoppingCartAdapter(ShoppingCartActivity.this, R.layout.listview_shoppingcart_custom, listShopping);
                 listView.setAdapter(adapter);
-
-                listShoppings.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key));
+                listShoppings.add(orderModel);
                 for (int i = 0; i < listShoppings.size(); ++i) {
                     if (!listShoppings.get(i).isChecked()) {
                         total += listShoppings.get(i).gia;
@@ -182,15 +180,13 @@ public class ShoppingCartActivity extends AppCompatActivity {
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
                 orderModel = dataSnapshot.getValue(OrderModel.class);
-                listShoppings.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key));
+                listShoppings.add(orderModel);
                 for (int i = 0; i < listShoppings.size(); i++) {
                     if (!listShoppings.get(i).isChecked()) {
                         total2 += listShoppings.get(i).gia;
                         listShoppings.remove(i);
                         txtTotal.setText(total2 + "");
-                        Log.d("AAAAA",total2 + "");
                     }
                 }adapter.notifyDataSetChanged();
                 listShoppings.clear();
