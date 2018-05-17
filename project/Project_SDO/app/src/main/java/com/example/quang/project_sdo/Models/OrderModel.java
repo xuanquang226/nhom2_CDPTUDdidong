@@ -5,17 +5,18 @@ import java.util.Date;
 public class OrderModel {
 
     public String ten, hinh;
-    public Integer gia, soLuong;
+    public int gia, soLuong;
     public long time;
     public boolean isChecked;
     public String key;
+    public int giagoc;
 
 
 
     public OrderModel() {
     }
 
-    public OrderModel(String ten, String hinh, Integer gia, Integer soLuong, String key) {
+    public OrderModel(String ten, String hinh, int gia, int soLuong, String key,int giagoc) {
         this.ten = ten;
         this.hinh = hinh;
         this.gia = gia;
@@ -23,6 +24,7 @@ public class OrderModel {
         this.time = new Date().getTime();
         this.isChecked = false;
         this.key = key;
+        this.giagoc = giagoc;
     }
 
     public String getTen() {
@@ -41,19 +43,19 @@ public class OrderModel {
         this.hinh = hinh;
     }
 
-    public Integer getGia() {
+    public int getGia() {
         return gia;
     }
 
-    public void setGia(Integer gia) {
+    public void setGia(int gia) {
         this.gia = gia;
     }
 
-    public Integer getSoLuong() {
+    public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(Integer soLuong) {
+    public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
 
@@ -79,5 +81,13 @@ public class OrderModel {
 
     public void setKey(String key) {
         this.key = key;
+    }
+
+    public int getGiagoc() {
+        return giagoc;
+    }
+
+    public void setGiagoc(int giagoc) {
+        this.giagoc = giagoc;
     }
 }

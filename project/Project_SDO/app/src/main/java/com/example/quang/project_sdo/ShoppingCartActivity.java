@@ -149,8 +149,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     }
 
                 }
+                //root.child(mAuth.getUid()).push().child("tongtien").setValue(total);
                 listShoppings.clear();
-
             }
 
             @Override
@@ -176,7 +176,6 @@ public class ShoppingCartActivity extends AppCompatActivity {
     }
 
     public void setPrice() {
-
         root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -188,7 +187,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
                         listShoppings.remove(i);
                         txtTotal.setText(total2 + "");
                     }
-                }adapter.notifyDataSetChanged();
+                }
+
+                adapter.notifyDataSetChanged();
                 listShoppings.clear();
             }
 
