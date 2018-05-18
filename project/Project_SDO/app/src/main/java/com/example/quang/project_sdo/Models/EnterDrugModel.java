@@ -9,11 +9,28 @@ import java.util.Date;
 public class EnterDrugModel {
     public String tenthuoc, congdung, gia, nguongoc, mota, soluong, linkhinh, tenshop,id,idShop;
     public long date;
-
+    public boolean isChecked;
+    public String key;
     public EnterDrugModel() {
     }
 
-    public EnterDrugModel(String tenthuoc, String congdung, String gia, String nguongoc, String mota, String soluong, String linkhinh, String tenshop,String id,String idShop) {
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public EnterDrugModel(String tenthuoc, String congdung, String gia, String nguongoc, String mota, String soluong, String linkhinh, String tenshop, String id, String idShop) {
         this.tenthuoc = tenthuoc;
         this.congdung = congdung;
         this.gia = gia;
@@ -25,6 +42,9 @@ public class EnterDrugModel {
         this.id = id;
         this.idShop = idShop;
         this.date = new Date().getTime();
+        this.isChecked = false;
+        this.key = key;
+
     }
 
     public String getIdShop() {
