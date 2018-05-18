@@ -62,7 +62,7 @@ public class SaleStatisticAdapter extends ArrayAdapter<EnterDrugModel> {
         viewHolder.nameDrug.setText(saleStatisticModels.get(position).getTenthuoc());
         viewHolder.drugPrice.setText(saleStatisticModels.get(position).getGia());
         viewHolder.drugAmount.setText(saleStatisticModels.get(position).getSoluong());
-        viewHolder.postDate.setText(android.text.format.DateFormat.format("dd/MM/yy",saleStatisticModels.get(position).getDate()));
+        viewHolder.postDate.setText(android.text.format.DateFormat.format("dd-MM-yyyy",saleStatisticModels.get(position).getDate()));
         Picasso.get().load(saleStatisticModels.get(position).getLinkhinh()).into(viewHolder.drugImage);
         return convertView;
     }

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.HomeListDrugAdapter;
 import com.example.quang.project_sdo.Adapters.SaleStatisticAdapter;
@@ -37,10 +38,11 @@ public class SaleStatisticActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<EnterDrugModel> listSale = new ArrayList<EnterDrugModel>();
     SaleStatisticAdapter adapter;
-    TextView txtSoLuong, txtGia, txtTen, txtDate;
+    TextView txtSoLuong, txtGia, txtTen, txtDate,txtTotalPrice;
     ImageView imgDrug;
     DatabaseReference root;
     FirebaseAuth mAuth;
+    int i, total;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +57,7 @@ public class SaleStatisticActivity extends AppCompatActivity {
         txtDate = (TextView) findViewById(R.id.txtpostDate);
         txtTen = (TextView) findViewById(R.id.txtNameDrugSale);
         imgDrug = (ImageView) findViewById(R.id.imgDrug);
-
+        txtTotalPrice = (TextView) findViewById(R.id.totalPrice);
         //Ini firebase
         mAuth = FirebaseAuth.getInstance();
         root = FirebaseDatabase.getInstance().getReference("Drug");
@@ -79,6 +81,19 @@ public class SaleStatisticActivity extends AppCompatActivity {
 
                     listView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
+                    //set total price textview
+                    for (i = 0; i < listSale.size(); i++) {
+                        if (!listSale.get(i).isChecked()){
+                            total += Integer.parseInt(listSale.get(i).getGia());
+                            Log.d("AAAA",total +"");
+                            txtTotalPrice.setText(total+" Đ ");
+                            adapter.notifyDataSetChanged();
+                        } else {
+                            Toast.makeText(SaleStatisticActivity.this,"AAA",Toast.LENGTH_SHORT);
+                        }
+
+                    }
                 }
             }
 

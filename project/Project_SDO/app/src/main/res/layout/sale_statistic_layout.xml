@@ -7,43 +7,39 @@
     android:orientation="vertical"
     tools:context="com.example.quang.project_sdo.SaleStatisticActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="right"
-        android:orientation="vertical">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:gravity="right"-->
+        <!--android:orientation="vertical">-->
 
-        <Spinner
-            android:id="@+id/spinnerChoiceAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginRight="42dp"
-            android:layout_marginTop="10dp"
-            android:entries="@array/TypeDate">
+        <!--<Spinner-->
+            <!--android:id="@+id/spinnerChoiceAccount"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:layout_marginRight="42dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:entries="@array/TypeDate">-->
 
-        </Spinner>
+        <!--</Spinner>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="10"
-        android:gravity="right"
-        android:orientation="vertical">
+
 
         <ListView
             android:id="@+id/lsvsaleSta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="10">
         </ListView>
 
-    </LinearLayout>
+
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center_vertical"
