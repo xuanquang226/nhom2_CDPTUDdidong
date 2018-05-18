@@ -28,7 +28,7 @@ public class DrugDetailActivity extends AppCompatActivity {
     private ActionBar actionBar;
     String idShop, tenshopA;
     FirebaseAuth mAuth;
-    DatabaseReference root, rootOrder;
+    DatabaseReference root, rootOrder,rootAccount;
     Bundle bundle;
 
     @Override
@@ -72,9 +72,7 @@ public class DrugDetailActivity extends AppCompatActivity {
         btnChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 getmImage();
-
             }
         });
 
@@ -82,20 +80,12 @@ public class DrugDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getDrug();
-                Toast.makeText(DrugDetailActivity.this,"Qua Giỏ Hàng Để Đặt Mua Sản Phẩm",Toast.LENGTH_SHORT).show();
+                Toast.makeText(DrugDetailActivity.this,"Thêm thành công",Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void getmImage() {
         if(mAuth.getCurrentUser() != null) {
@@ -132,10 +122,41 @@ public class DrugDetailActivity extends AppCompatActivity {
     }
 
     public void getDrug() {
-        rootOrder = FirebaseDatabase.getInstance().getReference("Order");
-        String idRandom = FirebaseDatabase.getInstance().getReference().push().getKey();
-        int soLuong = 1;
-        rootOrder.child(mAuth.getUid()).child(idRandom).setValue(new OrderModel(bundle.getString("tenThuoc"),bundle.getString("hinhanh"),Integer.parseInt(txtGia.getText() + ""),soLuong,idRandom,Integer.parseInt(txtGia.getText() + "")));
+        rootAccount = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
+        rootAccount.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String diachi = dataSnapshot.child("address").getValue().toString();
+                rootOrder = FirebaseDatabase.getInstance().getReference("Order");
+                String idRandom = FirebaseDatabase.getInstance().getReference().push().getKey();
+                int soLuong = 1;
+                rootOrder.child(mAuth.getUid()).child(idRandom).setValue(new OrderModel(bundle.getString("tenThuoc"),bundle.getString("hinhanh"),Integer.parseInt(txtGia.getText() + ""),soLuong,idRandom,Integer.parseInt(txtGia.getText() + ""),0,diachi));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_cart, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.cart_item:
+                startActivity(new Intent(DrugDetailActivity.this,ShoppingCartActivity.class));
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

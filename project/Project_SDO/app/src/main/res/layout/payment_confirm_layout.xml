@@ -9,7 +9,7 @@
     <ListView
         android:id="@+id/lvConfirm"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="128dp"
         android:layout_weight="2"></ListView>
 
     <LinearLayout
@@ -41,12 +41,12 @@
                 android:textSize="25dp"
                 android:textStyle="bold" />
 
-            <TextView
+            <Spinner
+                android:id="@+id/spinnerPayment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="10dp"
-                android:text="ABC"
                 android:textColor="@color/colorDen"
                 android:textSize="25dp"
                 android:textStyle="bold" />
@@ -76,42 +76,14 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 />
-
             <TextView
+                android:id="@+id/txtPriceDrugPA"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Đ"
+                android:text=" "
                 android:textStyle="bold"
                 android:textSize="25dp"
                 android:textColor="@color/colorDen"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="5dp"
-                />
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/price_shopping_cart"
-                android:layout_marginLeft="15dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Total:"
-                android:textStyle="bold"
-                android:textSize="25dp"
-                android:textColor="@color/colorDo"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="5dp"
                 />
@@ -127,8 +99,8 @@
                 android:layout_marginLeft="5dp"
                 />
 
-
         </LinearLayout>
+
     </LinearLayout>
 
     <Button

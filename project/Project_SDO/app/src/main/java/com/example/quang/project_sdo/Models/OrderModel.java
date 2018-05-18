@@ -10,13 +10,15 @@ public class OrderModel {
     public boolean isChecked;
     public String key;
     public int giagoc;
+    public int tongtien;
+    public String diachi;
 
 
 
     public OrderModel() {
     }
 
-    public OrderModel(String ten, String hinh, int gia, int soLuong, String key,int giagoc) {
+    public OrderModel(String ten, String hinh, int gia, int soLuong, String key,int giagoc,int tongtien,String diachi) {
         this.ten = ten;
         this.hinh = hinh;
         this.gia = gia;
@@ -25,6 +27,8 @@ public class OrderModel {
         this.isChecked = false;
         this.key = key;
         this.giagoc = giagoc;
+        this.tongtien = tongtien;
+        this.diachi = diachi;
     }
 
     public String getTen() {
@@ -89,5 +93,21 @@ public class OrderModel {
 
     public void setGiagoc(int giagoc) {
         this.giagoc = giagoc;
+    }
+
+    public int getTongtien() {
+        return tongtien;
+    }
+
+    public void setTongtien(int tongtien) {
+        this.tongtien = tongtien;
+    }
+
+    public String getDiachi() {
+        return diachi;
+    }
+
+    public void setDiachi(String diachi) {
+        this.diachi = diachi;
     }
 }

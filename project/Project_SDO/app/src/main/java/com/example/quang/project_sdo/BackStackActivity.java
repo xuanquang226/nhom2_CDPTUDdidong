@@ -2,6 +2,7 @@ package com.example.quang.project_sdo;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -46,6 +47,7 @@ public class BackStackActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private NavigationView navigationView;
+    Handler handler;
 
 
     @Override
@@ -139,7 +141,7 @@ public class BackStackActivity extends AppCompatActivity {
         });
 
 
-
+        handler = new Handler();
     }
 
     protected void addFragment(Fragment fragment) {
@@ -195,38 +197,47 @@ public class BackStackActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(mAuth.getCurrentUser() != null){
-            root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
-            root.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    String name = dataSnapshot.child("email").getValue().toString();
-                    String hinhanh = dataSnapshot.child("linkhinh").getValue().toString();
-                    ImageView imgAccountA = (ImageView) navigationView.findViewById(R.id.imgAccount);
-                    TextView txtNameAcc = (TextView) navigationView.findViewById(R.id.nameAccount);
-                    txtNameAcc.setText(name);
-                    if(hinhanh.equalsIgnoreCase("")){
-
-                    }else{
-                        Picasso.get().load(hinhanh).into(imgAccountA);
-                    }
-
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-        }else{
-
-        }
+        setHandler();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+    public void setHandler(){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if(mAuth.getCurrentUser() != null){
+                    root = FirebaseDatabase.getInstance().getReference("Infomation account").child(mAuth.getUid());
+                    root.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            String name = dataSnapshot.child("email").getValue().toString();
+                            String hinhanh = dataSnapshot.child("linkhinh").getValue().toString();
+                            ImageView imgAccountA = (ImageView) navigationView.findViewById(R.id.imgAccount);
+                            TextView txtNameAcc = (TextView) navigationView.findViewById(R.id.nameAccount);
+                            txtNameAcc.setText(name);
+                            if(hinhanh.equalsIgnoreCase("")){
+
+                            }else{
+                                Picasso.get().load(hinhanh).into(imgAccountA);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }else{
+
+                }
+            }
+        },3000);
     }
 
 }

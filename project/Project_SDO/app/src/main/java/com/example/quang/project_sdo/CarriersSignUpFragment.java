@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.quang.project_sdo.Models.CarrierModel;
+import com.example.quang.project_sdo.Models.NameCarrierModel;
 import com.example.quang.project_sdo.Models.SellerModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -38,7 +39,7 @@ public class CarriersSignUpFragment extends Fragment {
     private EditText edtNameCarrier;
     private ProgressDialog mProgress;
     private FirebaseAuth mAuth;
-    DatabaseReference root;
+    DatabaseReference root,root2;
 
     public CarriersSignUpFragment() {
         // Required empty public constructor
@@ -59,6 +60,7 @@ public class CarriersSignUpFragment extends Fragment {
 
         root = FirebaseDatabase.getInstance().getReference("Infomation account");
 
+        root2 = FirebaseDatabase.getInstance().getReference("Carrier");
         Button btnOK = view.findViewById(R.id.btnOKCa);
         btnOK.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,9 +85,8 @@ public class CarriersSignUpFragment extends Fragment {
                                     String accountType = "Carrier";
                                     String userID = mAuth.getCurrentUser().getUid();
                                     String linkhinh = "";
-                                    DatabaseReference current_user_id = root.child(userID);
-                                    CarrierModel model = new CarrierModel(email, password, address, phone, cmnd, nameCarrier, accountType,userID,linkhinh);
-                                    current_user_id.setValue(model);
+                                    root.child(mAuth.getUid()).setValue(new CarrierModel(email, password, address, phone, cmnd, nameCarrier, accountType,userID,linkhinh));
+                                    root2.push().setValue(new NameCarrierModel(nameCarrier,Integer.parseInt(cmnd)));
                                     Toast.makeText(getActivity(), "SignUp Successfully", Toast.LENGTH_SHORT).show();
                                     mProgress.dismiss();
                                     startActivity(new Intent(getActivity(), BackStackActivity.class));

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShoppingCartActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4">
+
+        <ImageView
+            android:id="@+id/imgDrugP"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_weight="3"
+            android:src="@drawable/img_cefixim" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_weight="2"
+            android:orientation="vertical"
+            android:paddingLeft="10dp">
+
+            <TextView
+                android:id="@+id/txtNameDrugP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/listviewdrug"
+                android:textColor="@color/colorDen"
+                android:textSize="17dp" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/imgShoppingCartPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/price_shopping_cart" />
+
+                <TextView
+                    android:id="@+id/txtPriceDrugP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_shoppingcart_front"
+                    android:textColor="@color/colorDo"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/txtDisplayPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="1dp"
+                    android:paddingTop="1dp"
+
+                    android:text="  Đ"
+                    android:textColor="@color/colorDo"
+                    android:textSize="17dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/priceA"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:textColor="@color/trang" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

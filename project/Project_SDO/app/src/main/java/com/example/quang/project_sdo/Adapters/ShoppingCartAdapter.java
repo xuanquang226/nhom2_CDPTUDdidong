@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quang.project_sdo.Models.OrderModel;
 import com.example.quang.project_sdo.R;
@@ -38,7 +40,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
     ArrayList<String> keys = new ArrayList<String>();
     int sum, minus;
     int totalPrice;
-
+    OrderModel orderModel;
 
     public ShoppingCartAdapter(@NonNull AppCompatActivity context, int resource, @NonNull ArrayList<OrderModel> objects) {
         super(context, resource, objects);
@@ -54,7 +56,6 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         ImageView drugImage;
         Button btnDecrease;
         Button btnIncrease;
-        TextView txtTotal;
         CheckBox chkSelected;
 
     }
@@ -68,6 +69,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
         root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                orderModel = dataSnapshot.getValue(OrderModel.class);
                 String key = dataSnapshot.getKey();
                 keys.add(key);
                 listShoppingCart.get(position).getKey().equalsIgnoreCase(keys + "");
@@ -104,16 +106,24 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
             viewHolder.drugImage = (ImageView) convertView.findViewById(R.id.imgShoppingCartDrug);
             viewHolder.btnDecrease = (Button) convertView.findViewById(R.id.btnDecrease);
             viewHolder.btnIncrease = (Button) convertView.findViewById(R.id.btnIncrease);
-            viewHolder.txtTotal = (TextView) convertView.findViewById(R.id.txtTotal);
             viewHolder.chkSelected = (CheckBox) convertView.findViewById(R.id.chkSelected);
             convertView.setTag(viewHolder);
+
+            if (!listShoppingCart.get(position).isChecked()) {
+                totalPrice += listShoppingCart.get(position).getGia();
+                for (int i = 0; i < listShoppingCart.size(); i++) {
+                    root.child(listShoppingCart.get(i).getKey()).child("tongtien").setValue(totalPrice);
+                }
+
+            }
+
+
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.drugName.setText(listShoppingCart.get(position).getTen());
         viewHolder.drugPrice.setText(Integer.toString(listShoppingCart.get(position).getGia()));
         viewHolder.drugAmount.setText(Integer.toString(listShoppingCart.get(position).getSoLuong()));
-
         Picasso.get().load(listShoppingCart.get(position).getHinh()).into(viewHolder.drugImage);
 
 
@@ -137,7 +147,6 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                     viewHolder.btnIncrease.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
                             dem = listShoppingCart.get(position).getSoLuong();
                             dem++;
                             viewHolder.drugAmount.setText(Integer.toString(dem));
@@ -155,6 +164,12 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                             }
                             root.child(listShoppingCart.get(position).getKey()).child("gia").setValue(sum);
                             root.child(listShoppingCart.get(position).getKey()).child("soLuong").setValue(dem);
+                            totalPrice += listShoppingCart.get(position).getGia();
+                            for (int i = 0; i < listShoppingCart.size(); i++) {
+                                root.child(listShoppingCart.get(i).getKey()).child("tongtien").setValue(totalPrice);
+                            }
+                            Toast.makeText(getContext(), "Tổng số tiền " + totalPrice, Toast.LENGTH_SHORT).show();
+
                         }
                     });
                     viewHolder.btnDecrease.setOnClickListener(new View.OnClickListener() {
@@ -177,7 +192,11 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
                             }
                             root.child(listShoppingCart.get(position).getKey()).child("gia").setValue(minus);
                             root.child(listShoppingCart.get(position).getKey()).child("soLuong").setValue(dem2);
-
+                            totalPrice -= listShoppingCart.get(position).getGia();
+                            for (int i = 0; i < listShoppingCart.size(); i++) {
+                                root.child(listShoppingCart.get(i).getKey()).child("tongtien").setValue(totalPrice);
+                            }
+                            Toast.makeText(getContext(), "Tổng số tiền " + totalPrice, Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
@@ -191,6 +210,7 @@ public class ShoppingCartAdapter extends ArrayAdapter<OrderModel> {
 
 
         return convertView;
+
     }
 
 

@@ -42,14 +42,12 @@ public class ShoppingCartActivity extends AppCompatActivity {
     ShoppingCartAdapter adapter;
     Button btnContinue, btnOrder, btnIncrease, btnDecrease;
     TextView txtSoLuong, txtGiaCa, txtGiaCaA, txtTotal;
-    int dem = 0;
-    int sum = 0;
     DatabaseReference root;
     FirebaseAuth mAuth;
     int total;
     int total2;
-    OrderModel orderModel;
-    Handler handler;
+    OrderModel orderModel, orderModel2;
+    Handler handler, handler2;
     ShoppingCartAdapter a;
 
 
@@ -70,12 +68,11 @@ public class ShoppingCartActivity extends AppCompatActivity {
         txtSoLuong = (TextView) findViewById(R.id.txtPriceShoppingCart);
         txtGiaCa = (TextView) findViewById(R.id.txtShoppingCartPrice);
         txtGiaCaA = (TextView) findViewById(R.id.priceA);
-        txtTotal = (TextView) findViewById(R.id.txtTotal);
         //ListView
         listView = (ListView) findViewById(R.id.lvShoppingCart);
 
-
         loadData();
+
         //processing for two buttons Continue and Order
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,7 +89,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
             }
         });
         handler = new Handler();
-
+        handler2 = new Handler();
     }
 
 
@@ -108,6 +105,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
                         adapter.notifyDataSetChanged();
                     }
                 }
+
             }
 
             @Override
@@ -136,20 +134,15 @@ public class ShoppingCartActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 orderModel = dataSnapshot.getValue(OrderModel.class);
-                listShopping.add(orderModel);
+                listShopping.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key, orderModel.giagoc, orderModel.tongtien,orderModel.diachi));
                 adapter = new ShoppingCartAdapter(ShoppingCartActivity.this, R.layout.listview_shoppingcart_custom, listShopping);
                 listView.setAdapter(adapter);
-                listShoppings.add(orderModel);
-                for (int i = 0; i < listShoppings.size(); ++i) {
+                listShoppings.add(new OrderModel(orderModel.ten, orderModel.hinh, orderModel.gia, orderModel.soLuong, orderModel.key, orderModel.giagoc, orderModel.tongtien,orderModel.diachi));
+                for (int i = 0; i < listShoppings.size(); i++) {
                     if (!listShoppings.get(i).isChecked()) {
                         total += listShoppings.get(i).gia;
-                        listShoppings.remove(i);
-                        txtTotal.setText(total + "");
-                        adapter.notifyDataSetChanged();
                     }
-
                 }
-                //root.child(mAuth.getUid()).push().child("tongtien").setValue(total);
                 listShoppings.clear();
             }
 
@@ -185,12 +178,8 @@ public class ShoppingCartActivity extends AppCompatActivity {
                     if (!listShoppings.get(i).isChecked()) {
                         total2 += listShoppings.get(i).gia;
                         listShoppings.remove(i);
-                        txtTotal.setText(total2 + "");
                     }
                 }
-
-                adapter.notifyDataSetChanged();
-                listShoppings.clear();
             }
 
 
@@ -237,12 +226,84 @@ public class ShoppingCartActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void setHandler(){
+    public void setHandler() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 setPrice();
+                pushPrice();
             }
-        },2000);
+        }, 1500);
+
+        handler2.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getPriceAfterDelete();
+            }
+        }, 4000);
+
+    }
+
+    public void pushPrice() {
+        root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
+                orderModel = dataSnapshot.getValue(OrderModel.class);
+                root.child(mAuth.getUid()).child(orderModel.getKey()).child("tongtien").setValue(total2);
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void getPriceAfterDelete() {
+        root.child(mAuth.getUid()).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                orderModel2 = dataSnapshot.getValue(OrderModel.class);
+                listShoppings.add(new OrderModel(orderModel2.ten, orderModel2.hinh, orderModel2.gia, orderModel2.soLuong, orderModel2.key, orderModel2.giagoc, orderModel2.tongtien,orderModel2.diachi));
+                Toast.makeText(ShoppingCartActivity.this, "Tổng số tiền " + listShoppings.get(0).getTongtien(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }
