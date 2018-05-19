@@ -38,7 +38,7 @@ public class ViewOrderActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
         actionBar.setTitle("View Order");
         actionBar.setDisplayHomeAsUpEnabled(true);
-        loadData();
+        loadData();//a
     }
 
     public void loadData() {
