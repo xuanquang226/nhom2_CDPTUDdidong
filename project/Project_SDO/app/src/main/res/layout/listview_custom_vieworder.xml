@@ -3,23 +3,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
-
+    android:gravity="center|start">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="25dp"
+        android:textColor="@color/colorDen"
         android:id="@+id/tenThuoc"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorDen"
+        android:textSize="25dp"
         android:id="@+id/hang"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorDen"
+        android:textSize="25dp"
         android:id="@+id/diachi"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorDen"
+        android:textSize="25dp"
         android:id="@+id/tongtien"/>
 
 

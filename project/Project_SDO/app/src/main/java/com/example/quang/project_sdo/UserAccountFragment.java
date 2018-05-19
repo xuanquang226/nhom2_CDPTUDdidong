@@ -77,6 +77,13 @@ public class UserAccountFragment extends Fragment {
         Button btnLogout = (Button) view.findViewById(R.id.btnLogOut);
         Button btnCart = (Button) view.findViewById(R.id.btnshopping);
         Button btnEdit = (Button) view.findViewById(R.id.btnEP);
+        Button btnOrder = (Button) view.findViewById(R.id.btnOrder);
+        btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(),ViewOrderActivity.class));
+            }
+        });
 
         storage = FirebaseStorage.getInstance();
         mountainImagesRef = storage.getReferenceFromUrl(

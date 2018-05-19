@@ -99,6 +99,7 @@ public class PaymentConfirmActivity extends AppCompatActivity {
                 payment.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Toast.makeText(PaymentConfirmActivity.this,"Đặt hàng thành công",Toast.LENGTH_SHORT).show();
                         root3.push().setValue(new LOrderModel(a,model.tongtien,model.diachi,name,mAuth.getUid()));
                         root.setValue(null);
                     }
