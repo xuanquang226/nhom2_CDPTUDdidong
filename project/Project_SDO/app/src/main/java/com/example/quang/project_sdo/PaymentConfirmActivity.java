@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.quang.project_sdo.Adapters.PaymentAdapter;
 import com.example.quang.project_sdo.Models.CarrierModel;
+import com.example.quang.project_sdo.Models.LOrderModel;
 import com.example.quang.project_sdo.Models.NameCarrierModel;
 import com.example.quang.project_sdo.Models.OrderModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,11 +35,14 @@ public class PaymentConfirmActivity extends AppCompatActivity {
     PaymentAdapter paymentAdapter;
     OrderModel model;
     FirebaseAuth mAuth;
-    DatabaseReference root, root2;
+    DatabaseReference root, root2,root3;
     ListView listView;
     ActionBar actionBar;
     TextView price;
+    Button payment;
     Spinner spinner;
+    String name;
+    String a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +56,27 @@ public class PaymentConfirmActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         root = FirebaseDatabase.getInstance().getReference("Order").child(mAuth.getUid());
         root2 = FirebaseDatabase.getInstance().getReference();
+        root3 = FirebaseDatabase.getInstance().getReference("LOrder");
         listView = (ListView) findViewById(R.id.lvConfirm);
 
+        payment = (Button) findViewById(R.id.btnPayment);
         price = (TextView) findViewById(R.id.txtPriceDrugPA);
         spinner = (Spinner) findViewById(R.id.spinnerPayment);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                name = nameCarriers.get(position).getNamecarrier();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
         loadData();
         getNameCarrier();
+
+
     }
 
     public void loadData() {
@@ -67,6 +88,21 @@ public class PaymentConfirmActivity extends AppCompatActivity {
                 paymentAdapter = new PaymentAdapter(PaymentConfirmActivity.this, R.layout.listview_payment_custom, listPay);
                 listView.setAdapter(paymentAdapter);
                 price.setText(Integer.toString(model.tongtien));
+                a = listPay.get(0).getTen();
+                for (int i = 1; i < listPay.size(); i++){
+                    if(!listPay.get(i).getTen().equalsIgnoreCase("")){
+                        a += listPay.get(i).getTen();
+                        Log.d("AAAA",a);
+                    }
+                }
+
+                payment.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        root3.push().setValue(new LOrderModel(a,model.tongtien,model.diachi,name,mAuth.getUid()));
+                        root.setValue(null);
+                    }
+                });
             }
 
             @Override
@@ -96,7 +132,7 @@ public class PaymentConfirmActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 NameCarrierModel nameCarrierModel = dataSnapshot.getValue(NameCarrierModel.class);
-                nameCarriers.add(new NameCarrierModel(nameCarrierModel.namecarrier,nameCarrierModel.cmnd));
+                nameCarriers.add(new NameCarrierModel(nameCarrierModel.namecarrier));
                 Log.d("AAAA",nameCarrierModel.namecarrier);
                 ArrayList<String> nameCarrier = new ArrayList<String>();
                 for (int i =  0; i < nameCarriers.size(); i++){

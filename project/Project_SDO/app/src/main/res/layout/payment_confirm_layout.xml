@@ -104,6 +104,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnPayment"
         style="@style/shoppingcartButtonStyle"
         android:layout_width="165dp"
         android:layout_height="wrap_content"

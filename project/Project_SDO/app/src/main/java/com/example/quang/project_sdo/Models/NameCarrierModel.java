@@ -6,11 +6,11 @@ package com.example.quang.project_sdo.Models;
 
 public class NameCarrierModel {
     public String namecarrier;
-    public int cmnd;
+
     public NameCarrierModel() {
     }
 
-    public NameCarrierModel(String namecarrier,int cmnd) {
+    public NameCarrierModel(String namecarrier) {
         this.namecarrier = namecarrier;
     }
 
@@ -22,11 +22,4 @@ public class NameCarrierModel {
         this.namecarrier = namecarrier;
     }
 
-    public int getCmnd() {
-        return cmnd;
-    }
-
-    public void setCmnd(int cmnd) {
-        this.cmnd = cmnd;
-    }
 }

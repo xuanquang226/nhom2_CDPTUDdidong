@@ -33,6 +33,7 @@
         <activity android:name=".DrugDetailActivity" />
         <activity android:name=".CarrierDeliverySchedule" />
         <activity android:name=".PaymentConfirmActivity" />
+        <activity android:name=".ViewOrderActivity"></activity>
     </application>
 
 </manifest>
